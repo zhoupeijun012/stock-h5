@@ -5,7 +5,8 @@ import * as StoreTypes from '@/store/store_types';
 // 创建一个具有默认配置的axios实例
 const instance = axios.create({
   // baseURL: 'https://120.48.100.49/api',
-  baseURL: '/api',
+  //baseURL: '/api',
+  baseURL: 'https://www.chives.asia/api',
   timeout: 60 * 1000,
 });
 

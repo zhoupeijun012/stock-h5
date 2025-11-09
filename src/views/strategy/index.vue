@@ -1,54 +1,28 @@
 <template>
   <div class="strategy">
     <van-sticky>
-      <van-nav-bar title="策略" />
+      <van-nav-bar title="投资策略" />
     </van-sticky>
-
-    <div class="content">
-      <van-tabs v-model:active="activeTab" sticky>
-        <van-tab title="热门策略">
-          <van-list>
-            <van-card
-              v-for="item in hotStrategies"
-              :key="item.id"
-              :title="item.title"
-              :desc="item.desc"
-              :thumb="item.image"
-            >
-              <template #tags>
-                <van-tag plain type="primary">{{ item.tag }}</van-tag>
-              </template>
-              <template #footer>
-                <van-button size="mini">查看详情</van-button>
-              </template>
-            </van-card>
-          </van-list>
-        </van-tab>
-
-        <van-tab title="最新策略">
-          <van-list>
-            <van-card
-              v-for="item in newStrategies"
-              :key="item.id"
-              :title="item.title"
-              :desc="item.desc"
-              :thumb="item.image"
-            >
-              <template #tags>
-                <van-tag plain type="success">{{ item.tag }}</van-tag>
-              </template>
-              <template #footer>
-                <van-button size="mini">查看详情</van-button>
-              </template>
-            </van-card>
-          </van-list>
-        </van-tab>
-      </van-tabs>
-    </div>
+    <van-list>
+      <van-card
+        v-for="item in hotStrategies"
+        :key="item.id"
+        :title="item.title"
+        :desc="item.desc"
+        :thumb="item.image"
+      >
+        <template #tags>
+          <van-tag plain type="primary">{{ item.tag }}</van-tag>
+        </template>
+        <template #footer>
+          <van-button size="mini">查看详情</van-button>
+        </template>
+      </van-card>
+    </van-list>
   </div>
 </template>
 
-<script >
+<script>
 export default {
   data() {
     return {
@@ -92,8 +66,7 @@ export default {
 
 <style lang="less" scoped>
 .strategy {
-  background-color: var(--bg-color);
-  min-height: 100%;
+  box-sizing: border-box;
 }
 
 .content {
@@ -103,7 +76,7 @@ export default {
 
 .van-card {
   background: #fff;
-  margin: 10px 0;
+  margin: 10px;
   border-radius: 8px;
 }
 </style>

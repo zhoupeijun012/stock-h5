@@ -59,7 +59,7 @@ export default {
 </script>
 <style lang="less" scoped>
 #app {
-  height: 100vh;
+  height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   overflow:hidden;
 }
 </style>

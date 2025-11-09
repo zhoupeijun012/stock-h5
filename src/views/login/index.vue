@@ -92,7 +92,7 @@ export default {
 
     // 跳转到注册页面
     goToRegister() {
-      this.$router.push("/register");
+      this.$router.replace("/register");
     },
 
     // 跳转到忘记密码页面
@@ -129,7 +129,7 @@ export default {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 50px 30px 20px;
+  padding: 50px 20px 20px;
   .form-actions {
     display: flex;
     flex-direction: column;

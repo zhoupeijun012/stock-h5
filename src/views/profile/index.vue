@@ -21,23 +21,11 @@
 
       <!-- 功能列表 -->
       <van-cell-group class="function-list">
-        <van-cell is-link title="个人信息" value="修改资料" clickable>
-          <template #right-icon>
-            <van-icon name="arrow" color="#969799" size="16" />
-          </template>
-        </van-cell>
+        <van-cell title="个人信息" is-link value="修改资料" />
 
-        <van-cell is-link title="修改密码" clickable>
-          <template #right-icon>
-            <van-icon name="arrow" color="#969799" size="16" />
-          </template>
-        </van-cell>
+        <van-cell title="修改密码" is-link />
 
-        <van-cell is-link title="意见反馈" clickable>
-          <template #right-icon>
-            <van-icon name="arrow" color="#969799" size="16" />
-          </template>
-        </van-cell>
+        <van-cell title="意见反馈" is-link />
       </van-cell-group>
 
       <!-- 退出登录 -->
@@ -48,9 +36,9 @@
   </div>
 </template>
 
-<script >
+<script>
 export default {
-  name: 'Profile',
+  name: "Profile",
 };
 </script>
 
@@ -62,10 +50,16 @@ export default {
 .header-warp {
   height: 200px;
   position: relative;
-  .header-bg { 
+  .header-bg {
     height: calc(100% - 10px);
-    background: linear-gradient(135deg, #001f3f, #0088a9, #00c9a7, #92d5c6, #92d5c6);
-
+    background: linear-gradient(
+      135deg,
+      #001f3f,
+      #0088a9,
+      #00c9a7,
+      #92d5c6,
+      #92d5c6
+    );
   }
   .user-info-wrap {
     border-radius: 12px;

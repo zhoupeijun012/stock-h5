@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import TabLayout from "@/components/tab-layout/index.vue";
 import store from "@/store/index";
 
 Vue.use(VueRouter);
@@ -7,35 +8,58 @@ Vue.use(VueRouter);
 export const routes = [
   {
     path: "/",
-    name: "home",
-    component: () =>
-      import(/* webpackChunkName:"stock" */ "@/views/home/index.vue"),
-    meta: { title: "首页", noAuth: true },
+    name: "root",
+    component: TabLayout,
+    children: [
+      {
+        path: "home",
+        name: "home",
+        component: () =>
+          import(/* webpackChunkName:"stock" */ "@/views/home/index.vue"),
+        meta: { title: "首页" },
+      },
+      {
+        path: "strategy",
+        name: "strategy",
+        component: () =>
+          import(/* webpackChunkName:"stock" */ "@/views/strategy/index.vue"),
+        meta: { title: "策略" },
+      },
+      {
+        path: "favorite",
+        name: "favorite",
+        component: () =>
+          import(/* webpackChunkName:"stock" */ "@/views/favorite/index.vue"),
+        meta: { title: "收藏" },
+      },
+      {
+        path: "profile",
+        name: "profile",
+        component: () =>
+          import(/* webpackChunkName:"stock" */ "@/views/profile/index.vue"),
+        meta: { title: "我的" },
+      },
+    ],
   },
   {
-    path: "/strategy",
-    name: "strategy",
+    path: "/login",
+    name: "login",
     component: () =>
-      import(/* webpackChunkName:"stock" */ "@/views/strategy/index.vue"),
-    meta: { title: "策略", noAuth: true },
+      import(/* webpackChunkName:"stock" */ "@/views/login/index.vue"),
+    meta: { title: "登录", noAuth: true },
   },
-  {
-    path: "/favorite",
-    name: "favorite",
+    {
+    path: "/register",
+    name: "register",
     component: () =>
-      import(/* webpackChunkName:"stock" */ "@/views/favorite/index.vue"),
-    meta: { title: "收藏", noAuth: true },
-  },
-  {
-    path: "/profile",
-    name: "profile",
-    component: () =>
-      import(/* webpackChunkName:"stock" */ "@/views/profile/index.vue"),
-    meta: { title: "我的", noAuth: true },
+      import(/* webpackChunkName:"stock" */ "@/views/register/index.vue"),
+    meta: { title: "注册", noAuth: true },
   },
   {
     path: "*",
-    redirect: "/",
+    redirect: {
+      name: "home",
+    },
   },
 ];
 
@@ -49,8 +73,7 @@ router.beforeEach((to, from, next) => {
   if (to?.meta?.noAuth) {
     next();
   } else {
-    next();
-    // store.state.token ? next() : window.location.replace('/login');
+    store.state.token ? next() : window.location.replace('/login');
   }
 });
 

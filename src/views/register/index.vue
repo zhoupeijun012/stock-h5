@@ -129,9 +129,9 @@ export default {
       } else {
         this.passwordType = "password";
       }
-      this.$nextTick(() => {
-        this.$refs.password.focus();
-      });
+      // this.$nextTick(() => {
+      //   this.$refs.password.focus();
+      // });
     },
 
     // 提交表单

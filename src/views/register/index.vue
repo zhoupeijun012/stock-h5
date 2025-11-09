@@ -43,7 +43,7 @@
             :border="false"
             :error="false"
           />
-          <van-button type="primary" block round native-type="submit">
+          <van-button style="margin-top:10px" type="primary" block round native-type="submit">
             注册
           </van-button>
           <div class="form-actions">

@@ -119,7 +119,7 @@ export default {
 
 .content {
   position: absolute;
-  top: 20%;
+  top: 20vh;
   left: 20px;
   right: 20px;
 }

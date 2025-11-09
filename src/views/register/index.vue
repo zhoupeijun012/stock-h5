@@ -6,6 +6,7 @@
           <van-field
             class="login-form-field"
             v-model="form.username"
+            autocomplete="off"
             name="username"
             placeholder="请输入账户名"
             :rules="[{ required: true, message: '请填写账户名' }]"
@@ -18,6 +19,7 @@
             v-model="form.password"
             name="password"
             type="password"
+            autocomplete="off"
             placeholder="请输入密码"
             :rules="[{ required: true, message: '请填写密码' }]"
             :error-message="false"
@@ -29,6 +31,7 @@
             v-model="form.confirmPassword"
             name="confirmPassword"
             type="password"
+            autocomplete="off"
             placeholder="请再次输入密码"
             :rules="[
               { required: true, message: '请填写确认密码' },
@@ -119,7 +122,7 @@ export default {
 
 .content {
   position: absolute;
-  top: 20%;
+  top: 20vh;
   left: 20px;
   right: 20px;
 }

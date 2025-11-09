@@ -19,8 +19,7 @@
 
 .main-content {
   overflow-y: auto;
-  height: 100%;
-  padding-bottom: 50px;
+  height: calc(100% - 50px);
 }
 
 .app-tabbar {

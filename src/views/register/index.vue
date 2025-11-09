@@ -2,57 +2,63 @@
   <div class="register-page">
     <div class="content">
       <div class="login-form-container">
-        <van-form class="login-form" @submit="onSubmit">
+        <van-form ref="formRef" class="login-form" @submit="onSubmit">
+          <div class="title-container">账号注册</div>
           <van-field
             class="login-form-field"
-            v-model="form.username"
+            v-model.trim="form.username"
             autocomplete="off"
             name="username"
-            placeholder="请输入账户名"
-            :rules="[{ required: true, message: '请填写账户名' }]"
-            :error-message="false"
+            placeholder="账户名允许输入字母/数字，长度3-16位"
+            :rules="rules.username"
             :border="false"
             :error="false"
           />
           <van-field
             class="login-form-field"
-            v-model="form.password"
+            v-model.trim="form.password"
             name="password"
-            type="password"
-            autocomplete="off"
-            placeholder="请输入密码"
-            :rules="[{ required: true, message: '请填写密码' }]"
-            :error-message="false"
+            ref="password"
+           autocomplete="new-password"
+            placeholder="密码为字母、数字、特殊符号，长度8-16位"
+            :type="passwordType"
+            :rules="rules.password"
             :border="false"
             :error="false"
-          />
+          >
+            <template #right-icon>
+              <van-icon
+                :name="passwordType === 'password' ? 'eye-o' : 'closed-eye'"
+                @click="showPwd"
+              />
+            </template>
+          </van-field>
           <van-field
             class="login-form-field"
-            v-model="form.confirmPassword"
+            v-model.trim="form.confirmPassword"
             name="confirmPassword"
             type="password"
-            autocomplete="off"
+            autocomplete="new-password"
             placeholder="请再次输入密码"
-            :rules="[
-              { required: true, message: '请填写确认密码' },
-              {
-                validator: (value) => {
-                  return value === form.password;
-                },
-                message: '两次输入的密码不一致',
-              },
-            ]"
-            :error-message="false"
+            :rules="rules.confirmPassword"
             :border="false"
             :error="false"
           />
-          <van-button style="margin-top:10px" type="primary" block round native-type="submit">
+          <van-button
+            :loading="loading"
+            :disabled="loading"
+            style="margin-top: 10px"
+            type="primary"
+            block
+            round
+            native-type="submit"
+          >
             注册
           </van-button>
           <div class="form-actions">
             <div class="register" @click="goToLogin">
-              <span style="color: #323233; margin-right: 10px">已有账号?</span
-              >立即登录
+              <span style="color: #323233; margin-right: 10px">已有账号?</span>
+              立即登录
             </div>
           </div>
         </van-form>
@@ -62,11 +68,18 @@
 </template>
 
 <script>
-import { Toast } from "vant";
+import { Toast, Dialog } from "vant";
+import { userRegister } from "@/api/index";
+import { MD5 } from "@/utils/tool";
 
 export default {
   name: "RegisterPage",
   data() {
+    // 正则表达式常量
+    const USERNAME_REGEX = /^[a-zA-Z0-9]{3,16}$/;
+    const PASSWORD_REGEX =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[_@#$%^&*!~])[A-Za-z\d_@#$%^&*!~]{8,16}$/;
+
     return {
       // 表单数据
       form: {
@@ -74,34 +87,79 @@ export default {
         password: "",
         confirmPassword: "",
       },
+      passwordType: "password",
+      rules: {
+        username: [
+          { required: true, message: "请输入账户名", trigger: "blur" },
+          {
+            validator: (value, rule) => {
+              return USERNAME_REGEX.test(value);
+            },
+            message: "账户名只能包含字母、数字，长度3-16位",
+          },
+        ],
+        password: [
+          { required: true, message: "请输入密码", trigger: "blur" },
+          {
+            validator: (value, rule) => {
+              return PASSWORD_REGEX.test(value);
+            },
+            message: "密码为字母、数字、_@#$%^&*!~，长度8-16位",
+          },
+        ],
+        confirmPassword: [
+          { required: true, message: "请再次确认密码", trigger: "blur" },
+          {
+            validator: (value, rule) => {
+              return value == this.form.password;
+            },
+            trigger: "blur",
+            message: "两次输入的密码不一致",
+          },
+        ],
+      },
+      loading: false,
     };
   },
   methods: {
+    // 显示/隐藏密码
+    showPwd() {
+      if (this.passwordType === "password") {
+        this.passwordType = "";
+      } else {
+        this.passwordType = "password";
+      }
+      this.$nextTick(() => {
+        this.$refs.password.focus();
+      });
+    },
+
     // 提交表单
     onSubmit(values) {
-      return fetch("/api/cc/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      })
-        .then((response) => {
-          if (response.ok) {
-            return response.json().then((data) => {
-              Toast.success("注册成功");
-              // 跳转到登录页面
-              this.$router.push("/login");
+      this.$refs.formRef.validate().then(() => {
+          this.loading = true;
+          const params = JSON.parse(JSON.stringify(this.form));
+          params["password"] = MD5(params["password"]);
+
+          userRegister(params)
+            .then(() => {
+              Dialog.alert({
+                title: "提示",
+                message: "注册成功，请等待管理员审核通过！",
+                showCancelButton: false,
+              }).then(() => {
+                this.$router.replace("/login");
+              });
+            })
+            .catch((error) => {
+              Toast.fail(error.message || "注册失败");
+            })
+            .finally(() => {
+              this.loading = false;
             });
-          } else {
-            return response.json().then((errorData) => {
-              Toast.fail(errorData.message || "注册失败");
-            });
-          }
-        })
-        .catch((error) => {
-          Toast.fail("网络错误，请检查网络连接");
-        });
+      }).catch((error) => {
+        console.log(error);
+      });
     },
 
     // 跳转到登录页面
@@ -132,7 +190,14 @@ export default {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 50px 20px 20px;
+  padding: 20px 20px 20px;
+  .title-container {
+    font-size: 24px;
+    color: #333;
+    margin: 0 auto 32px auto;
+    text-align: center;
+    font-weight: bold;
+  }
   .form-actions {
     display: flex;
     flex-direction: column;

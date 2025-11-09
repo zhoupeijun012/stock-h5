@@ -13,8 +13,8 @@
             style="margin-right: 10px"
           />
           <div class="user-info-right">
-            <div class="user-name">Hi,小灰灰</div>
-            <div class="user-phone">123****8911</div>
+            <div class="user-name">Hi,{{userInfo.username}}</div>
+            <div class="user-phone">{{ userInfo.userId }}</div>
           </div>
         </div>
       </div>
@@ -29,23 +29,50 @@
       </van-cell-group>
 
       <!-- 退出登录 -->
-      <div class="function-list">
-        <van-button class="logout-btn" block>退出登录</van-button>
+      <div class="function-list" style="margin-top:20px">
+        <van-button class="logout-btn" type="danger" block @click="logout">退出登录</van-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { Dialog,Toast } from "vant";
+import * as StoreTypes from "@/store/store_types";
 export default {
   name: "Profile",
+  computed: {
+    userInfo() {
+      return this.$store.state.userInfo;
+    }
+  },
+  methods: {
+    logout() {
+      Dialog.confirm({
+        title: "提示",
+        message: "确定退出登录吗？",
+        showCancelButton: true,
+      })
+        .then(() => {
+          // 退出登录逻辑
+          this.$store.commit(StoreTypes.CLEAR_ALL);
+
+          Toast.success("退出登录成功");
+          setTimeout(() => {
+            this.$router.replace("/login");
+          }, 2000);
+        })
+        .catch(() => {});
+    }
+  }
 };
 </script>
 
 <style lang="less" scoped>
 .profile {
   background-color: var(--bg-color);
-  min-height: 100%;
+  height: 100%;
+  position: relative;
 }
 .header-warp {
   height: 200px;
@@ -103,9 +130,9 @@ export default {
 
 .logout-btn {
   border-radius: 12px;
-  color: var(--text-color);
   border: none;
   font-size: 14px;
   box-sizing: border-box;
 }
+
 </style>

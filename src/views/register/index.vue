@@ -180,7 +180,7 @@ export default {
 
 .content {
   position: absolute;
-  top: 20vh;
+  top: 17vh;
   left: 20px;
   right: 20px;
 }

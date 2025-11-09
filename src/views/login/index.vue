@@ -27,11 +27,22 @@
             :error="false"
           >
             <template #right-icon>
-              <van-icon :name="passwordType === 'password' ? 'eye-o' : 'closed-eye'" @click="showPwd" />
+              <van-icon
+                :name="passwordType === 'password' ? 'eye-o' : 'closed-eye'"
+                @click="showPwd"
+              />
             </template>
           </van-field>
 
-          <van-button :loading="loading" :disabled="loading" style="margin-top:10px" type="primary" block round native-type="submit">
+          <van-button
+            :loading="loading"
+            :disabled="loading"
+            style="margin-top: 10px"
+            type="primary"
+            block
+            round
+            native-type="submit"
+          >
             登录
           </van-button>
 
@@ -55,7 +66,7 @@
 
 <script>
 import { Toast, Dialog } from "vant";
-import * as storeTypes from '@/store/store_types';
+import * as storeTypes from "@/store/store_types";
 
 export default {
   name: "LoginPage",
@@ -67,10 +78,12 @@ export default {
         password: "",
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', message: '请输入账户名' }],
-        password: [{ required: true, trigger: 'blur', message: '请输入密码' }],
+        username: [
+          { required: true, trigger: "blur", message: "请输入账户名" },
+        ],
+        password: [{ required: true, trigger: "blur", message: "请输入密码" }],
       },
-      passwordType: 'password',
+      passwordType: "password",
       loading: false,
       redirect: undefined,
       otherQuery: {},
@@ -86,19 +99,21 @@ export default {
   methods: {
     // 显示/隐藏密码
     showPwd() {
-      if (this.passwordType === 'password') {
-        this.passwordType = '';
+      if (this.passwordType === "password") {
+        this.passwordType = "";
       } else {
-        this.passwordType = 'password';
+        this.passwordType = "password";
       }
-      this.$nextTick(() => {
-        this.$refs.password.focus();
-      });
+      // this.$nextTick(() => {
+      //   this.$refs.password.focus();
+      // });
     },
-    
+
     // 登录提交
     onSubmitLogin(values) {
-      this.$refs.loginForm.validate().then((valid) => {
+      this.$refs.loginForm
+        .validate()
+        .then((valid) => {
           this.loading = true;
           this.$store
             .dispatch(storeTypes.ACTION_LOGIN, this.loginForm)
@@ -106,7 +121,7 @@ export default {
               Toast.success("登录成功");
               // 跳转到指定页面或首页
               this.$router.replace({
-                path: this.redirect || '/home',
+                path: this.redirect || "/home",
                 query: this.otherQuery,
               });
             })
@@ -116,9 +131,10 @@ export default {
             .finally(() => {
               this.loading = false;
             });
-      }).catch((error) => {
-        console.log(error);
-      });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
 
     // 跳转到注册页面
@@ -136,11 +152,11 @@ export default {
         .then(() => {})
         .catch(() => {});
     },
-    
+
     // 获取其他查询参数
     getOtherQuery(query) {
       return Object.keys(query).reduce((acc, cur) => {
-        if (cur !== 'redirect') {
+        if (cur !== "redirect") {
           acc[cur] = query[cur];
         }
         return acc;
@@ -160,7 +176,7 @@ export default {
 
 .content {
   position: absolute;
-  top: 20vh;
+  top: 17vh;
   left: 20px;
   right: 20px;
 }

@@ -172,11 +172,14 @@ export default {
 
 <style lang="less" scoped>
 .login-page {
- 
+  position: releative;
+  left:0;
+  right:0;
+  height:100%;
 }
 
 .content {
-  position: fixed;
+  position: absolute;
   top: 17vh;
   left: 20px;
   right: 20px;

@@ -168,10 +168,10 @@ export default {
 
 <style lang="less" scoped>
 .login-page {
-position: releative;
-  left:0;
-  right:0;
-  height:100%;
+  position: relative;
+  left: 0;
+  right: 0;
+  height: 100%;
   padding-top: 1px;
 }
 

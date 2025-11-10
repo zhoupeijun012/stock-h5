@@ -172,6 +172,7 @@ position: releative;
   left:0;
   right:0;
   height:100%;
+  padding-top: 1px;
 }
 
 .content {

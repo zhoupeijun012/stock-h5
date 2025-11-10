@@ -5,16 +5,28 @@
     </main>
 
     <van-tabbar class="app-tabbar" :value="$route.name" route>
-      <van-tabbar-item replace name="home" to="/home" icon="wap-home-o">首页</van-tabbar-item>
-      <van-tabbar-item replace name="strategy" to="/strategy" icon="bars">策略</van-tabbar-item>
-      <van-tabbar-item replace name="favorite" to="/favorite" icon="star-o">收藏</van-tabbar-item>
-      <van-tabbar-item replace name="profile" to="/profile" icon="user-o">我的</van-tabbar-item>
+      <van-tabbar-item replace name="home" to="/home" icon="wap-home-o"
+        >首页</van-tabbar-item
+      >
+      <van-tabbar-item replace name="strategy" to="/strategy" icon="bars"
+        >策略</van-tabbar-item
+      >
+      <van-tabbar-item replace name="favorite" to="/favorite" icon="star-o"
+        >收藏</van-tabbar-item
+      >
+      <van-tabbar-item replace name="profile" to="/profile" icon="user-o"
+        >我的</van-tabbar-item
+      >
     </van-tabbar>
   </div>
 </template>
 <style lang="less" scoped>
 .app-container {
-  height: 100%;
+  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  width: 100%;
+  position: relative;
+  left: 0;
+  top: 0;
 }
 
 .main-content {

@@ -14,6 +14,9 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  overflow:hidden;
+  overflow-y: scroll;
 }
 
 :root {

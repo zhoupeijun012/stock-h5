@@ -172,10 +172,8 @@ export default {
 }
 
 .content {
-  position: fixed;
-  top: 17vh;
-  left: 20px;
-  right: 20px;
+  margin: 17vh auto 0;
+  width: calc(100% - 40px);
 }
 
 .login-form-container {

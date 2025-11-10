@@ -23,11 +23,20 @@ body {
   overflow-y: scroll;
 }
 
+/* 强制底部操作栏背景白色（iOS 核心） */
+@media (prefers-color-scheme: light) {
+  :root {
+    --apple-system-bar-color: #ffffff;
+  }
+}
+
 /* 禁用页面整体的弹性滚动效果 */
 body, html {
   overscroll-behavior: none;
   /* 部分安卓机型需补充前缀兼容 */
   -ms-overscroll-behavior: none;
+  -webkit-nav-bar-color: #ffffff;
+  nav-bar-color: #ffffff;
 }
 
 :root {

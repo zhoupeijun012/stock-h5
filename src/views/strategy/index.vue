@@ -67,11 +67,8 @@ export default {
 <style lang="less" scoped>
 .strategy {
   box-sizing: border-box;
-}
-
-.content {
-  padding: 10px;
-  padding-bottom: 20px;
+  height: 100%;
+  position: relative;
 }
 
 .van-card {

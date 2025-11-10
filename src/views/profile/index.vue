@@ -98,7 +98,7 @@ export default {
     align-items: center;
     position: absolute;
     left: 10px;
-    bottom: -20px;
+    bottom: -10px;
     right: 10px;
     .user-info-right {
       flex: 1;

@@ -54,8 +54,7 @@ export default {
 
 <style lang="less" scoped>
 .favorite {
-  background-color: var(--bg-color);
-  min-height: 100%;
+  height: 100%;
 }
 
 .content {

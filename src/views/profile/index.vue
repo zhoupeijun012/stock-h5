@@ -71,7 +71,6 @@ export default {
 <style lang="less" scoped>
 .profile {
   background-color: var(--bg-color);
-  height: 100%;
   position: relative;
 }
 .header-warp {
@@ -93,7 +92,7 @@ export default {
     overflow: hidden;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
     background: #fff;
-    padding: 15px;
+    padding: 20px 15px;
     display: flex;
     align-items: center;
     position: absolute;
@@ -126,10 +125,13 @@ export default {
   box-sizing: border-box;
   overflow: hidden;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  /deep/.van-cell {
+    padding: 14px;
+  }
 }
 
 .logout-btn {
-  border-radius: 12px;
+  border-radius: 28px;
   border: none;
   font-size: 14px;
   box-sizing: border-box;

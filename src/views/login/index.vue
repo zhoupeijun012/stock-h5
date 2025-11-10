@@ -172,7 +172,7 @@ export default {
 }
 
 .content {
-  margin: 17vh auto 0;
+  //margin: 17vh auto 0;
   width: calc(100% - 40px);
 }
 

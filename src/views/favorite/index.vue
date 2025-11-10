@@ -54,7 +54,6 @@ export default {
 
 <style lang="less" scoped>
 .favorite {
-  height: 100%;
 }
 
 .content {

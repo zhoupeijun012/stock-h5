@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <!-- <router-view></router-view> -->
+    <router-view></router-view>
   </div>
 </template>
 
@@ -59,7 +59,7 @@ export default {
 </script>
 <style lang="less" scoped>
 #app {
-  // height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   width: 100%;
   position: relative;
   left:0;

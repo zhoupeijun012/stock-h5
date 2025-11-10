@@ -1,11 +1,13 @@
 * {
   margin: 0;
   padding: 0;
+  overscroll-behavior: none;
+  /* 部分安卓机型需补充前缀兼容 */
+  -ms-overscroll-behavior: none;
 }
 body {
   color: var(--color-text);
-  // background: rgb(243, 244, 245);
-  background: red;
+  background: rgb(243, 244, 245);
   transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -19,8 +21,7 @@ body {
   box-sizing: border-box;
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
-  overflow:hidden;
-  overflow-y: scroll;
+  overflow: hidden;
 }
 
 /* 强制底部操作栏背景白色（iOS 核心） */
@@ -31,10 +32,8 @@ body {
 }
 
 /* 禁用页面整体的弹性滚动效果 */
-body, html {
-  overscroll-behavior: none;
-  /* 部分安卓机型需补充前缀兼容 */
-  -ms-overscroll-behavior: none;
+body,
+html {
   -webkit-nav-bar-color: #ffffff;
   nav-bar-color: #ffffff;
 }

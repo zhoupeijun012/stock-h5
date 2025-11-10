@@ -20,7 +20,7 @@
       </div>
 
       <!-- 功能列表 -->
-      <van-cell-group class="function-list">
+      <van-cell-group class="function-list" style="margin-top: 30px">
         <van-cell title="个人信息" is-link value="修改资料" />
 
         <van-cell title="修改密码" is-link />
@@ -72,6 +72,7 @@ export default {
 .profile {
   background-color: var(--bg-color);
   position: relative;
+  height: 100%;
 }
 .header-warp {
   height: 200px;
@@ -90,14 +91,14 @@ export default {
   .user-info-wrap {
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    // box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
     background: #fff;
     padding: 20px 15px;
     display: flex;
     align-items: center;
     position: absolute;
     left: 10px;
-    bottom: 0;
+    bottom: -20px;
     right: 10px;
     .user-info-right {
       flex: 1;
@@ -124,7 +125,7 @@ export default {
   border-radius: 12px;
   box-sizing: border-box;
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+  // box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
   /deep/.van-cell {
     padding: 14px;
   }

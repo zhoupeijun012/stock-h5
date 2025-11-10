@@ -1,5 +1,5 @@
 <template>
-  <div class="register-page">
+  <div class="login-page">
     <div class="content">
       <div class="login-form-container">
         <van-form ref="formRef" class="login-form" @submit="onSubmit">
@@ -172,10 +172,11 @@ export default {
 
 <style lang="less" scoped>
 .login-page {
-  position: releative;
+  position: relative;
   left:0;
   right:0;
   height:100%;
+  padding-top: 1px;
 }
 
 

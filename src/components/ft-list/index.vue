@@ -5,9 +5,9 @@
         :immediate-check="false"
         v-model="loading"
         :finished="finished"
-        :finished-text="this.list.length > 0 ? '没有更多了' : ''"
+        :finished-text="this.list.length > 0 ? '没有更多了' : undefined"
         :error.sync="error"
-        :error-text="this.list.length > 0 ? '请求失败，点击重试' : ''"
+        :error-text="this.list.length > 0 ? '请求失败，点击重试' : undefined"
         @load="onLoad"
       >
         <slot name="list" :list="list"></slot>

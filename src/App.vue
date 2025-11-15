@@ -1,15 +1,16 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+  <tab-layout></tab-layout>
 </template>
 
 <script>
+import TabLayout from "@/components/tab-layout";
 import { detectPwaMode } from "@/utils/tool.js";
 import { Dialog } from "vant";
 export default {
   name: "App",
-  components: {},
+  components: {
+    TabLayout
+  },
   mounted() {
     if (!detectPwaMode()) {
       navigator
@@ -57,12 +58,3 @@ export default {
   },
 };
 </script>
-<style lang="less" scoped>
-#app {
-  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
-  width: 100%;
-  position: relative;
-  left: 0;
-  top: 0;
-}
-</style>

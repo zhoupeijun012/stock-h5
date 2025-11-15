@@ -3,8 +3,8 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-// import * as api from '@/api/index';
-// Vue.prototype.$api = api;
+import * as api from '@/api/index';
+Vue.prototype.$api = api;
 import Vant from 'vant';
 import 'vant/lib/index.css';
 Vue.use(Vant);

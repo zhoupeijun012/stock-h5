@@ -12,6 +12,7 @@
 import FtList from "@/components/ft-list";
 import StockCard from "@/components/stock-card";
 export default {
+  name: 'favorite',
   components: {
     FtList,
     StockCard,

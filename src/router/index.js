@@ -1,14 +1,15 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import TabLayout from "@/components/tab-layout/index.vue";
+import NavLayout from "@/components/nav-layout/index.vue";
 import store from "@/store/index";
 
 Vue.use(VueRouter);
 
 export const routes = [
   {
-    path: "/",
-    name: "root",
+    path: "/tab",
+    name: "tab",
     component: TabLayout,
     children: [
       {
@@ -42,13 +43,69 @@ export const routes = [
     ],
   },
   {
+    path: "/nav",
+    name: "nav",
+    component: NavLayout,
+    children: [
+      {
+        path: "stock",
+        name: "stock",
+        component: () =>
+          import(/* webpackChunkName:"stock" */ "@/views/stock/index.vue"),
+        meta: { title: "股票列表" },
+      },
+      {
+        path: "industry",
+        name: "industry",
+        component: () =>
+          import(/* webpackChunkName:"stock" */ "@/views/industry/index.vue"),
+        meta: { title: "行业列表" },
+      },
+      {
+        path: "concept",
+        name: "concept",
+        component: () =>
+          import(/* webpackChunkName:"stock" */ "@/views/concept/index.vue"),
+        meta: { title: "概念列表" },
+      },
+      {
+        path: "region",
+        name: "region",
+        component: () =>
+          import(/* webpackChunkName:"stock" */ "@/views/region/index.vue"),
+        meta: { title: "区域列表" },
+      },
+      {
+        path: "t+0",
+        name: "t+0",
+        component: () =>
+          import(/* webpackChunkName:"stock" */ "@/views/t+0/index.vue"),
+        meta: { title: "T+0列表" },
+      },
+      {
+        path: "t+1",
+        name: "t+1",
+        component: () =>
+          import(/* webpackChunkName:"stock" */ "@/views/t+1/index.vue"),
+        meta: { title: "T+1列表" },
+      },
+      {
+        path: "lof",
+        name: "lof",
+        component: () =>
+          import(/* webpackChunkName:"stock" */ "@/views/lof/index.vue"),
+        meta: { title: "LOF列表" },
+      },
+    ],
+  },
+  {
     path: "/login",
     name: "login",
     component: () =>
       import(/* webpackChunkName:"stock" */ "@/views/login/index.vue"),
     meta: { title: "登录", noAuth: true },
   },
-    {
+  {
     path: "/register",
     name: "register",
     component: () =>
@@ -73,7 +130,7 @@ router.beforeEach((to, from, next) => {
   if (to?.meta?.noAuth) {
     next();
   } else {
-    store.state.token ? next() : window.location.replace('/login');
+    store.state.token ? next() : window.location.replace("/login");
   }
 });
 

@@ -1,20 +1,22 @@
 <template>
   <div class="app-container">
     <main class="main-content">
-      <router-view></router-view>
+      <keep-alive :include="['home', 'strategy', 'favorite', 'profile']">
+        <router-view></router-view>
+      </keep-alive>
     </main>
 
     <van-tabbar class="app-tabbar" :value="$route.name" route>
-      <van-tabbar-item replace name="home" to="/home" icon="wap-home-o"
+      <van-tabbar-item replace name="home" to="/tab/home" icon="wap-home-o"
         >首页</van-tabbar-item
       >
-      <van-tabbar-item replace name="strategy" to="/strategy" icon="bars"
+      <van-tabbar-item replace name="strategy" to="/tab/strategy" icon="bars"
         >策略</van-tabbar-item
       >
-      <van-tabbar-item replace name="favorite" to="/favorite" icon="star-o"
+      <van-tabbar-item replace name="favorite" to="/tab/favorite" icon="star-o"
         >收藏</van-tabbar-item
       >
-      <van-tabbar-item replace name="profile" to="/profile" icon="user-o"
+      <van-tabbar-item replace name="profile" to="/tab/profile" icon="user-o"
         >我的</van-tabbar-item
       >
     </van-tabbar>

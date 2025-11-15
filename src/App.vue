@@ -62,7 +62,7 @@ export default {
   height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   width: 100%;
   position: relative;
-  left:0;
-  top:0;
+  left: 0;
+  top: 0;
 }
 </style>

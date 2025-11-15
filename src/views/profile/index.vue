@@ -40,7 +40,7 @@
 import { Dialog,Toast } from "vant";
 import * as StoreTypes from "@/store/store_types";
 export default {
-  name: "Profile",
+  name: "profile",
   computed: {
     userInfo() {
       return this.$store.state.userInfo;
@@ -79,14 +79,7 @@ export default {
   position: relative;
   .header-bg {
     height: calc(100% - 10px);
-    background: linear-gradient(
-      135deg,
-      #001f3f,
-      #0088a9,
-      #00c9a7,
-      #92d5c6,
-      #92d5c6
-    );
+    background: linear-gradient(135deg, #809fc0, #26c5eb, #00c9a7, #92d5c6, #92d5c6);
   }
   .user-info-wrap {
     border-radius: 12px;

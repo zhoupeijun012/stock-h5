@@ -12,6 +12,7 @@
 <script>
 import FtList from "@/components/ft-list";
 export default {
+  name: 'strategy',
   components: {
     FtList,
   },

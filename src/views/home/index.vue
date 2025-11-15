@@ -35,6 +35,7 @@
           :key="'list-item-' + index"
           :icon="item.icon"
           :text="item.title"
+          @click="handleClick(item)"
         >
         </van-grid-item>
       </van-grid>
@@ -45,6 +46,7 @@
 
 <script>
 export default {
+  name: 'home',
   data() {
     return {
       refreshing: false,
@@ -63,13 +65,13 @@ export default {
         { title: "北证50" },
       ],
       list: [
-        { title: "股票", icon: "cash-back-record-o" },
-        { title: "T+0", icon: "goods-collect-o" },
-        { title: "T+1", icon: "discount-o" },
-        { title: "LOF", icon: "shopping-cart-o" },
-        { title: "板块", icon: "award-o" },
-        { title: "概念", icon: "shop-collect-o" },
-        { title: "地区", icon: "hot-o" },
+        { title: "股票", icon: "cash-back-record-o",name: 'stock' },
+        { title: "T+0", icon: "goods-collect-o",name: 't+0' },
+        { title: "T+1", icon: "discount-o",name: 't+1' },
+        { title: "LOF", icon: "shopping-cart-o",name: 'lof' },
+        { title: "板块", icon: "award-o",name: 'industry' },
+        { title: "概念", icon: "shop-collect-o",name: 'concept' },
+        { title: "地区", icon: "hot-o",name: 'region' },
       ],
     };
   },
@@ -78,6 +80,9 @@ export default {
       setTimeout(() => {
         this.refreshing = false;
       }, 1000);
+    },
+    handleClick(item) {
+      this.$router.push({ name: item.name });
     },
   },
 };

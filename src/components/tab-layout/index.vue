@@ -8,13 +8,11 @@
         @click-left="onClickLeft"
       />
     </div>
-    <div class="app-container">
-      <main class="main-content" :style="contentStyle">
-        <keep-alive :include="tabs">
-          <router-view></router-view>
-        </keep-alive>
-      </main>
-    </div>
+    <main class="main-content" :style="contentStyle">
+      <keep-alive :include="tabs">
+        <router-view></router-view>
+      </keep-alive>
+    </main>
     <div class="tab-bar" v-if="showTab">
       <van-tabbar class="app-tabbar" :value="$route.name" route>
         <van-tabbar-item replace name="home" to="/home" icon="wap-home-o"
@@ -55,7 +53,6 @@ export default {
         marginTop,
         marginBottom,
         height,
-        backgroundColor: 'red',
       };
     },
   },
@@ -68,17 +65,14 @@ export default {
 </script>
 <style lang="less" scoped>
 #app {
-  height: 100vh;
   box-sizing: border-box;
   overflow: hidden;
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
+  margin-top: env(safe-area-inset-top);
+  margin-bottom: env(safe-area-inset-bottom);
+  height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   position: relative;
 }
-.app-container {
-  height: 100%;
-  overflow: hidden;
-}
+
 .nav-bar {
   position: absolute;
   top: 0;

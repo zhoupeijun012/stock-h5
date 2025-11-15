@@ -102,6 +102,13 @@ export const routes = [
       name: "home",
     },
   },
+  {
+    path: "/stock-detail",
+    name: "stock-detail",
+    component: () =>
+      import(/* webpackChunkName:"stock" */ "@/views/stock-detail/index.vue"),
+    meta: { title: "股票详情", showNav: true },
+  }
 ];
 
 const router = new VueRouter({

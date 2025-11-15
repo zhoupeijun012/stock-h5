@@ -1,5 +1,5 @@
 <template>
-  <div class="ft-card-item" @click="gotoDetail(info)" >
+  <div class="ft-card-item" @click="toDetail(info)" >
     <div class="card-name" style="font-size: 20px; line-height: 24px">
       {{ info.f14 }}
       <span :style="valueStyle(info.f3)" style="font-size: 20px; line-height: 24px" class="card-prec">{{ formatPrec(info.f3, '%') }}</span>
@@ -76,11 +76,14 @@ export default {
     formatMoney,
     valueStyle,
     formatPrec,
-    gotoDetail(row) {
-      this.cardOptions && this.cardOptions.detailClick && this.cardOptions.detailClick(row);
-    },
-    gotoList() {
-      this.cardOptions && this.cardOptions.listClick && this.cardOptions.listClick(this.info);
+     toDetail(item) {
+      this.$router.push({
+        name: "stock-detail",
+        query: {
+          f12: item.f12,
+          f14: item.f14
+        },
+      });
     },
   },
 };

@@ -6,7 +6,7 @@
 <script>
 import KLineChart from "@/components/k-line-chart";
 import { getKLineOne } from "@/api/index";
-import { formatMoney, valueStyle, formatPrec, stockKMap } from "@/utils/tool";
+import { stockKMap } from "@/utils/tool";
 export default {
   name: "stock-detail",
   components: {
@@ -25,8 +25,9 @@ export default {
       const stockKlineParams = {
         where: [
           {
-            f12: this.$route.query.f12,
-            f40001: "day",
+            field: "f12",
+            operator: "eq",
+            value: this.$route.query.f12
           },
         ],
       };

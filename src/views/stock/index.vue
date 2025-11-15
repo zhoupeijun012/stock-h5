@@ -6,7 +6,6 @@
           v-for="item in list"
           :key="item.id"
           :info="item"
-          @click.native="toDetail(item)"
         ></stock-card>
       </template>
     </ft-list>
@@ -72,16 +71,6 @@ export default {
         "f40016",
       ],
     });
-  },
-  methods: {
-    toDetail(item) {
-      this.$router.push({
-        name: "stock-detail",
-        query: {
-          f12: item.f12,
-        },
-      });
-    },
   },
 };
 </script>

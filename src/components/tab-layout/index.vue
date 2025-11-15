@@ -55,6 +55,7 @@ export default {
         marginTop,
         marginBottom,
         height,
+        backgroundColor: 'red',
       };
     },
   },
@@ -72,12 +73,14 @@ export default {
   overflow: hidden;
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
+  position: relative;
 }
 .app-container {
   height: 100%;
+  overflow: hidden;
 }
 .nav-bar {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -85,7 +88,7 @@ export default {
 }
 
 .tab-bar {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
   right: 0;

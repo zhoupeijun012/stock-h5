@@ -1,52 +1,52 @@
 <template>
-  <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
-  <div class="home">
-    <div class="content">
-      <van-grid :gutter="0" square>
-        <van-grid-item
-          v-for="(item, index) in indexList"
-          :key="'list-item-' + index"
-        >
-          <div class="index-warp ins">
-            <div class="index-num">20000</div>
-            <div class="index-info">-0.20%</div>
-            <div class="index-title">{{ item.title }}</div>
-          </div>
-        </van-grid-item>
-      </van-grid>
-      <van-grid :gutter="0" square style="margin-top: 10px">
-        <van-grid-item>
-          <div class="index-warp ins">
-            <div class="index-info">208</div>
-            <div class="index-title">金叉数</div>
-          </div>
-        </van-grid-item>
-        <van-grid-item>
-          <div class="index-warp des">
-            <div class="index-info">2000</div>
-            <div class="index-title">死叉数</div>
-          </div>
-        </van-grid-item>
-      </van-grid>
+  <van-pull-refresh style="min-height: 100%" v-model="refreshing" @refresh="onRefresh">
+    <div class="home">
+      <div class="content">
+        <van-grid :gutter="0" square>
+          <van-grid-item
+            v-for="(item, index) in indexList"
+            :key="'list-item-' + index"
+          >
+            <div class="index-warp ins">
+              <div class="index-num">20000</div>
+              <div class="index-info">-0.20%</div>
+              <div class="index-title">{{ item.title }}</div>
+            </div>
+          </van-grid-item>
+        </van-grid>
+        <van-grid :gutter="0" square style="margin-top: 10px">
+          <van-grid-item>
+            <div class="index-warp ins">
+              <div class="index-info">208</div>
+              <div class="index-title">金叉数</div>
+            </div>
+          </van-grid-item>
+          <van-grid-item>
+            <div class="index-warp des">
+              <div class="index-info">2000</div>
+              <div class="index-title">死叉数</div>
+            </div>
+          </van-grid-item>
+        </van-grid>
 
-      <van-grid :gutter="0" square style="margin-top: 10px" class="list-grid">
-        <van-grid-item
-          v-for="(item, index) in list"
-          :key="'list-item-' + index"
-          :icon="item.icon"
-          :text="item.title"
-          @click="handleClick(item)"
-        >
-        </van-grid-item>
-      </van-grid>
+        <van-grid :gutter="0" square style="margin-top: 10px" class="list-grid">
+          <van-grid-item
+            v-for="(item, index) in list"
+            :key="'list-item-' + index"
+            :icon="item.icon"
+            :text="item.title"
+            @click="handleClick(item)"
+          >
+          </van-grid-item>
+        </van-grid>
+      </div>
     </div>
-  </div>
   </van-pull-refresh>
 </template>
 
 <script>
 export default {
-  name: 'home',
+  name: "home",
   data() {
     return {
       refreshing: false,
@@ -65,13 +65,13 @@ export default {
         { title: "北证50" },
       ],
       list: [
-        { title: "股票", icon: "cash-back-record-o",name: 'stock' },
-        { title: "T+0", icon: "goods-collect-o",name: 't+0' },
-        { title: "T+1", icon: "discount-o",name: 't+1' },
-        { title: "LOF", icon: "shopping-cart-o",name: 'lof' },
-        { title: "板块", icon: "award-o",name: 'industry' },
-        { title: "概念", icon: "shop-collect-o",name: 'concept' },
-        { title: "地区", icon: "hot-o",name: 'region' },
+        { title: "股票", icon: "cash-back-record-o", name: "stock" },
+        { title: "T+0", icon: "goods-collect-o", name: "t+0" },
+        { title: "T+1", icon: "discount-o", name: "t+1" },
+        { title: "LOF", icon: "shopping-cart-o", name: "lof" },
+        { title: "板块", icon: "award-o", name: "industry" },
+        { title: "概念", icon: "shop-collect-o", name: "concept" },
+        { title: "地区", icon: "hot-o", name: "region" },
       ],
     };
   },
@@ -90,7 +90,6 @@ export default {
 
 <style lang="less" scoped>
 .home {
-  min-height: 100%;
 }
 .content {
   padding: 10px;

@@ -89,6 +89,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.home {
+  min-height: 100%;
+}
 .content {
   padding: 10px;
 }

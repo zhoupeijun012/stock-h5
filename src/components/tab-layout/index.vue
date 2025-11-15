@@ -69,7 +69,7 @@ export default {
   overflow: hidden;
   margin-top: env(safe-area-inset-top);
   margin-bottom: env(safe-area-inset-bottom);
-  height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   position: relative;
 }
 

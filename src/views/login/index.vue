@@ -168,8 +168,11 @@ export default {
 
 <style lang="less" scoped>
 .login-page {
-  position: relative;
   padding-top: 1px;
+  box-sizing: border-box;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
 }
 
 .content {

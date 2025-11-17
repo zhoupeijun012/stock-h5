@@ -6,7 +6,7 @@
       </keep-alive>
     </main>
     <div class="tab-bar" v-if="showTab">
-      <van-tabbar class="app-tabbar" :value="$route.name" route>
+      <van-tabbar class="app-tabbar" active-color="#00c9a7" :value="$route.name" route>
         <van-tabbar-item replace name="home" to="/home" icon="wap-home-o"
           >首页</van-tabbar-item
         >
@@ -104,6 +104,7 @@ export default {
   margin-bottom: env(safe-area-inset-bottom);
   height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   position: relative;
+    background: rgb(243, 244, 245);
 }
 
 .nav-bar {
@@ -120,5 +121,8 @@ export default {
   left: 0;
   right: 0;
   z-index: 100;
+  /deep/.van-tabbar-item {
+    font-weight: 700;
+  }
 }
 </style>

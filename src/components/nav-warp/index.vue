@@ -35,13 +35,14 @@ export default {
   height: 100%;
 }
 .nav-bar {
-  /deep/.van-nav-bar__left {
-    font-weight: bold;
+  /deep/.van-nav-bar__text {
+    color: #000!important;
     font-size: 16px;
   }
   /deep/.van-icon {
-    font-size: 16px;
-    font-weight: 700;
+    font-size: 18px;
+    color: #000;
+    line-height: 22px;
   }
 }
 .nav-bar-top {

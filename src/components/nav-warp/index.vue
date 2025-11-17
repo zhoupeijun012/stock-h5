@@ -1,11 +1,12 @@
 <template>
-  <div class="nav-bar">
+  <div class="nav-bar-wrap">
     <div class="nav-bar-top">
       <van-nav-bar
         :title="title"
         left-text="返回"
         left-arrow
         @click-left="onClickLeft"
+        class="nav-bar"
       />
     </div>
     <div class="page-content">
@@ -30,8 +31,18 @@ export default {
 </script>
 
 <style  lang="less" scoped>
-.nav-bar {
+.nav-bar-wrap {
   height: 100%;
+}
+.nav-bar {
+  /deep/.van-nav-bar__left {
+    font-weight: bold;
+    font-size: 16px;
+  }
+  /deep/.van-icon {
+    font-size: 16px;
+    font-weight: 700;
+  }
 }
 .nav-bar-top {
   position: absolute;

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <main class="main-content" :style="contentStyle">
-      <keep-alive>
+      <keep-alive :include="includeRoutes">
         <router-view></router-view>
       </keep-alive>
     </main>
@@ -42,6 +42,11 @@ export default {
         height,
       };
     },
+  },
+  data() {
+    return {
+      includeRoutes: ["home", "strategy", "favorite", "profile"],
+    };
   },
   mounted() {
     if (!detectPwaMode()) {

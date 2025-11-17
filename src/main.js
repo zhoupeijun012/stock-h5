@@ -12,7 +12,6 @@ Vue.use(Vant);
 import '@/styles/index.less';
 Vue.config.productionTip = false;
 
-
 new Vue({
   router,
   store,

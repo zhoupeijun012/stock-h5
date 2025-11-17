@@ -1,16 +1,23 @@
 <template>
-  <div>
+  <nav-warp :title="title">
     <k-line-chart ref="k-line-chart" /> 
-  </div>
+  </nav-warp>
 </template>
 <script>
+import NavWarp from "@/components/nav-warp";
 import KLineChart from "@/components/k-line-chart";
 import { getKLineOne } from "@/api/index";
 import { stockKMap } from "@/utils/tool";
 export default {
   name: "stock-detail",
   components: {
+    NavWarp,
     KLineChart,
+  },
+  computed: {
+    title() {
+      return `${this.$route.query.f14} (${this.$route.query.f12})`;
+    },
   },
   data() {
     return {

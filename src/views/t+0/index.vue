@@ -1,5 +1,5 @@
 <template>
-  <div class="stock">
+  <nav-warp title="T+0">
     <ft-list :requestFunction="$api.getEtfList" ref="ft-list">
       <template v-slot:list="{ list }">
         <stock-card
@@ -9,15 +9,17 @@
         ></stock-card>
       </template>
     </ft-list>
-  </div>
+  </nav-warp>
 </template>
 
 <script>
+import NavWarp from "@/components/nav-warp";
 import FtList from "@/components/ft-list";
 import StockCard from "@/components/stock-card";
 export default {
   name: 't0',
   components: {
+    NavWarp,
     FtList,
     StockCard,
   },
@@ -71,15 +73,13 @@ export default {
         "f41006",
         "f40016",
       ],
+      where: [
+        {field: "c1", operator: "eq", value: 0}
+      ],
     });
   },
 };
 </script>
 
 <style lang="less" scoped>
-.stock {
-  box-sizing: border-box;
-  height: 100%;
-  position: relative;
-}
 </style>

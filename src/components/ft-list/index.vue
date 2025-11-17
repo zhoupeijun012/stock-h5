@@ -1,5 +1,5 @@
 <template>
-  <div class="ft-list">
+  <div class="ft-list" @scroll="handleScroll" ref="list-warp">
     <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
       <van-list
         :immediate-check="false"
@@ -47,9 +47,18 @@ export default {
       pageNum: 0,
       pageSize: 10,
       requestParams: {},
+      scrollTop: 0,
     };
   },
+  activated() {
+    this.$nextTick(() => {
+      this.$refs['list-warp'].scrollTop = this.scrollTop;
+    });
+  },
   methods: {
+    handleScroll(e) {
+      this.scrollTop = e.target.scrollTop;
+    },
     onRefresh() {
       this.loadFunction(false);
     },

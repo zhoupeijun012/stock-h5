@@ -1,5 +1,5 @@
 <template>
-  <div class="stock">
+  <nav-warp title="行业">
     <ft-list :requestFunction="$api.getIndustryList" ref="ft-list">
       <template v-slot:list="{ list }">
         <stock-card
@@ -9,15 +9,17 @@
         ></stock-card>
       </template>
     </ft-list>
-  </div>
+  </nav-warp>
 </template>
 
 <script>
+import NavWarp from "@/components/nav-warp";
 import FtList from "@/components/ft-list";
 import StockCard from "@/components/stock-card";
 export default {
   name: 'industry',
   components: {
+    NavWarp,
     FtList,
     StockCard,
   },
@@ -77,9 +79,4 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.stock {
-  box-sizing: border-box;
-  height: 100%;
-  position: relative;
-}
 </style>

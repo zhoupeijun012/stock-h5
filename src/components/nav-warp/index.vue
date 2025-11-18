@@ -38,13 +38,13 @@ export default {
   /deep/.van-nav-bar__text {
     color: #323233!important;
     font-size: 16px;
-  font-weight:bold;
+  font-weight:500;
   }
   /deep/.van-icon {
     font-size: 18px;
     color: #323233;
     line-height: 22px;
-  font-weight:bold;
+  font-weight:500;
   }
 }
 .nav-bar-top {

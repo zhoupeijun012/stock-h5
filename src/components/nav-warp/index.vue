@@ -36,12 +36,12 @@ export default {
 }
 .nav-bar {
   /deep/.van-nav-bar__text {
-    color: #000!important;
+    color: #323233!important;
     font-size: 16px;
   }
   /deep/.van-icon {
     font-size: 18px;
-    color: #000;
+    color: #323233;
     line-height: 22px;
   }
 }

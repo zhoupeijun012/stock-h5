@@ -64,6 +64,7 @@ export default {
     },
     onLoad() {
       if (this.refreshing) {
+        this.loading = false;
         return;
       }
       this.loadFunction(true);
@@ -114,7 +115,7 @@ export default {
 
 .empty-state {
   position: absolute;
-  top: 50%;
+  top: calc(50% - 64px);
   left: 50%;
   transform: translate(-50%, -50%);
   width: 100%;

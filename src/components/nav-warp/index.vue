@@ -30,21 +30,22 @@ export default {
 }
 </script>
 
-<style  lang="less" scoped>
+<style lang="less" scoped>
 .nav-bar-wrap {
   height: 100%;
 }
 .nav-bar {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   /deep/.van-nav-bar__text {
-    color: #323233!important;
+    color: #323233 !important;
     font-size: 16px;
-  font-weight:500;
   }
   /deep/.van-icon {
     font-size: 18px;
     color: #323233;
     line-height: 22px;
-  font-weight:500;
   }
 }
 .nav-bar-top {

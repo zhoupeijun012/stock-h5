@@ -8,13 +8,13 @@
           </div>
           <van-row>
             <van-col span="6">登录IP：</van-col>
-            <van-col span="18">
+            <van-col span="18" :style="{ color: 'gray' }">
               {{ item.loginIp }}
             </van-col>
           </van-row>
           <van-row>
             <van-col span="6">登录时间：</van-col>
-            <van-col span="18">
+            <van-col span="18" :style="{ color: 'gray' }">
               {{ dayjs(item.loginTime).format("YYYY-MM-DD HH:mm:ss") }}
             </van-col>
           </van-row>

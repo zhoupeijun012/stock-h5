@@ -10,11 +10,11 @@
         {{ item.title }}
       </div>
 
-      <div class="index-text">
+      <div class="index-text" :style="{ color: 'gray' }">
         推荐指数：<span style="color: red">{{ item.index }}</span
         >星
       </div>
-      <div class="index-text">
+      <div class="index-text" :style="{ color: 'gray' }">
         {{ item.description }}
       </div>
     </div>

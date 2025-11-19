@@ -24,7 +24,7 @@
             </van-row>
             <van-row>
               <van-col span="6">创建时间：</van-col>
-              <van-col span="18">
+              <van-col span="18" :style="{ color: 'gray' }">
                 {{ dayjs(item.createdAt).format("YYYY-MM-DD HH:mm:ss") }}
               </van-col>
             </van-row>

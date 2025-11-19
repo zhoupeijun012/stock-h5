@@ -30,8 +30,8 @@
             </van-row>
           </div>
           <template #right v-if="!item.isAdmin">
-            <van-button style="height:100%" square type="danger" v-if="item.isApproved" text="禁用" @click="handleStatus(item,false)" />
-            <van-button style="height:100%" square type="primary" v-if="!item.isApproved" text="启用" @click="handleStatus(item,true)" />
+            <van-button style="height:100%" class="action-btn" square type="danger" v-if="item.isApproved" text="禁用" @click="handleStatus(item,false)" />
+            <van-button style="height:100%" class="action-btn" square type="primary" v-if="!item.isApproved" text="启用" @click="handleStatus(item,true)" />
           </template>
         </van-swipe-cell>
       </template>
@@ -109,5 +109,9 @@ export default {
 .card-name {
   color: red;
   font-size: 16px;
+}
+.action-btn {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 </style>

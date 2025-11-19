@@ -17,21 +17,21 @@ export const routes = [
     name: "strategy",
     component: () =>
       import(/* webpackChunkName:"stock" */ "@/views/strategy/index.vue"),
-    meta: { title: "策略", showTab: true , keepAlive: true },
+    meta: { title: "策略", showTab: true, keepAlive: true },
   },
   {
     path: "/favorite",
     name: "favorite",
     component: () =>
       import(/* webpackChunkName:"stock" */ "@/views/favorite/index.vue"),
-    meta: { title: "收藏", showTab: true , keepAlive: true },
+    meta: { title: "收藏", showTab: true, keepAlive: true },
   },
   {
     path: "/profile",
     name: "profile",
     component: () =>
       import(/* webpackChunkName:"stock" */ "@/views/profile/index.vue"),
-    meta: { title: "我的", showTab: true , keepAlive: true },
+    meta: { title: "我的", showTab: true, keepAlive: true },
   },
   {
     path: "/stock",
@@ -108,7 +108,35 @@ export const routes = [
     component: () =>
       import(/* webpackChunkName:"stock" */ "@/views/stock-detail/index.vue"),
     meta: { title: "股票详情", keepAlive: true },
-  }
+  },
+  {
+    path: "/user",
+    name: "user",
+    component: () =>
+      import(/* webpackChunkName:"stock" */ "@/views/user/index.vue"),
+    meta: { title: "用户", keepAlive: true },
+  },
+  {
+    path:'/login-record',
+    name:'login-record',
+    component: () =>
+      import(/* webpackChunkName:"stock" */ "@/views/record/index.vue"),
+    meta: { title: "登录记录", keepAlive: true },
+  },
+  {
+    path:'/task-queue',
+    name:'task-queue',
+    component: () =>
+      import(/* webpackChunkName:"stock" */ "@/views/task-queue/index.vue"),
+    meta: { title: "任务队列", keepAlive: true },
+  },
+  {
+    path:'/data-manage',
+    name:'data-manage',
+    component: () =>
+      import(/* webpackChunkName:"stock" */ "@/views/data-manage/index.vue"),
+    meta: { title: "数据管理", keepAlive: true },
+  },
 ];
 
 const router = new VueRouter({
@@ -121,7 +149,7 @@ router.beforeEach((to, from, next) => {
   if (to?.meta?.noAuth) {
     next();
   } else {
-    store.state.token ? next() : next('/login', { replace: true });
+    store.state.token ? next() : next("/login", { replace: true });
   }
 });
 

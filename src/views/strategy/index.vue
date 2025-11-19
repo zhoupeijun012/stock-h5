@@ -1,41 +1,48 @@
 <template>
   <div class="strategy">
-    <ft-list :requestFunction="$api.getFocusList" ref="ft-list">
-      <template v-slot:list="{ list }">
-        <van-card v-for="item in list" :key="item.id" :title="item.f14">
-        </van-card>
-      </template>
-    </ft-list>
+    <div
+      class="ft-card-item"
+      style="margin-bottom: 0"
+      v-for="item in list"
+      :key="item.queryId"
+    >
+      <div class="card-name">
+        {{ item.title }}
+      </div>
+
+      <div class="index-text">
+        推荐指数：<span style="color: red">{{ item.index }}</span
+        >星
+      </div>
+      <div class="index-text">
+        {{ item.description }}
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import FtList from "@/components/ft-list";
 export default {
-  name: 'strategy',
-  components: {
-    FtList,
-  },
+  name: "strategy",
   data() {
     return {
+      list: [
+        {
+          queryId: "1",
+          index: 5,
+          title: "龙头探底金叉",
+          description: "自由流通市值大于500亿，且触底反弹",
+        },
+        {
+          queryId: "2",
+          index: 5,
+          title: "ETF探底金叉",
+          description:  "ETF触底反弹",
+        },
+      ],
     };
   },
-  mounted() {
-    this.$refs["ft-list"].query({
-      order: [{ prop: "f3", order: "descending" }],
-      where: [],
-      matchKeys: [
-        "f14",
-        "f3",
-        "f12",
-        "f21",
-        "f20",
-        "f2",
-        "f12",
-        "f7",
-      ],
-    });
-  },
+  mounted() {},
 };
 </script>
 
@@ -45,10 +52,37 @@ export default {
   height: 100%;
   position: relative;
 }
-
-.van-card {
-  background: #fff;
-  margin: 10px;
+.ft-card-item {
   border-radius: 8px;
+  background: #fff;
+  margin-bottom: 8px;
+  position: relative;
+  padding: 6px 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+  font-size: 14px;
+  cursor: pointer;
+  user-select: none;
+  overflow: hidden;
+  margin: 10px;
+  &.gold {
+    background: rgba(255, 215, 0, 0.08);
+  }
+  &.silver {
+    background: rgba(218, 112, 214, 0.08);
+  }
+  &:active {
+    background: #f3f4f5;
+  }
+}
+.card-name {
+  color: red;
+  font-size: 18px;
+  line-height: 26px;
+}
+.index-text {
+  font-size: 14px;
+  line-height: 22px;
+  color: #646566;
 }
 </style>

@@ -13,7 +13,7 @@
             style="margin-right: 10px"
           />
           <div class="user-info-right">
-            <div class="user-name">Hi,{{userInfo.username}}</div>
+            <div class="user-name">Hi,{{ userInfo.username }}</div>
             <div class="user-phone">{{ userInfo.userId }}</div>
           </div>
         </div>
@@ -21,32 +21,55 @@
 
       <!-- 功能列表 -->
       <van-cell-group class="function-list" style="margin-top: 30px">
-        <van-cell title="个人信息" is-link value="修改资料" />
-
-        <van-cell title="修改密码" is-link />
-
-        <van-cell title="意见反馈" is-link />
+        <template v-if="isAdmin">
+          <van-cell title="用户管理" is-link @click="toUserManage"/>
+          <van-cell title="登录记录" is-link @click="toLoginRecord"/>
+          <van-cell title="任务列表" is-link @click="toTaskList"/>
+          <van-cell title="数据管理" is-link @click="toDataManage"/>
+        </template>
+        <template v-if="!isAdmin">
+          <van-cell title="个人信息" is-link value="修改资料" />
+          <van-cell title="修改密码" is-link />
+          <van-cell title="意见反馈" is-link />
+        </template>
       </van-cell-group>
 
       <!-- 退出登录 -->
-      <div class="function-list" style="margin-top:20px">
-        <van-button class="logout-btn" type="danger" block @click="logout">退出登录</van-button>
+      <div class="function-list" style="margin-top: 20px">
+        <van-button class="logout-btn" type="danger" block @click="logout"
+          >退出登录</van-button
+        >
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { Dialog,Toast } from "vant";
+import { Dialog, Toast } from "vant";
 import * as StoreTypes from "@/store/store_types";
 export default {
   name: "profile",
   computed: {
     userInfo() {
       return this.$store.state.userInfo;
-    }
+    },
+    isAdmin() {
+      return this.userInfo.isAdmin;
+    },
   },
   methods: {
+    toUserManage() {
+      this.$router.push({ name: "user" });
+    },
+    toLoginRecord() {
+      this.$router.push({ name: "login-record" });
+    },
+    toTaskList() {
+      this.$router.push({ name: "task-queue" });
+    },
+    toDataManage() {
+      this.$router.push({ name: "data-manage" });
+    },
     logout() {
       Dialog.confirm({
         title: "提示",
@@ -63,8 +86,8 @@ export default {
           }, 2000);
         })
         .catch(() => {});
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -79,7 +102,14 @@ export default {
   position: relative;
   .header-bg {
     height: calc(100% - 10px);
-    background: linear-gradient(135deg, #809fc0, #26c5eb, #00c9a7, #92d5c6, #92d5c6);
+    background: linear-gradient(
+      135deg,
+      #809fc0,
+      #26c5eb,
+      #00c9a7,
+      #92d5c6,
+      #92d5c6
+    );
   }
   .user-info-wrap {
     border-radius: 12px;
@@ -130,5 +160,4 @@ export default {
   font-size: 14px;
   box-sizing: border-box;
 }
-
 </style>

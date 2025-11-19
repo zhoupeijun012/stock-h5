@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <main class="main-content" :style="contentStyle">
-      <keep-alive :include="includeRoutes">
-        <router-view></router-view>
-      </keep-alive>
+      <alive-view></alive-view>
     </main>
     <div class="tab-bar" v-if="showTab">
       <van-tabbar class="app-tabbar" active-color="#00c9a7" :value="$route.name" route>
@@ -26,10 +24,13 @@
 
 <script>
 import { detectPwaMode } from "@/utils/tool.js";
+import AliveView from "@/components/alive-view";
 import { Dialog } from "vant";
 export default {
   name: "App",
-  components: {},
+  components: {
+    AliveView,
+  },
   computed: {
     showTab() {
       return this.$route.meta?.showTab;
@@ -45,7 +46,6 @@ export default {
   },
   data() {
     return {
-      includeRoutes: ["home", "strategy", "favorite", "profile"],
     };
   },
   mounted() {

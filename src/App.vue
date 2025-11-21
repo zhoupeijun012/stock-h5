@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <main class="main-content" :style="contentStyle">
-      <router-cache>
-        <router-view></router-view>
-      </router-cache>
+      <alive-view></alive-view>
     </main>
     <div class="tab-bar" v-if="showTab">
       <van-tabbar

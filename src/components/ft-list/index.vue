@@ -27,6 +27,9 @@
         class="empty-icon"
       />
     </div>
+    <transition name="fade" duration="300">
+      <div class="page-info" v-if="loading">第{{pageNum}}页/共{{pages}}页，共{{total}}条</div>
+    </transition>
   </div>
 </template>
 
@@ -46,6 +49,8 @@ export default {
       list: [],
       pageNum: 0,
       pageSize: 10,
+      pages:0,
+      total: 0,
       requestParams: {},
       scrollTop: 0,
       requestCallback: null
@@ -90,6 +95,8 @@ export default {
           }
           this.pageNum = res.pageNum;
           this.finished = this.pageNum >= res.pages;
+          this.pages = res.pages;
+          this.total = res.total;
         })
         .catch((err) => {
           this.error = true;
@@ -130,4 +137,19 @@ export default {
   justify-content: center;
   cursor: pointer;
 }
+
+.page-info {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0 12px;
+  border-radius: 12px;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+
 </style>

@@ -1,10 +1,17 @@
 <template>
   <div id="app">
     <main class="main-content" :style="contentStyle">
-      <alive-view></alive-view>
+      <router-cache>
+        <router-view></router-view>
+      </router-cache>
     </main>
     <div class="tab-bar" v-if="showTab">
-      <van-tabbar class="app-tabbar" active-color="#00c9a7" :value="$route.name" route>
+      <van-tabbar
+        class="app-tabbar"
+        active-color="#00c9a7"
+        :value="$route.name"
+        route
+      >
         <van-tabbar-item replace name="home" to="/home" icon="wap-home-o"
           >首页</van-tabbar-item
         >
@@ -45,8 +52,7 @@ export default {
     },
   },
   data() {
-    return {
-    };
+    return {};
   },
   mounted() {
     if (!detectPwaMode()) {
@@ -104,7 +110,7 @@ export default {
   margin-bottom: env(safe-area-inset-bottom);
   height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   position: relative;
-    background: rgb(243, 244, 245);
+  background: rgb(243, 244, 245);
 }
 
 .nav-bar {

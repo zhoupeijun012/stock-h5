@@ -101,7 +101,7 @@ export default {
           this.showPageInfo = true;
           setTimeout(() => {
             this.showPageInfo = false;
-          }, 300);
+          }, 1500);
         })
         .catch((err) => {
           this.error = true;

@@ -28,7 +28,7 @@
       />
     </div>
     <transition name="fade" duration="1500">
-      <div class="page-info" v-if="loading || refreshing">第{{pageNum}}页/共{{pages}}页，共{{total}}条</div>
+      <div class="page-info" v-if="showPageInfo">第{{pageNum}}页/共{{pages}}页，共{{total}}条</div>
     </transition>
   </div>
 </template>
@@ -53,7 +53,8 @@ export default {
       total: 0,
       requestParams: {},
       scrollTop: 0,
-      requestCallback: null
+      requestCallback: null,
+      showPageInfo: false,
     };
   },
   activated() {
@@ -97,6 +98,10 @@ export default {
           this.finished = this.pageNum >= res.pages;
           this.pages = res.pages;
           this.total = res.total;
+          this.showPageInfo = true;
+          setTimeout(() => {
+            this.showPageInfo = false;
+          }, 300);
         })
         .catch((err) => {
           this.error = true;

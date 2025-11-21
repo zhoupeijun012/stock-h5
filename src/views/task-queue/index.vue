@@ -1,10 +1,16 @@
 <template>
   <nav-warp title="任务管理">
-    <ft-list :requestFunction="$api.getQueueList" ref="ft-list">
+    <list-grid :colNum="3" :labelWidth="10" :list="pageInfo"></list-grid>
+    <ft-list style="flex: 1" :requestFunction="$api.getQueueList" ref="ft-list">
       <template v-slot:list="{ list }">
-        <div v-for="item in list" :key="item.id" class="ft-card-item" :style="{
-          background: item.status === 'failed' ? 'red' : '#fff',
-        }">
+        <div
+          v-for="item in list"
+          :key="item.id"
+          class="ft-card-item"
+          :style="{
+            background: item.status === 'failed' ? 'red' : '#fff',
+          }"
+        >
           <div class="card-info">
             <div>任务名称：{{ item.handlerName }}</div>
             <van-row>
@@ -31,20 +37,59 @@
 <script>
 import NavWarp from "@/components/nav-warp";
 import FtList from "@/components/ft-list";
+import ListGrid from "@/components/list-grid";
 export default {
-  name: "t1",
+  name: "task-queue",
   components: {
     NavWarp,
     FtList,
+    ListGrid,
   },
   data() {
-    return {};
+    return {
+      dataInfo: {},
+    };
+  },
+  computed: {
+    pageInfo() {
+      return [
+        {
+          title: "总计",
+          value: this.dataInfo.total || 0,
+        },
+        {
+          title: "成功",
+          value: this.dataInfo.success || 0,
+        },
+        {
+          title: "失败",
+          value: this.dataInfo.failed || 0,
+        },
+        {
+          title: "进行中",
+          value: this.dataInfo.running || 0,
+        },
+        {
+          title: "等待中",
+          value: this.dataInfo.pending || 0,
+        },
+        {
+          title: "重试中",
+          value: this.dataInfo.retriable || 0,
+        },
+      ];
+    },
   },
   mounted() {
-    this.$refs["ft-list"].query({
-      order: [{ prop: "taskLevel", order: "ascending" }],
-      where: [],
-    });
+    this.$refs["ft-list"].query(
+      {
+        order: [{ prop: "taskLevel", order: "ascending" }],
+        where: [],
+      },
+      (res) => {
+        this.dataInfo = res.summary || {};
+      }
+    );
   },
 };
 </script>

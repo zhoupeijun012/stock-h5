@@ -59,5 +59,7 @@ export default {
   background-color: #f5f5f5;
   margin-top: 46px;
   height: calc(100% - 46px);
+  display: flex;
+  flex-direction: column;
 }
 </style>

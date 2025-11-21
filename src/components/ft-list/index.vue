@@ -48,6 +48,7 @@ export default {
       pageSize: 10,
       requestParams: {},
       scrollTop: 0,
+      requestCallback: null
     };
   },
   activated() {
@@ -79,6 +80,9 @@ export default {
         ...this.requestParams,
       })
         .then((res) => {
+          if (this.requestCallback) {
+            this.requestCallback(res);
+          }
           if (isMore) {
             this.list = [...this.list, ...res.list];
           } else {
@@ -95,8 +99,9 @@ export default {
           this.refreshing = false;
         });
     },
-    query(params) {
+    query(params,callback) {
       this.requestParams = params;
+      this.requestCallback = callback;
       this.onRefresh();
     },
   },

@@ -149,7 +149,7 @@ export default {
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
-  background: rgba(255, 255, 255, 0.8);
+  background: #e3e4e5;
   padding: 0 12px;
   border-radius: 12px;
   box-sizing: border-box;

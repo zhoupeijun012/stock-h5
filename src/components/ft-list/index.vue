@@ -27,7 +27,7 @@
         class="empty-icon"
       />
     </div>
-    <transition name="fade" duration="300">
+    <transition name="fade" duration="600">
       <div class="page-info" v-if="loading">第{{pageNum}}页/共{{pages}}页，共{{total}}条</div>
     </transition>
   </div>

@@ -6,6 +6,14 @@ import VueRouterCache from 'vue-router-cache'
 Vue.use(VueRouterCache, {
   router: router,
   max: 10,
+    getHistoryStack() {
+    const str = window.sessionStorage.getItem('historyStack')
+    return JSON.parse(str)
+  },
+  setHistoryStack(history) {
+    const str = JSON.stringify(history)
+    window.sessionStorage.setItem('historyStack', str)
+  }
 })
 
 import * as api from '@/api/index';

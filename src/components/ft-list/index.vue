@@ -28,7 +28,7 @@
       />
     </div>
     <transition name="fade" duration="1500">
-      <div class="page-info" v-if="showPageInfo">第{{pageNum}}页/共{{pages}}页，共{{total}}条</div>
+      <div class="page-info" v-if="showPageInfo && total > 0">第{{pageNum}}页/共{{pages}}页，共{{total}}条</div>
     </transition>
   </div>
 </template>

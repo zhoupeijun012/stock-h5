@@ -1,6 +1,6 @@
 <template>
   <nav-warp title="股票" :searchOptions="searchOptions" @confirm="onConfirm">
-    <list-grid v-if="filters.length > 0" :list="filters" :colNum="2" :labelWidth="12"></list-grid>
+    <list-grid v-if="filters.length > 0" :list="filters" :colNum="2" :labelWidth="10"></list-grid>
     <ft-list :requestFunction="$api.getStockList" ref="ft-list">
       <template v-slot:list="{ list }">
         <stock-card
@@ -129,7 +129,7 @@ export default {
             { label: "小于5天", value: "1", realValue: [0, 5] },
             { label: "小于10天", value: "3", realValue: [0, 10] },
             { label: "10-20天", value: "4", realValue: [10, 20] },
-            { label: "大于20天", value: "5", realValue: [20] },
+            { label: "超20天", value: "5", realValue: [20] },
           ],
         },
         {
@@ -159,7 +159,7 @@ export default {
             { label: "小于5天", value: "1", realValue: [0, 5] },
             { label: "6-10天", value: "2", realValue: [6, 10] },
             { label: "10-20天", value: "4", realValue: [10, 20] },
-            { label: "大于20天", value: "5", realValue: [20] },
+            { label: "超20天", value: "5", realValue: [20] },
           ],
         },
         {

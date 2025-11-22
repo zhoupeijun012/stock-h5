@@ -6,7 +6,7 @@
     position="right"
     :style="{ width: '90%', height: '100%' }"
   >
-    <div class="panel-container">
+    <div class="panel-container" ref="panelContainer">
       <div class="panel-content">
         <template v-for="item in filterOptions">
           <template v-if="item.component === 'input'">
@@ -141,6 +141,8 @@ export default {
     value(newVal) {
       if(newVal) {
         this.filterOptions = JSON.parse(JSON.stringify(this.options || []));
+        // 滚动到顶部
+        this.$refs.panelContainer.scrollTop = 0;
       }
     }
   }

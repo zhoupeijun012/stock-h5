@@ -27,6 +27,21 @@ export default {
   data() {
     return {
       searchOptions: [
+               {
+          prop: "f14",
+          title: "名称",
+          component: "input",
+          defaultValue: '',
+          value: '',
+          operator: 'like',
+          target: "f14",
+          style: {
+            position: 'sticky',
+            top: '0',
+            margin: '0 -10px 0',
+            zIndex: '10',
+          }
+        },
         {
           prop: "f40014",
           title: "金叉天数",

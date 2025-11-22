@@ -2,54 +2,63 @@
   <van-popup
     :value="value"
     @input="(val) => $emit('input', val)"
-    closeable
-    close-icon="cross"
-    position="bottom"
-    :style="{ height: '90%' }"
-    round
-    close-icon-position="top-right"
+    :closeable="false"
+    position="right"
+    :style="{ width: '90%', height: '100%' }"
   >
     <div class="panel-container">
-      <div class="panel-top"></div>
       <div class="panel-content">
-        <div v-for="item in filterOptions" :key="item.prop" class="panel-item">
-          <div class="panel-item-title">{{ item.title }}</div>
-          <div v-if="item.component === 'radio'">
-            <van-checkbox-group
-              :max="1"
-              class="radio-group"
-              :value="item.value"
-              direction="horizontal"
-            >
-              <van-checkbox
-                :name="option.value"
-                v-for="(option, index) in item.options"
-                :key="index"
-                @click="
-                  () => {
-                    if (
-                      item.value?.length > 0 &&
-                      item.value[0] === option.value
-                    ) {
-                      item.value = [];
-                    } else {
-                      item.value = [option.value];
-                    }
-                  }
-                "
-              >
-                <template #icon="props">
-                  <van-button
-                    type="primary"
-                    :plain="!props.checked"
-                    size="small"
-                    >{{ option.label }}</van-button
+        <template v-for="item in filterOptions">
+          <template v-if="item.component === 'input'">
+            <div :style="item.style || {}" :key="item.prop">
+              <van-search
+                placeholder="请输入搜索关键词"
+                background="rgb(79, 192, 141)"
+                v-model.trim="item.value"
+              />
+            </div>
+          </template>
+          <template v-if="item.component === 'radio'">
+            <div class="panel-item" :key="item.prop">
+              <div class="panel-item-title">{{ item.title }}</div>
+              <div :style="item.style || {}">
+                <van-checkbox-group
+                  :max="1"
+                  class="radio-group"
+                  :value="item.value"
+                  direction="horizontal"
+                >
+                  <van-checkbox
+                    :name="option.value"
+                    v-for="(option, index) in item.options"
+                    :key="index"
+                    @click="
+                      () => {
+                        if (
+                          item.value?.length > 0 &&
+                          item.value[0] === option.value
+                        ) {
+                          item.value = [];
+                        } else {
+                          item.value = [option.value];
+                        }
+                      }
+                    "
                   >
-                </template>
-              </van-checkbox>
-            </van-checkbox-group>
-          </div>
-        </div>
+                    <template #icon="props">
+                      <van-button
+                        type="primary"
+                        :plain="!props.checked"
+                        size="small"
+                        >{{ option.label }}</van-button
+                      >
+                    </template>
+                  </van-checkbox>
+                </van-checkbox-group>
+              </div>
+            </div>
+          </template>
+        </template>
       </div>
       <div class="panel-bottom">
         <van-button
@@ -95,6 +104,9 @@ export default {
         if(item.component === 'radio') {
           return item.value?.length > 0;
         }
+        if(item.component === 'input') {
+          return item.value?.length > 0;
+        }
         return false;
       });
     },
@@ -104,6 +116,9 @@ export default {
         this.filterOptions.forEach((item) => {
           if(item.component === 'radio') {
             item.value = [];
+          }
+          if(item.component === 'input') {
+            item.value = '';
           }
         });
         this.onApply();

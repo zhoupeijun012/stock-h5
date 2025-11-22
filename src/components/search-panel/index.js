@@ -10,6 +10,14 @@ export const getSearchParams = (searchColumns = []) => {
           .realValue,
       });
     }
+    if (item.component === "input" && item.value?.length > 0) {
+      filterList.push({
+        field: item.prop,
+        target: item.target || item.prop,
+        operator: item.operator,
+        value: item.value,
+      });
+    }
   });
   return filterList;
 };

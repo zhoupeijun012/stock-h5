@@ -28,6 +28,21 @@ export default {
     return {
       searchOptions: [
         {
+          prop: "f14",
+          title: "名称",
+          component: "input",
+          defaultValue: '',
+          value: '',
+          operator: 'like',
+          target: "f14",
+          style: {
+            position: 'sticky',
+            top: '0',
+            margin: '0 -10px 0',
+            zIndex: '10',
+          }
+        },
+        {
           prop: "f6666",
           title: "上市地区",
           component: "radio",

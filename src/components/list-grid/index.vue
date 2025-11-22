@@ -56,7 +56,7 @@ export default {
   .list-item-text {
     color: gray;
     &::before {
-      content: "：";
+      content: ":";
       color: gray !important;
     }
   }

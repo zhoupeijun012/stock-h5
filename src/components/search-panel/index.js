@@ -21,3 +21,22 @@ export const getSearchParams = (searchColumns = []) => {
   });
   return filterList;
 };
+
+export const getSearchFilters = (searchColumns = []) => {
+  const filterList = [];
+  searchColumns.forEach((item) => {
+    if (item.component === "radio" && item.value?.length > 0) {
+      filterList.push({
+        title: item.title,
+        value: item.options.find((opt) => opt.value === item.value[0]).label,
+      });
+    }
+    if (item.component === "input" && item.value?.length > 0) {
+      filterList.push({
+        title: item.title,
+        value: item.value,
+      });
+    }
+  });
+  return filterList;
+};

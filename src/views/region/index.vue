@@ -178,7 +178,7 @@ export default {
         },
         {
           prop: "f40017",
-          title: "资金流入天数",
+          title: "资金流入",
           component: "radio",
           defaultValue: [],
           value: [],

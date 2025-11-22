@@ -1,8 +1,8 @@
 <template>
   <div class="ft-card-item" @click="toDetail(info)" >
-    <div class="card-name" style="font-size: 20px; line-height: 24px">
+    <div class="card-name" style="font-size: 18px; line-height: 24px">
       {{ info.f14 }}
-      <span :style="valueStyle(info.f3)" style="font-size: 20px; line-height: 24px" class="card-prec">{{ formatPrec(info.f3, '%') }}</span>
+      <span :style="valueStyle(info.f3)" style="font-size: 18px; line-height: 24px" class="card-prec">{{ formatPrec(info.f3, '%') }}</span>
     </div>
     <div class=""></div>
     <div class="card-col">

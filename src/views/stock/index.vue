@@ -32,7 +32,7 @@ export default {
           title: "上市地区",
           component: "radio",
           defaultValue: [],
-          value: [],
+          value: ['0'],
           operator: "orStart",
           target: "f12",
           options: [

@@ -107,7 +107,7 @@ export default {
           value: [],
           operator: "between",
           options: [
-            { label: "小于5%", value: "1", realValue: [0, 500] },
+            
             { label: "小于20%", value: "4", realValue: [0, 2000] },
             { label: "20%-40%", value: "5", realValue: [2000, 4000] },
             { label: "40%-60%", value: "6", realValue: [4000, 6000] },
@@ -124,8 +124,8 @@ export default {
           operator: "between",
           options: [
             { label: "小于5天", value: "1", realValue: [0, 5] },
-            { label: "小10天", value: "3", realValue: [0, 10] },
-            { label: "10天-20天", value: "4", realValue: [10, 20] },
+            { label: "小于10天", value: "3", realValue: [0, 10] },
+            { label: "10-20天", value: "4", realValue: [10, 20] },
             { label: "大于20天", value: "5", realValue: [20] },
           ],
         },
@@ -137,8 +137,7 @@ export default {
           value: [],
           operator: "between",
           options: [
-            { label: "小于5%", value: "1", realValue: [0, 500] },
-            { label: "5%-10%", value: "2", realValue: [500, 1000] },
+            { label: "1%-10%", value: "2", realValue: [0, 1000] },
             { label: "10%-20%", value: "3", realValue: [1000, 2000] },
             { label: "20%-40%", value: "5", realValue: [2000, 4000] },
             { label: "40%-60%", value: "6", realValue: [4000, 6000] },
@@ -155,8 +154,8 @@ export default {
           operator: "between",
           options: [
             { label: "小于5天", value: "1", realValue: [0, 5] },
-            { label: "6天-10天", value: "2", realValue: [6, 10] },
-            { label: "10天-20天", value: "4", realValue: [10, 20] },
+            { label: "6-10天", value: "2", realValue: [6, 10] },
+            { label: "10-20天", value: "4", realValue: [10, 20] },
             { label: "大于20天", value: "5", realValue: [20] },
           ],
         },
@@ -168,7 +167,7 @@ export default {
           value: [],
           operator: "between",
           options: [
-            { label: "小于5%", value: "1", realValue: [0, 500] },
+            
             { label: "5%-10%", value: "2", realValue: [500, 1000] },
             { label: "10%-20%", value: "3", realValue: [1000, 2000] },
             { label: "20%-40%", value: "5", realValue: [2000, 4000] },
@@ -186,9 +185,9 @@ export default {
           operator: "between",
           options: [
             { label: "小于5天", value: "1", realValue: [0, 5] },
-            { label: "6天-10天", value: "2", realValue: [6, 10] },
-            { label: "小10天", value: "3", realValue: [0, 10] },
-            { label: "10天-20天", value: "4", realValue: [10, 20] },
+            { label: "6-10天", value: "2", realValue: [6, 10] },
+            { label: "小于10天", value: "3", realValue: [0, 10] },
+            { label: "10-20天", value: "4", realValue: [10, 20] },
           ],
         },
         {
@@ -200,9 +199,9 @@ export default {
           operator: "between",
           options: [
             { label: "小于5天", value: "1", realValue: [0, 5] },
-            { label: "6天-10天", value: "2", realValue: [6, 10] },
-            { label: "小10天", value: "3", realValue: [0, 10] },
-            { label: "10天-20天", value: "4", realValue: [10, 20] },
+            { label: "6-10天", value: "2", realValue: [6, 10] },
+            { label: "小于10天", value: "3", realValue: [0, 10] },
+            { label: "10-20天", value: "4", realValue: [10, 20] },
           ],
         },
         {
@@ -214,11 +213,10 @@ export default {
           operator: "between",
           options: [
             { label: "小于20亿", value: "1", realValue: [0, 20e8] },
-            { label: "20亿-40亿", value: "2", realValue: [20e8, 40e8] },
-            { label: "小于40亿", value: "3", realValue: [0, 40e8] },
-            { label: "40亿-100亿", value: "4", realValue: [40e8, 100e8] },
-            { label: "100亿-200亿", value: "5", realValue: [100e8, 200e8] },
-            { label: "200亿-500亿", value: "6", realValue: [200e8, 500e8] },
+            { label: "20-40亿", value: "2", realValue: [20e8, 40e8] },
+            { label: "40-100亿", value: "4", realValue: [40e8, 100e8] },
+            { label: "100-200亿", value: "5", realValue: [100e8, 200e8] },
+            { label: "200-500亿", value: "6", realValue: [200e8, 500e8] },
             { label: "大于500亿", value: "7", realValue: [500e8] },
           ],
         },
@@ -232,7 +230,6 @@ export default {
           options: [
             { label: "小于2%", value: "1", realValue: [0, 200] },
             { label: "2-4%", value: "2", realValue: [200, 400] },
-            { label: "小于4%", value: "3", realValue: [0, 400] },
             { label: "4-6%", value: "4", realValue: [400, 600] },
             { label: "大于6%", value: "6", realValue: [600] },
           ],

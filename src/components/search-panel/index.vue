@@ -169,6 +169,7 @@ export default {
   flex-direction: row;
   gap: 10px;
   padding: 0 10px;
+  border-top: 1px solid #ebedf0;
 }
 .panel-bottom-btn {
   flex: 1;
@@ -179,6 +180,9 @@ export default {
   .panel-item-title {
     line-height: 20px;
     margin-bottom: 12px;
+  }
+  &:last-child {
+    border-bottom: none;
   }
 }
 .radio-group {

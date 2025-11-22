@@ -73,7 +73,7 @@ import { userRegister } from "@/api/index";
 import { MD5 } from "@/utils/tool";
 
 export default {
-  name: "RegisterPage",
+  name: "register",
   data() {
     // 正则表达式常量
     const USERNAME_REGEX = /^[a-zA-Z0-9]{3,16}$/;

@@ -62,7 +62,7 @@ export default {
       this.$router.push({ name: "user" });
     },
     toLoginRecord() {
-      this.$router.push({ name: "login-record" });
+      this.$router.push({ name: "record" });
     },
     toTaskList() {
       this.$router.push({ name: "task-queue" });

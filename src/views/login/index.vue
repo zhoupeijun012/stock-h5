@@ -69,7 +69,7 @@ import { Toast, Dialog } from "vant";
 import * as storeTypes from "@/store/store_types";
 
 export default {
-  name: "LoginPage",
+  name: "login",
   data() {
     return {
       // 登录表单数据

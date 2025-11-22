@@ -35,13 +35,16 @@ export default {
         showCancelButton: true,
       })
         .then(() => {
-          this.$api.taskInit().then(() => {
-            Toast.success("初始化系统成功");
-          });
+          this.$api
+            .taskInit()
+            .then(() => {
+              Toast.success("初始化系统成功");
+            })
+            .catch(() => {
+              Toast.fail("更新数据失败");
+            });
         })
-        .catch(() => {
-          Toast.fail("初始化系统失败");
-        });
+        .catch(() => {});
     },
     updateData() {
       Dialog.confirm({
@@ -50,13 +53,16 @@ export default {
         showCancelButton: true,
       })
         .then(() => {
-          this.$api.taskUpdate().then(() => {
-            Toast.success("更新数据成功");
-          });
+          this.$api
+            .taskUpdate()
+            .then(() => {
+              Toast.success("更新数据成功");
+            })
+            .catch(() => {
+              Toast.fail("更新数据失败");
+            });
         })
-        .catch(() => {
-          Toast.fail("更新数据失败");
-        });
+        .catch(() => {});
     },
   },
 };

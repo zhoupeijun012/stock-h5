@@ -1,5 +1,5 @@
 <template>
-  <nav-warp title="股票">
+  <nav-warp title="股票" showSearch>
     <ft-list :requestFunction="$api.getStockList" ref="ft-list">
       <template v-slot:list="{ list }">
         <stock-card
@@ -9,6 +9,14 @@
         ></stock-card>
       </template>
     </ft-list>
+    <van-icon
+      name="search"
+      @click="showSearchPanel = true"
+      class="search-icon"
+    />
+    <search-panel
+      v-model="showSearchPanel"
+    ></search-panel>
   </nav-warp>
 </template>
 
@@ -16,14 +24,20 @@
 import NavWarp from "@/components/nav-warp";
 import FtList from "@/components/ft-list";
 import StockCard from "@/components/stock-card";
+import SearchPanel from "@/components/search-panel";
+
 export default {
+  name: "stock",
   components: {
     NavWarp,
     FtList,
     StockCard,
+    SearchPanel,
   },
   data() {
-    return {};
+    return {
+      showSearchPanel: false,
+    };
   },
   mounted() {
     this.$refs["ft-list"].query({

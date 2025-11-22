@@ -66,8 +66,8 @@ export default {
       ],
       list: [
         { title: "股票", icon: "cash-back-record-o", name: "stock" },
-        { title: "T+0", icon: "goods-collect-o", name: "t+0" },
-        { title: "T+1", icon: "discount-o", name: "t+1" },
+        { title: "T+0", icon: "goods-collect-o", name: "t0" },
+        { title: "T+1", icon: "discount-o", name: "t1" },
         { title: "LOF", icon: "shopping-cart-o", name: "lof" },
         { title: "板块", icon: "award-o", name: "industry" },
         { title: "概念", icon: "shop-collect-o", name: "concept" },

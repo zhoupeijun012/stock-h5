@@ -17,13 +17,13 @@
         <div v-for="item in options" :key="item.prop" class="panel-item">
           <div class="panel-item-title">{{ item.title }}</div>
           <div v-if="item.component === 'radio'">
-            <van-radio-group class="radio-group" v-model="item.defaultValue" direction="horizontal">
-              <van-radio :name="option.value" v-for="(option, index) in item.options" :key="index">
+            <van-checkbox-group :max="1" class="radio-group" v-model="item.value" direction="horizontal">
+              <van-checkbox :name="option.value" v-for="(option, index) in item.options" :key="index">
                 <template #icon="props">
                   <van-button type="primary" :plain="!props.checked" size="small">{{ option.label }}</van-button>
                 </template>
-              </van-radio>
-            </van-radio-group>
+              </van-checkbox>
+            </van-checkbox-group>
           </div>
         </div>
       </div>
@@ -100,7 +100,7 @@ export default {
 .radio-group {
     font-size: 14px;
     line-height: 14px;
-    /deep/.van-radio__icon {
+    /deep/.van-checkbox__icon{
         height: auto;
         margin-bottom: 10px;
     }

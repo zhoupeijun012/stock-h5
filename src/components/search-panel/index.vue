@@ -5,7 +5,7 @@
     closeable
     close-icon="cross"
     position="bottom"
-    :style="{ height: '80%' }"
+    :style="{ height: '90%' }"
     round
     close-icon-position="top-right"
     v-bind="$attrs"
@@ -90,7 +90,7 @@ export default {
   flex: 1;
 }
 .panel-item {
-    padding: 10px 0;
+    padding-top: 10px;
     border-bottom: 1px solid #ebedf0;
     .panel-item-title {
         line-height: 20px;

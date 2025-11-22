@@ -14,7 +14,10 @@
       @click="showSearchPanel = true"
       class="search-icon"
     />
-    <search-panel v-model="showSearchPanel" :options="searchOptions"></search-panel>
+    <search-panel
+      v-model="showSearchPanel"
+      :options="searchOptions"
+    ></search-panel>
   </nav-warp>
 </template>
 
@@ -37,6 +40,59 @@ export default {
       showSearchPanel: true,
       searchOptions: [
         {
+          prop: "f6666",
+          title: "上市地区",
+          component: "radio",
+          defaultValue: "",
+          operator: "orStart",
+          target: "f12",
+          options: [
+            { label: "主板", value: "0", realValue: ["00", "60"] },
+            { label: "创业", value: "1", realValue: ["300"] },
+            { label: "科创", value: "2", realValue: ["68"] },
+            { label: "北证", value: "3", realValue: ["8"] },
+          ],
+        },
+        {
+          prop: "f40014",
+          title: "金叉天数",
+          component: "radio",
+          defaultValue: "",
+          operator: "between",
+          options: [
+            { label: "大于1天", value: "-1", realValue: [1] },
+            { label: "1-2天", value: "1", realValue: [1, 2] },
+            { label: "小于5天", value: "4", realValue: [0, 5] },
+            { label: "5-10天", value: "5", realValue: [5, 10] },
+          ],
+        },
+        {
+          prop: "f41006",
+          title: "周金叉数",
+          component: "radio",
+          defaultValue: "",
+          operator: "between",
+          options: [
+            { label: "大于1周", value: "-1", realValue: [1] },
+            { label: "1-2周", value: "1", realValue: [1, 2] },
+            { label: "小于5周", value: "4", realValue: [0, 5] },
+            { label: "5-10周", value: "5", realValue: [5, 10] },
+          ],
+        },
+        {
+          prop: "f40016",
+          title: "控盘程度",
+          component: "radio",
+          defaultValue: "",
+          operator: "between",
+          options: [
+            { label: "大于50", value: "3", realValue: [50] },
+            { label: "大于100", value: "5", realValue: [100] },
+            { label: "大于150", value: "6", realValue: [150] },
+            { label: "大于200", value: "7", realValue: [200] },
+          ],
+        },
+        {
           prop: "f40006",
           title: "924涨幅",
           component: "radio",
@@ -44,8 +100,6 @@ export default {
           operator: "between",
           options: [
             { label: "小于5%", value: "1", realValue: [0, 500] },
-            { label: "5%-10%", value: "2", realValue: [500, 1000] },
-            { label: "10%-20%", value: "3", realValue: [1000, 2000] },
             { label: "小于20%", value: "4", realValue: [0, 2000] },
             { label: "20%-40%", value: "5", realValue: [2000, 4000] },
             { label: "40%-60%", value: "6", realValue: [4000, 6000] },
@@ -77,7 +131,6 @@ export default {
             { label: "小于5%", value: "1", realValue: [0, 500] },
             { label: "5%-10%", value: "2", realValue: [500, 1000] },
             { label: "10%-20%", value: "3", realValue: [1000, 2000] },
-            { label: "小于20%", value: "4", realValue: [0, 2000] },
             { label: "20%-40%", value: "5", realValue: [2000, 4000] },
             { label: "40%-60%", value: "6", realValue: [4000, 6000] },
             { label: "60%-100%", value: "7", realValue: [6000, 10000] },
@@ -108,7 +161,6 @@ export default {
             { label: "小于5%", value: "1", realValue: [0, 500] },
             { label: "5%-10%", value: "2", realValue: [500, 1000] },
             { label: "10%-20%", value: "3", realValue: [1000, 2000] },
-            { label: "小于20%", value: "4", realValue: [0, 2000] },
             { label: "20%-40%", value: "5", realValue: [2000, 4000] },
             { label: "40%-60%", value: "6", realValue: [4000, 6000] },
             { label: "60%-100%", value: "7", realValue: [6000, 10000] },
@@ -131,7 +183,7 @@ export default {
         },
         {
           prop: "f40017",
-          title: "流入天数",
+          title: "资金流入天数",
           component: "radio",
           defaultValue: "",
           operator: "between",
@@ -160,52 +212,6 @@ export default {
           ],
         },
         {
-          prop: "f40014",
-          title: "金叉天数",
-          component: "radio",
-          defaultValue: "",
-          operator: "between",
-          options: [
-            { label: "大于1天", value: "-1", realValue: [1] },
-            { label: "1天", value: "1", realValue: [1, 1] },
-            { label: "2天", value: "2", realValue: [2, 2] },
-            { label: "3-4天", value: "3", realValue: [3, 4] },
-            { label: "小于5天", value: "4", realValue: [0, 5] },
-            { label: "5-10天", value: "5", realValue: [5, 10] },
-          ],
-        },
-        {
-          prop: "f41006",
-          title: "周金叉数",
-          component: "radio",
-          defaultValue: "",
-          operator: "between",
-          options: [
-            { label: "大于1周", value: "-1", realValue: [1] },
-            { label: "1周", value: "1", realValue: [1, 1] },
-            { label: "2周", value: "2", realValue: [2, 2] },
-            { label: "3-4周", value: "3", realValue: [3, 4] },
-            { label: "小于5周", value: "4", realValue: [0, 5] },
-            { label: "5-10周", value: "5", realValue: [5, 10] },
-          ],
-        },
-        {
-          prop: "f40016",
-          title: "控盘程度",
-          component: "radio",
-          defaultValue: "",
-          operator: "between",
-          options: [
-            { label: "小于50", value: "1", realValue: [0, 50] },
-            { label: "50-100", value: "2", realValue: [50, 100] },
-            { label: "大于50", value: "3", realValue: [50] },
-            { label: "大于80", value: "4", realValue: [80] },
-            { label: "大于100", value: "5", realValue: [100] },
-            { label: "大于150", value: "6", realValue: [150] },
-            { label: "大于200", value: "7", realValue: [200] },
-          ],
-        },
-        {
           prop: "f3",
           title: "当日涨幅",
           component: "radio",
@@ -216,22 +222,7 @@ export default {
             { label: "2-4%", value: "2", realValue: [200, 400] },
             { label: "小于4%", value: "3", realValue: [0, 400] },
             { label: "4-6%", value: "4", realValue: [400, 600] },
-            { label: "小于6%", value: "5", realValue: [400, 600] },
             { label: "大于6%", value: "6", realValue: [600] },
-          ],
-        },
-        {
-          prop: "f6666",
-          title: "上市地区",
-          component: "radio",
-          defaultValue: "",
-          operator: "orStart",
-          target: "f12",
-          options: [
-            { label: "主板", value: "0", realValue: ["00", "60"] },
-            { label: "创业", value: "1", realValue: ["300"] },
-            { label: "科创", value: "2", realValue: ["68"] },
-            { label: "北证", value: "3", realValue: ["8"] },
           ],
         },
       ],

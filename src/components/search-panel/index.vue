@@ -1,26 +1,50 @@
 <template>
   <van-popup
     :value="value"
-    @input="$emit('update:value', false)"
+    @input="(val) => $emit('input', val)"
     closeable
     close-icon="cross"
     position="bottom"
     :style="{ height: '90%' }"
     round
     close-icon-position="top-right"
-    v-bind="$attrs"
-    v-on="$listeners"
   >
     <div class="panel-container">
       <div class="panel-top"></div>
       <div class="panel-content">
-        <div v-for="item in options" :key="item.prop" class="panel-item">
+        <div v-for="item in filterOptions" :key="item.prop" class="panel-item">
           <div class="panel-item-title">{{ item.title }}</div>
           <div v-if="item.component === 'radio'">
-            <van-checkbox-group :max="1" class="radio-group" v-model="item.value" direction="horizontal">
-              <van-checkbox :name="option.value" v-for="(option, index) in item.options" :key="index">
+            <van-checkbox-group
+              :max="1"
+              class="radio-group"
+              :value="item.value"
+              direction="horizontal"
+            >
+              <van-checkbox
+                :name="option.value"
+                v-for="(option, index) in item.options"
+                :key="index"
+                @click="
+                  () => {
+                    if (
+                      item.value?.length > 0 &&
+                      item.value[0] === option.value
+                    ) {
+                      item.value = [];
+                    } else {
+                      item.value = [option.value];
+                    }
+                  }
+                "
+              >
                 <template #icon="props">
-                  <van-button type="primary" :plain="!props.checked" size="small">{{ option.label }}</van-button>
+                  <van-button
+                    type="primary"
+                    :plain="!props.checked"
+                    size="small"
+                    >{{ option.label }}</van-button
+                  >
                 </template>
               </van-checkbox>
             </van-checkbox-group>
@@ -28,10 +52,19 @@
         </div>
       </div>
       <div class="panel-bottom">
-        <van-button round type="danger" class="panel-bottom-btn"
+        <van-button
+          round
+          type="danger"
+          v-if="showClear"
+          class="panel-bottom-btn"
+          @click="onClear"
           >清空</van-button
         >
-        <van-button round type="primary" class="panel-bottom-btn"
+        <van-button
+          round
+          type="primary"
+          class="panel-bottom-btn"
+          @click="onApply"
           >应用</van-button
         >
       </div>
@@ -40,6 +73,7 @@
 </template>
 <script lang="js">
 export default {
+ name:'search-panel',
   props: {
     value: {
       type: Boolean,
@@ -52,14 +86,49 @@ export default {
   },
   data() {
     return {
-      searchText: "",
+        filterOptions: []
     };
   },
-  methods: {
-    onSearch() {
-      this.$emit("search", this.searchText);
+  computed: {
+    showClear() {
+      return this.filterOptions.some((item) => {
+        if(item.component === 'radio') {
+          return item.value?.length > 0;
+        }
+        return false;
+      });
     },
   },
+  methods: {
+    onClear() {
+        this.filterOptions.forEach((item) => {
+          if(item.component === 'radio') {
+            item.value = [];
+          }
+        });
+        this.onApply();
+    },
+    onApply() {
+      // 同时使用input事件和update:value事件确保弹窗能正确关闭
+      this.$emit('input', false);
+      this.$emit('update:value', false);
+      // 赋值回去
+      this.options.forEach((item) => {
+        const findObj = this.filterOptions.find((filterItem) => filterItem.prop === item.prop);
+        if(findObj) {
+          Object.assign(item, findObj);
+        }
+      });
+      this.$listeners.confirm && this.$listeners.confirm(this.filterOptions);
+    },
+  },
+  watch: {
+    value(newVal) {
+      if(newVal) {
+        this.filterOptions = JSON.parse(JSON.stringify(this.options || []));
+      }
+    }
+  }
 }
 </script>
 <style lang="less" scoped>
@@ -90,19 +159,19 @@ export default {
   flex: 1;
 }
 .panel-item {
-    padding-top: 10px;
-    border-bottom: 1px solid #ebedf0;
-    .panel-item-title {
-        line-height: 20px;
-        margin-bottom: 12px;
-    }
+  padding-top: 10px;
+  border-bottom: 1px solid #ebedf0;
+  .panel-item-title {
+    line-height: 20px;
+    margin-bottom: 12px;
+  }
 }
 .radio-group {
-    font-size: 14px;
-    line-height: 14px;
-    /deep/.van-checkbox__icon{
-        height: auto;
-        margin-bottom: 10px;
-    }
+  font-size: 14px;
+  line-height: 14px;
+  /deep/.van-checkbox__icon {
+    height: auto;
+    margin-bottom: 10px;
+  }
 }
 </style>

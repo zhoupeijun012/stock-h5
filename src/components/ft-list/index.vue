@@ -114,6 +114,7 @@ export default {
     query(params,callback) {
       this.requestParams = params;
       this.requestCallback = callback;
+      this.$refs['list-warp'].scrollTop = 0;
       this.onRefresh();
     },
   },

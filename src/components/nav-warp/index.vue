@@ -7,20 +7,44 @@
         left-arrow
         @click-left="onClickLeft"
         class="nav-bar"
-      />
+      >
+        <template #right v-if="searchOptions.length > 0">
+          <van-icon name="search" @click="showSearchPanel = true" size="24"/>
+        </template>
+      </van-nav-bar>
     </div>
     <div class="page-content">
       <slot></slot>
     </div>
+    <search-panel
+      v-model="showSearchPanel"
+      :options="searchOptions"
+      v-bind="$attrs"
+      v-on="$listeners"
+    ></search-panel>
   </div>
 </template>
 <script lang="js">
+import SearchPanel from "../search-panel/index.vue";
 export default {
+  name: "nav-warp",
+  components: {
+    [SearchPanel.name]: SearchPanel,
+  },
   props: {
     title: {
       type: String,
       default: "",
     },
+    searchOptions: {
+      type: Array,
+      default: () => [],
+    },
+  },
+  data() {
+    return {
+      showSearchPanel: false,
+    };
   },
   methods: {
     onClickLeft() {

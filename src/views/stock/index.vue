@@ -1,5 +1,5 @@
 <template>
-  <nav-warp title="股票" showSearch>
+  <nav-warp title="股票" :searchOptions="searchOptions" @confirm="onConfirm">
     <ft-list :requestFunction="$api.getStockList" ref="ft-list">
       <template v-slot:list="{ list }">
         <stock-card
@@ -9,15 +9,6 @@
         ></stock-card>
       </template>
     </ft-list>
-    <van-icon
-      name="search"
-      @click="showSearchPanel = true"
-      class="search-icon"
-    />
-    <search-panel
-      v-model="showSearchPanel"
-      :options="searchOptions"
-    ></search-panel>
   </nav-warp>
 </template>
 
@@ -25,19 +16,16 @@
 import NavWarp from "@/components/nav-warp";
 import FtList from "@/components/ft-list";
 import StockCard from "@/components/stock-card";
-import SearchPanel from "@/components/search-panel";
-
+import { getSearchParams } from "@/components/search-panel/index.js";
 export default {
   name: "stock",
   components: {
     NavWarp,
     FtList,
     StockCard,
-    SearchPanel,
   },
   data() {
     return {
-      showSearchPanel: true,
       searchOptions: [
         {
           prop: "f6666",
@@ -238,53 +226,62 @@ export default {
     };
   },
   mounted() {
-    this.$refs["ft-list"].query({
-      order: [{ prop: "f3", order: "descending" }],
-      where: [],
-      matchKeys: [
-        "f14",
-        "f3",
-        "f40014",
-        "f41006",
-        "f40006",
-        "f40008",
-        "f40009",
-        "f40010",
-        "f40011",
-        "f40012",
-        "f40013",
-        "f40017",
-        "f6",
-        "c_f103",
-        "f12",
-        "f21",
-        "f20",
-        "f2",
-        "f12",
-        "f7",
-        "f23",
-        "c_f100",
-        "c_f102",
-        "f8",
-        "f9",
-        "f11",
-        "f41003",
-        "f41004",
-        "f24",
-        "f62",
-        "f267",
-        "f164",
-        "f63",
-        "f17",
-        "f2",
-        "f15",
-        "f16",
-        "f5",
-        "f4",
-        "f41006",
-        "f40016",
-      ],
-    });
+    this.getDetail();
+  },
+  methods: {
+    getDetail() {
+      const params = getSearchParams(this.searchOptions);
+      this.$refs["ft-list"].query({
+        order: [{ prop: "f3", order: "descending" }],
+        where: params,
+        matchKeys: [
+          "f14",
+          "f3",
+          "f40014",
+          "f41006",
+          "f40006",
+          "f40008",
+          "f40009",
+          "f40010",
+          "f40011",
+          "f40012",
+          "f40013",
+          "f40017",
+          "f6",
+          "c_f103",
+          "f12",
+          "f21",
+          "f20",
+          "f2",
+          "f12",
+          "f7",
+          "f23",
+          "c_f100",
+          "c_f102",
+          "f8",
+          "f9",
+          "f11",
+          "f41003",
+          "f41004",
+          "f24",
+          "f62",
+          "f267",
+          "f164",
+          "f63",
+          "f17",
+          "f2",
+          "f15",
+          "f16",
+          "f5",
+          "f4",
+          "f41006",
+          "f40016",
+        ],
+      });
+    },
+    onConfirm() {
+      this.getDetail();
+    },
   },
 };
 </script>

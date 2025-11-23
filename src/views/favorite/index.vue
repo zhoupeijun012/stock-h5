@@ -191,7 +191,7 @@ export default {
     getDetail() {
       const params = getSearchParams(this.searchOptions);
       this.$refs["ft-list"].query({
-        order: [{ prop: "f3", order: "descending" }],
+        order: [{ prop: "createdAt", order: "descending" }],
         where: params,
         matchKeys: [
           "f14",

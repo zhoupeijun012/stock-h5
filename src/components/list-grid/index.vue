@@ -49,6 +49,8 @@ export default {
 .list-grid {
   background: #fff;
   padding: 10px;
+  box-shadow: rgba(100, 101, 102, 0.12) 0px 2px 4px 0px;
+  z-index: 100;
   .list-item-label {
     text-align: justify;
     text-align-last: justify;

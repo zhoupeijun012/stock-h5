@@ -1,5 +1,5 @@
 <template>
-  <div class="ft-card-item" @click="toDetail(info)" >
+  <div class="ft-card-item" >
     <div class="card-name" style="font-size: 18px; line-height: 24px">
       {{ info.f14 }}
       <span :style="valueStyle(info.f3)" style="font-size: 18px; line-height: 24px" class="card-prec">{{ formatPrec(info.f3, '%') }}</span>
@@ -75,16 +75,7 @@ export default {
   methods: {
     formatMoney,
     valueStyle,
-    formatPrec,
-     toDetail(item) {
-      this.$router.push({
-        name: "stock-detail",
-        query: {
-          f12: item.f12,
-          f14: item.f14
-        },
-      });
-    },
+    formatPrec
   },
 };
 </script>

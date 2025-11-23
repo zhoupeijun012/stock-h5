@@ -100,8 +100,33 @@ export const routes = [
     path: "/stock-detail",
     name: "stock-detail",
     component: () =>
-      import(/* webpackChunkName:"stock" */ "@/views/stock/stock-detail/index.vue"),
+      import(
+        /* webpackChunkName:"stock" */ "@/views/stock/detail/index.vue"
+      ),
     meta: { title: "股票详情", keepAlive: false, level: 3 },
+  },
+  {
+    path: "/region-detail",
+    name: "region-detail",
+    component: () =>
+      import(/* webpackChunkName:"stock" */ "@/views/region/detail/index.vue"),
+    meta: { title: "区域详情", keepAlive: false, level: 3 },
+  },
+  {
+    path: "/concept-detail",
+    name: "concept-detail",
+    component: () =>
+      import(/* webpackChunkName:"stock" */ "@/views/concept/detail/index.vue"),
+    meta: { title: "概念详情", keepAlive: false, level: 3 },
+  },
+  {
+    path: "/industry-detail",
+    name: "industry-detail",
+    component: () =>
+      import(
+        /* webpackChunkName:"stock" */ "@/views/industry/detail/index.vue"
+      ),
+    meta: { title: "行业详情", keepAlive: false, level: 3 },
   },
   {
     path: "/user",
@@ -131,7 +156,7 @@ export const routes = [
       import(/* webpackChunkName:"stock" */ "@/views/data-manage/index.vue"),
     meta: { title: "数据管理", keepAlive: true, level: 2 },
   },
-    {
+  {
     path: "*",
     redirect: {
       name: "home",
@@ -168,7 +193,7 @@ router.beforeEach((to, from, next) => {
     );
   }
   Vue.nextTick(() => {
-    Vue.nextTick  (() => {
+    Vue.nextTick(() => {
       if (to?.meta?.noAuth) {
         next();
       } else {

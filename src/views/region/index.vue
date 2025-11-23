@@ -6,6 +6,7 @@
           v-for="item in list"
           :key="item.id"
           :info="item"
+          @click.native="toDetail(item)"
         ></stock-card>
       </template>
     </ft-list>
@@ -249,6 +250,15 @@ export default {
     },
     onConfirm() {
       this.getDetail();
+    },
+    toDetail(item) {
+      this.$router.push({
+        name: "region-detail",
+        query: {
+          f12: item.f12,
+          f14: item.f14
+        }
+      });
     },
   },
 };

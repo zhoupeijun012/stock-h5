@@ -3,13 +3,14 @@
     <div class="nav-bar-top">
       <van-nav-bar
         :title="title"
-        left-text="返回"
-        left-arrow
+        :left-text="showBack ? '返回' : ''"
+        :left-arrow="showBack"
         @click-left="onClickLeft"
         class="nav-bar"
       >
-        <template #right v-if="searchOptions.length > 0">
-          <van-icon name="search" @click="showSearchPanel = true" size="24"/>
+        <template #right >
+          <van-icon v-if="searchOptions.length > 0" name="search" @click="showSearchPanel = true" size="24"/>
+          <slot name="nav-right"></slot>
         </template>
       </van-nav-bar>
     </div>
@@ -35,6 +36,10 @@ export default {
     title: {
       type: String,
       default: "",
+    },
+    showBack: {
+      type: Boolean,
+      default: true,
     },
     searchOptions: {
       type: Array,

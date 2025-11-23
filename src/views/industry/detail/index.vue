@@ -1,5 +1,8 @@
 <template>
   <nav-warp :title="title">
+    <template #nav-right>
+      <focus-icon :info="info" ></focus-icon>
+    </template>
     <div class="industry-detail">
       <list-grid
       :colNum="3"
@@ -19,12 +22,14 @@ import { stockKMap } from "@/utils/tool";
 import ListGrid from "@/components/list-grid";
 import { Toast } from "vant";
 import { formatMoney, valueStyle, formatPrec } from "@/utils/tool";
+import FocusIcon from "@/components/focus-icon";
 export default {
   name: "industry-detail",
   components: {
     NavWarp,
     KLineChart,
     ListGrid,
+    FocusIcon,
   },
   computed: {
     title() {

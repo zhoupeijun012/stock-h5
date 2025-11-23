@@ -1,5 +1,8 @@
 <template>
   <nav-warp title="LOF" :searchOptions="searchOptions" @confirm="onConfirm">
+    <template #nav-right>
+      <focus-icon :info="info" ></focus-icon>
+    </template>
     <list-grid
       v-if="filters.length > 0"
       :list="filters"
@@ -24,13 +27,15 @@ import FtList from "@/components/ft-list";
 import StockCard from "@/components/stock-card";
 import ListGrid from "@/components/list-grid";
 import { getSearchParams,getSearchFilters } from "@/components/search-panel/index.js";
+import FocusIcon from "@/components/focus-icon";
 export default {
   name: 'lof',
   components: {
     NavWarp,
     FtList,
     StockCard,
-    ListGrid
+    ListGrid,
+    FocusIcon,
   },
  data() {
     return {

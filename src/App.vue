@@ -30,6 +30,7 @@
 <script>
 import { detectPwaMode } from "@/utils/tool.js";
 import AliveView from "@/components/alive-view";
+import * as StoreTypes from "@/store/store_types";
 import { Dialog } from "vant";
 export default {
   name: "App",
@@ -96,6 +97,8 @@ export default {
           .catch(() => {});
       }
     };
+
+    this.$store.dispatch(StoreTypes.ACTION_GET_FOCUS_LIST);
   },
 };
 </script>

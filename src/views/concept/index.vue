@@ -1,5 +1,12 @@
 <template>
   <nav-warp title="概念" :searchOptions="searchOptions" @confirm="onConfirm">
+    <list-grid
+      v-if="filters.length > 0"
+      :list="filters"
+      :colNum="2"
+      :labelWidth="10"
+    ></list-grid>
+
     <ft-list :requestFunction="$api.getConceptList" ref="ft-list">
       <template v-slot:list="{ list }">
         <stock-card
@@ -17,13 +24,19 @@
 import NavWarp from "@/components/nav-warp";
 import FtList from "@/components/ft-list";
 import StockCard from "@/components/stock-card";
-import { getSearchParams } from "@/components/search-panel/index.js";
+import ListGrid from "@/components/list-grid";
+import {
+  getSearchParams,
+  getSearchFilters,
+} from "@/components/search-panel/index.js";
+
 export default {
   name: "concept",
   components: {
     NavWarp,
     FtList,
     StockCard,
+    ListGrid,
   },
   data() {
     return {
@@ -190,6 +203,11 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    filters() {
+      return getSearchFilters(this.searchOptions);
+    },
   },
   mounted() {
     this.getDetail();

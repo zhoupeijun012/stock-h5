@@ -5,6 +5,12 @@
     @confirm="onConfirm"
     :showBack="false"
   >
+      <list-grid
+      v-if="filters.length > 0"
+      :list="filters"
+      :colNum="2"
+      :labelWidth="10"
+    ></list-grid>
     <ft-list :requestFunction="$api.getFocusList" ref="ft-list">
       <template v-slot:list="{ list }">
         <stock-card
@@ -22,14 +28,16 @@
 import FtList from "@/components/ft-list";
 import StockCard from "@/components/stock-card";
 import * as StoreTypes from "@/store/store_types";
-import { getSearchParams } from "@/components/search-panel/index.js";
+import { getSearchParams,getSearchFilters } from "@/components/search-panel/index.js";
 import NavWarp from "@/components/nav-warp/index.vue";
+import ListGrid from "@/components/list-grid";
 export default {
   name: "favorite",
   components: {
     FtList,
     StockCard,
     NavWarp,
+    ListGrid,
   },
   data() {
     return {
@@ -182,6 +190,11 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    filters() {
+      return getSearchFilters(this.searchOptions);
+    },
   },
   mounted() {
     this.getDetail();

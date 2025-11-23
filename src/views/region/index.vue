@@ -1,5 +1,11 @@
 <template>
   <nav-warp title="区域" :searchOptions="searchOptions" @confirm="onConfirm">
+    <list-grid
+      v-if="filters.length > 0"
+      :list="filters"
+      :colNum="2"
+      :labelWidth="10"
+    ></list-grid>
     <ft-list :requestFunction="$api.getRegionList" ref="ft-list">
       <template v-slot:list="{ list }">
         <stock-card
@@ -17,7 +23,8 @@
 import NavWarp from "@/components/nav-warp";
 import FtList from "@/components/ft-list";
 import StockCard from "@/components/stock-card";
-import { getSearchParams } from "@/components/search-panel/index.js";
+import ListGrid from "@/components/list-grid";
+import { getSearchParams,getSearchFilters } from "@/components/search-panel/index.js";
 
 export default {
   name: "region",
@@ -25,24 +32,25 @@ export default {
     NavWarp,
     FtList,
     StockCard,
+    ListGrid,
   },
   data() {
     return {
       searchOptions: [
-               {
+        {
           prop: "f14",
           title: "名称",
           component: "input",
-          defaultValue: '',
-          value: '',
-          operator: 'like',
+          defaultValue: "",
+          value: "",
+          operator: "like",
           target: "f14",
           style: {
-            position: 'sticky',
-            top: '0',
-            margin: '0 -10px 0',
-            zIndex: '10',
-          }
+            position: "sticky",
+            top: "0",
+            margin: "0 -10px 0",
+            zIndex: "10",
+          },
         },
         {
           prop: "f40014",
@@ -94,7 +102,6 @@ export default {
           value: [],
           operator: "between",
           options: [
-            
             { label: "小于20%", value: "4", realValue: [0, 2000] },
             { label: "20%-40%", value: "5", realValue: [2000, 4000] },
             { label: "40%-60%", value: "6", realValue: [4000, 6000] },
@@ -154,7 +161,6 @@ export default {
           value: [],
           operator: "between",
           options: [
-            
             { label: "5%-10%", value: "2", realValue: [500, 1000] },
             { label: "10%-20%", value: "3", realValue: [1000, 2000] },
             { label: "20%-40%", value: "5", realValue: [2000, 4000] },
@@ -193,6 +199,16 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    filters() {
+      return getSearchFilters(this.searchOptions);
+    },
+  },
+  computed: {
+    filters() {
+      return getSearchFilters(this.searchOptions);
+    },
   },
   mounted() {
     this.getDetail();
@@ -256,8 +272,8 @@ export default {
         name: "region-detail",
         query: {
           f12: item.f12,
-          f14: item.f14
-        }
+          f14: item.f14,
+        },
       });
     },
   },

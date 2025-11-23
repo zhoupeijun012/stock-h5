@@ -102,9 +102,9 @@ export default {
   &.silver {
     background: rgba(218, 112, 214, 0.08);
   }
-  &:active {
-    background: #f3f4f5;
-  }
+  // &:active {
+  //   background: #f3f4f5;
+  // }
 }
 .card-name {
   color: red;

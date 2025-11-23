@@ -28,20 +28,20 @@ export default {
   data() {
     return {
       searchOptions: [
-               {
+        {
           prop: "f14",
           title: "名称",
           component: "input",
-          defaultValue: '',
-          value: '',
-          operator: 'like',
+          defaultValue: "",
+          value: "",
+          operator: "like",
           target: "f14",
           style: {
-            position: 'sticky',
-            top: '0',
-            margin: '0 -10px 0',
-            zIndex: '10',
-          }
+            position: "sticky",
+            top: "0",
+            margin: "0 -10px 0",
+            zIndex: "10",
+          },
         },
         {
           prop: "f40014",
@@ -93,7 +93,6 @@ export default {
           value: [],
           operator: "between",
           options: [
-            
             { label: "小于20%", value: "4", realValue: [0, 2000] },
             { label: "20%-40%", value: "5", realValue: [2000, 4000] },
             { label: "40%-60%", value: "6", realValue: [4000, 6000] },
@@ -153,7 +152,6 @@ export default {
           value: [],
           operator: "between",
           options: [
-            
             { label: "5%-10%", value: "2", realValue: [500, 1000] },
             { label: "10%-20%", value: "3", realValue: [1000, 2000] },
             { label: "20%-40%", value: "5", realValue: [2000, 4000] },
@@ -255,8 +253,8 @@ export default {
         name: "concept-detail",
         query: {
           f12: item.f12,
-          f14: item.f14
-        }
+          f14: item.f14,
+        },
       });
     },
   },

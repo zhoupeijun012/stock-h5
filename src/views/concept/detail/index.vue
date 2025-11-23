@@ -41,6 +41,11 @@ export default {
         {
           title: "名称",
           value: this.info?.f14 || "-",
+          style: {
+            whiteSpace: 'noWrap',
+            textOverflow: "ellipsis",
+            overflow: "hidden"
+          }
         },
         {
           title: "代码",

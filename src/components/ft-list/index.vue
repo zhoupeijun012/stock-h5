@@ -117,6 +117,10 @@ export default {
       this.$refs['list-warp'].scrollTop = 0;
       this.onRefresh();
     },
+    scrollToTop() {
+      this.$refs['list-warp'].scrollTop = 0;
+      this.scrollTop = 0;
+    },
   },
 };
 </script>

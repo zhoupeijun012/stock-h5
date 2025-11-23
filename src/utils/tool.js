@@ -93,12 +93,12 @@ export const formatMoney = (value) => {
 
   const y = 100000000;
   if (value > y || value < -y) {
-    return parseInt((value / y) * 100) / 100 + '亿';
+    return parseInt((value / y) * 10) / 10 + '亿';
   }
 
   const w = 10000;
   if (value > w || value < -w) {
-    return parseInt((value / w) * 100) / 100 + '万';
+    return parseInt((value / w) * 10) / 10 + '万';
   }
 
   return value;

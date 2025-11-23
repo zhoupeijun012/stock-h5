@@ -100,7 +100,7 @@ export const routes = [
     path: "/stock-detail",
     name: "stock-detail",
     component: () =>
-      import(/* webpackChunkName:"stock" */ "@/views/stock-detail/index.vue"),
+      import(/* webpackChunkName:"stock" */ "@/views/stock/stock-detail/index.vue"),
     meta: { title: "股票详情", keepAlive: false, level: 3 },
   },
   {

@@ -1,8 +1,5 @@
 <template>
   <nav-warp title="LOF" :searchOptions="searchOptions" @confirm="onConfirm">
-    <template #nav-right>
-      <focus-icon :info="info" ></focus-icon>
-    </template>
     <list-grid
       v-if="filters.length > 0"
       :list="filters"

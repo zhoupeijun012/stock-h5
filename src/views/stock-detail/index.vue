@@ -24,10 +24,10 @@ export default {
     },
     infoOptions() {
       return [
-        {
-          title: item.title,
-          value: item.value,
-        }
+        // {
+        //   title: item.title,
+        //   value: item.value,
+        // }
       ];
     },
   },

@@ -1,7 +1,5 @@
 <template>
-  <van-row
-    class="list-grid"
-  >
+  <van-row class="list-grid">
     <van-col
       :span="24 / colNum"
       class="list-item"
@@ -54,9 +52,15 @@ export default {
   .list-item-label {
     text-align: justify;
     text-align-last: justify;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .list-item-text {
     color: gray;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     &::before {
       content: ":";
       color: gray !important;

@@ -119,3 +119,11 @@ export const taskUpdate = (params) => {
 export const getFocusListDetail = (params) => {
   return httpRequest.post('/focus/list-detail', params);
 };
+
+export const getEftOne = (params) => {
+  return httpRequest.post('/etf/one', params);
+};
+
+export const getLofOne = (params) => {
+  return httpRequest.post('/lof/one', params);
+};

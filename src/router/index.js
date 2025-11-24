@@ -127,6 +127,33 @@ export const routes = [
     meta: { title: "行业详情", keepAlive: false, level: 3 },
   },
   {
+    path: "/t0-detail",
+    name: "t0-detail",
+    component: () =>
+      import(
+        /* webpackChunkName:"stock" */ "@/views/t+0/detail/index.vue"
+      ),
+    meta: { title: "T+0详情", keepAlive: false, level: 3 },
+  },
+  {
+    path: "/t1-detail",
+    name: "t1-detail",
+    component: () =>
+      import(
+        /* webpackChunkName:"stock" */ "@/views/t+1/detail/index.vue"
+      ),
+    meta: { title: "T+1详情", keepAlive: false, level: 3 },
+  },
+  {
+    path: "/lof-detail",
+    name: "lof-detail",
+    component: () =>
+      import(
+        /* webpackChunkName:"stock" */ "@/views/lof/detail/index.vue"
+      ),
+    meta: { title: "LOF详情", keepAlive: false, level: 3 },
+  },
+  {
     path: "/user",
     name: "user",
     component: () =>

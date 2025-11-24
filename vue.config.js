@@ -7,7 +7,7 @@ module.exports = defineConfig({
   transpileDependencies: true,
   lintOnSave: false,
   devServer: {
-    // proxy: 'http://localhost:12345',
+    proxy: 'http://localhost:12345',
     proxy: "https://www.chives.asia",
     client: {
       overlay: false,

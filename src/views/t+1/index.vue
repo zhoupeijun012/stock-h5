@@ -12,6 +12,7 @@
           v-for="item in list"
           :key="item.id"
           :info="item"
+          @click.native="toDetail(item)"
         ></stock-card>
       </template>
     </ft-list>
@@ -23,14 +24,17 @@ import NavWarp from "@/components/nav-warp";
 import FtList from "@/components/ft-list";
 import StockCard from "@/components/stock-card";
 import ListGrid from "@/components/list-grid";
-import { getSearchParams,getSearchFilters } from "@/components/search-panel/index.js";
+import {
+  getSearchParams,
+  getSearchFilters,
+} from "@/components/search-panel/index.js";
 import FocusIcon from "@/components/focus-icon";
 export default {
   name: "t1",
   components: {
     NavWarp,
     FtList,
-    StockCard,  
+    StockCard,
     ListGrid,
     FocusIcon,
   },
@@ -201,7 +205,7 @@ export default {
       const params = getSearchParams(this.searchOptions);
       this.$refs["ft-list"].query({
         order: [{ prop: "f3", order: "descending" }],
-        where: params,
+        where: [...params,{"field":"c1","target": "c1","operator":"eq","value":1}],
         matchKeys: [
           "f14",
           "f3",
@@ -249,6 +253,15 @@ export default {
     },
     onConfirm() {
       this.getDetail();
+    },
+    toDetail(item) {
+      this.$router.push({
+        name: "t1-detail",
+        query: {
+          f12: item.f12,
+          f14: item.f14,
+        },
+      });
     },
   },
 };

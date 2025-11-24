@@ -100,9 +100,7 @@ export const routes = [
     path: "/stock-detail",
     name: "stock-detail",
     component: () =>
-      import(
-        /* webpackChunkName:"stock" */ "@/views/stock/detail/index.vue"
-      ),
+      import(/* webpackChunkName:"stock" */ "@/views/stock/detail/index.vue"),
     meta: { title: "股票详情", keepAlive: false, level: 3 },
   },
   {
@@ -155,6 +153,33 @@ export const routes = [
     component: () =>
       import(/* webpackChunkName:"stock" */ "@/views/data-manage/index.vue"),
     meta: { title: "数据管理", keepAlive: true, level: 2 },
+  },
+  {
+    path: "/strategy/scene1",
+    name: "scene1",
+    component: () =>
+      import(
+        /* webpackChunkName:"stock" */ "@/views/strategy/scene1/index.vue"
+      ),
+    meta: { title: "龙头探底回升", keepAlive: true, level: 2 },
+  },
+  {
+    path: "/strategy/scene2",
+    name: "scene2",
+    component: () =>
+      import(
+        /* webpackChunkName:"stock" */ "@/views/strategy/scene2/index.vue"
+      ),
+    meta: { title: "ETF探底回升", keepAlive: true, level: 2 },
+  },
+  {
+    path: "/strategy/scene3",
+    name: "scene3",
+    component: () =>
+      import(
+        /* webpackChunkName:"stock" */ "@/views/strategy/scene3/index.vue"
+      ),
+    meta: { title: "ETF探底回升", keepAlive: true, level: 2 },
   },
   {
     path: "*",

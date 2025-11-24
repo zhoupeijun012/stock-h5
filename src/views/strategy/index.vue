@@ -5,6 +5,7 @@
       style="margin-bottom: 0"
       v-for="item in list"
       :key="item.queryId"
+      @click="handleClick(item)"
     >
       <div class="card-name">
         {{ item.title }}
@@ -32,17 +33,33 @@ export default {
           index: 5,
           title: "龙头探底金叉",
           description: "自由流通市值大于500亿，且触底反弹",
+          name: "scene1",
         },
         {
           queryId: "2",
           index: 5,
-          title: "ETF探底金叉",
-          description:  "ETF触底反弹",
+          title: "T+0探底金叉",
+          description: "ETF触底反弹",
+          name: "scene2",
+        },
+        {
+          queryId: "3",
+          index: 5,
+          title: "T+1探底金叉",
+          description: "ETF触底反弹",
+          name: "scene3",
         },
       ],
     };
   },
-  mounted() {},
+  methods: {
+    handleClick(item) {
+      this.$router.push({
+        name: item.name,
+        title: item.title,
+      });
+    },
+  },
 };
 </script>
 

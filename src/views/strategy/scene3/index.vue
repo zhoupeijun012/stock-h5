@@ -101,7 +101,7 @@ export default {
     getDetail() {
       const params = getSearchParams(this.searchOptions);
       this.$refs["ft-list"].query({
-        // order: [{ prop: "f40014_XYS1", order: "ascending" }],
+        order: [{ prop: "f40014_XYS1", order: "ascending" }],
         where: [...params, { field: "c1", operator: "eq", value: 1 }],
         matchKeys: [
           "f14",

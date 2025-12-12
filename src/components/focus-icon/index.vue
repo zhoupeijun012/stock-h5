@@ -1,5 +1,11 @@
 <template>
-  <van-icon name="like" size="24" color="red" v-if="isFocus" @click.stop.prevent="handDelete" />
+  <van-icon
+    name="like"
+    size="24"
+    color="red"
+    v-if="isFocus"
+    @click.stop.prevent="handDelete"
+  />
   <van-icon name="like-o" size="24" v-else @click.stop.prevent="handAdd" />
 </template>
 <script>
@@ -11,6 +17,9 @@ export default {
       type: Object,
       default: () => {},
     },
+    cardType: {
+      type: String,
+    },
   },
   computed: {
     isFocus() {
@@ -19,7 +28,10 @@ export default {
   },
   methods: {
     handAdd() {
-      this.$store.dispatch(StoreTypes.ACTION_FOCUS_ADD, this.info);
+      this.$store.dispatch(StoreTypes.ACTION_FOCUS_ADD, {
+        ...this.info,
+        cardType: this.cardType,
+      });
     },
     handDelete() {
       this.$store.dispatch(StoreTypes.ACTION_FOCUS_DELETE, this.info);

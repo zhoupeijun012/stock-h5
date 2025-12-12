@@ -1,16 +1,16 @@
 <template>
   <nav-warp
     title="收藏列表"
-    :searchOptions="searchOptions"
-    @confirm="onConfirm"
     :showBack="false"
   >
-      <list-grid
-      v-if="filters.length > 0"
-      :list="filters"
-      :colNum="2"
-      :labelWidth="10"
-    ></list-grid>
+    <van-tabs type="card" class="my-tabs">
+      <van-tab title="股票" title-class="tab-item"></van-tab>
+      <van-tab title="ETF" title-class="tab-item"></van-tab>
+      <van-tab title="LOF" title-class="tab-item"></van-tab>
+      <van-tab title="板块" title-class="tab-item"></van-tab>
+      <van-tab title="概念" title-class="tab-item"></van-tab>
+      <van-tab title="地区" title-class="tab-item"></van-tab>
+    </van-tabs>
     <ft-list :requestFunction="$api.getFocusList" ref="ft-list">
       <template v-slot:list="{ list }">
         <stock-card
@@ -28,7 +28,10 @@
 import FtList from "@/components/ft-list";
 import StockCard from "@/components/stock-card";
 import * as StoreTypes from "@/store/store_types";
-import { getSearchParams,getSearchFilters } from "@/components/search-panel/index.js";
+import {
+  getSearchParams,
+  getSearchFilters,
+} from "@/components/search-panel/index.js";
 import NavWarp from "@/components/nav-warp/index.vue";
 import ListGrid from "@/components/list-grid";
 export default {
@@ -278,5 +281,26 @@ export default {
   background: #fff;
   margin: 10px;
   border-radius: 8px;
+}
+.my-tabs {
+    border: 1px solid #07c160;
+  /deep/.van-tabs__nav {
+    margin: 0;
+  }
+  /deep/.tab-item {
+    color: #000;
+    border: none;
+    border-right: 1px solid #07c160;
+    &:last-child {
+      border-right: none;
+    }
+  }
+  /deep/.van-tab--active {
+    background-color: #07c160;
+    color: #fff;
+  }
+  /deep/.van-tabs__nav--card {
+    border: none;
+  }
 }
 </style>

@@ -13,6 +13,7 @@
           v-for="item in list"
           :key="item.id"
           :info="item"
+          cardType="CONCEPT"
           @click.native="toDetail(item)"
         ></stock-card>
       </template>

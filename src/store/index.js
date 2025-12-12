@@ -60,7 +60,7 @@ export default new Vuex.Store({
       });
     },
     async [StoreTypes.ACTION_FOCUS_ADD](store, poly) {
-      focusAdd({ f12: poly.f12, f14: poly.f14 }).then(() => {});
+      focusAdd({ f12: poly.f12, f14: poly.f14, f1024: poly.cardType }).then(() => {});
       store.state.focusList.push(poly.f12);
     },
     async [StoreTypes.ACTION_FOCUS_DELETE](store, poly) {

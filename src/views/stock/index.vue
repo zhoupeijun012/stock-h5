@@ -7,6 +7,7 @@
           v-for="item in list"
           :key="item.id"
           :info="item"
+          cardType="STOCK"
           @click.native="toDetail(item)"
         ></stock-card>
       </template>

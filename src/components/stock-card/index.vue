@@ -3,7 +3,7 @@
     <div class="card-name" style="font-size: 18px; line-height: 24px">
       {{ info.f14 }}
       <span :style="valueStyle(info.f3)" style="font-size: 18px; line-height: 24px" class="card-prec">{{ formatPrec(info.f3, '%') }}</span>
-      <focus-icon :info="info" style="position: absolute; right: 10px; top: 6px;"></focus-icon>
+      <focus-icon :info="info" :cardType="cardType" style="position: absolute; right: 10px; top: 6px;"></focus-icon>
     </div>
     <div class=""></div>
     <div class="card-col">
@@ -74,6 +74,9 @@ export default {
       type: Object,
       default: () => {},
     },
+    cardType: {
+      type: String
+    }
   },
   methods: {
     formatMoney,

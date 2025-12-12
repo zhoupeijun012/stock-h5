@@ -1,16 +1,24 @@
 <template>
   <nav-warp title="数据管理">
     <div class="data-wrap">
-      <van-button class="logout-btn" type="primary" block @click="initSystem"
-        >初始化系统</van-button
+      <van-button class="logout-btn" type="primary" block @click="initPage"
+        >初始化列表</van-button
       >
       <van-button
         class="logout-btn"
         style="margin-top: 20px"
         type="primary"
         block
-        @click="updateData"
-        >更新数据</van-button
+        @click="updatePage"
+        >更新列表</van-button
+      >
+      <van-button
+        class="logout-btn"
+        style="margin-top: 20px"
+        type="primary"
+        block
+        @click="initK"
+        >更新K线</van-button
       >
     </div>
   </nav-warp>
@@ -28,7 +36,7 @@ export default {
     return {};
   },
   methods: {
-    initSystem() {
+    initPage() {
       Dialog.confirm({
         title: "提示",
         message: "确定初始化系统吗？",
@@ -36,30 +44,48 @@ export default {
       })
         .then(() => {
           this.$api
-            .taskInit()
+            .taskInitPage()
             .then(() => {
-              Toast.success("初始化系统成功");
+              Toast.success("提交任务成功");
             })
             .catch(() => {
-              Toast.fail("更新数据失败");
+              Toast.fail("提交任务失败");
             });
         })
         .catch(() => {});
     },
-    updateData() {
+    updatePage() {
       Dialog.confirm({
         title: "提示",
-        message: "确定更新数据吗？",
+        message: "确定更新列表吗？",
         showCancelButton: true,
       })
         .then(() => {
           this.$api
-            .taskUpdate()
+            .taskUpdatePage()
             .then(() => {
-              Toast.success("更新数据成功");
+              Toast.success("提交任务成功");
             })
             .catch(() => {
-              Toast.fail("更新数据失败");
+              Toast.fail("提交任务失败");
+            });
+        })
+        .catch(() => {});
+    },
+    initK() {
+      Dialog.confirm({
+        title: "提示",
+        message: "确定更新K线吗？",
+        showCancelButton: true,
+      })
+        .then(() => {
+          this.$api
+            .taskInitK()
+            .then(() => {
+              Toast.success("提交任务成功");
+            })
+            .catch(() => {
+              Toast.fail("提交任务失败");
             });
         })
         .catch(() => {});

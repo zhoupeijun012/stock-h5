@@ -49,6 +49,9 @@ export default {
         height,
       };
     },
+    userInfo() {
+      return this.$store.state.userInfo;
+    },
   },
   data() {
     return {};
@@ -98,8 +101,17 @@ export default {
       }
     };
 
-    this.$store.dispatch(StoreTypes.ACTION_GET_FOCUS_LIST);
   },
+  watch: {
+    userInfo:{
+      immediate:true,
+      handler(newVal) {
+        if(newVal) {
+          this.$store.dispatch(StoreTypes.ACTION_GET_FOCUS_LIST);
+        }
+      }
+    }
+  }
 };
 </script>
 

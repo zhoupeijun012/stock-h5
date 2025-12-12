@@ -120,10 +120,11 @@ export default {
             .then(() => {
               Toast.success("登录成功");
               // 跳转到指定页面或首页
-              this.$router.replace({
-                path: this.redirect || "/home",
-                query: this.otherQuery,
-              });
+              setTimeout(() => {
+                this.$router.replace({
+                  path: "/home",
+                });
+              }, 300);
             })
             .catch((error) => {
               Toast.fail(error.message || "登录失败");

@@ -108,12 +108,16 @@ export const focusDelete = (params) => {
   return httpRequest.post('/focus/delete', params);
 };
 
-export const taskInit = (params) => {
-  return httpRequest.post('/task/init', params);
+export const taskInitPage = (params) => {
+  return httpRequest.post('/task/init-page', params);
 };
 
-export const taskUpdate = (params) => {
-  return httpRequest.post('/task/update', params);
+export const taskUpdatePage = (params) => {
+  return httpRequest.post('/task/update-page', params);
+};
+
+export const taskInitK = (params) => {
+  return httpRequest.post('/task/init-k', params);
 };
 
 export const getFocusListDetail = (params) => {

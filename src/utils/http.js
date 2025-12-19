@@ -1,7 +1,7 @@
 const axios = require('axios');
 import store from '@/store/index';
 import * as StoreTypes from '@/store/store_types';
-// import { Message } from 'element-ui';
+import { Toast } from "vant";
 // 创建一个具有默认配置的axios实例
 const instance = axios.create({
   // baseURL: 'https://120.48.100.49/api',
@@ -19,15 +19,7 @@ instance.interceptors.request.use(
     return config;
   },
   (error) => {
-    // 处理请求错误
-    // Message({
-    //   type: 'error',
-    //   message: error.message || '请求错误',
-    //   iconClass: null,
-    //   customClass: 'toast-normal',
-    //   showClose: false,
-    //   center: true,
-    // });
+    Toast.fail(error.message || '请求错误');
     return Promise.reject(error);
   }
 );
@@ -38,14 +30,7 @@ instance.interceptors.response.use(
       return response?.data?.data;
     }
     if (response?.data?.errorCode == 401) {
-      // Message({
-      //   type: 'error',
-      //   message: response?.data?.message,
-      //   iconClass: null,
-      //   customClass: 'toast-normal',
-      //   showClose: false,
-      //   center: true,
-      // });
+      Toast.fail(response?.data?.message || '网络错误');
       store.commit(StoreTypes.CLEAR_ALL);
       setTimeout(() => {
         window.location.replace('/login');
@@ -54,7 +39,7 @@ instance.interceptors.response.use(
     }
 
     const message = response?.data?.message || '网络错误';
-    // Message({ type: 'error', message, iconClass: null, customClass: 'toast-normal', showClose: false, center: true });
+    Toast.fail(message);
     return Promise.reject({
       success: false,
       message: message,
@@ -63,14 +48,7 @@ instance.interceptors.response.use(
   },
   (error) => {
     if (error?.status != 200) {
-      // Message({
-      //   type: 'error',
-      //   message: '网络错误',
-      //   iconClass: null,
-      //   customClass: 'toast-normal',
-      //   showClose: false,
-      //   center: true,
-      // });
+      Toast.fail('网络错误');
       return Promise.reject({
         success: false,
         message: error.message || '网络错误',
@@ -79,7 +57,7 @@ instance.interceptors.response.use(
     }
     const message = error?.response?.data?.message;
     if (message) {
-      // Message({ type: 'error', message, iconClass: null, customClass: 'toast-normal', showClose: false, center: true });
+      Toast.fail(message);
     }
     return Promise.reject({
       success: false,

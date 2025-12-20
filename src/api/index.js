@@ -120,6 +120,10 @@ export const taskInitK = (params) => {
   return httpRequest.post('/task/init-k', params);
 };
 
+export const taskClear = ()=>{
+  return httpRequest.post('/task/clear');
+}
+
 export const getFocusListDetail = (params) => {
   return httpRequest.post('/focus/list-detail', params);
 };
@@ -130,4 +134,9 @@ export const getEftOne = (params) => {
 
 export const getLofOne = (params) => {
   return httpRequest.post('/lof/one', params);
+};
+
+
+export const getHomeInfo = (params) => {
+  return httpRequest.post('/summary/homeInfo', params);
 };

@@ -16,7 +16,7 @@
 
     <!-- 空状态显示 -->
     <div
-      v-if="!loading && !error && list.length === 0 && !refreshing"
+      v-if="!loading && list.length === 0 && !refreshing"
       class="empty-state"
       @click="onRefresh"
     >

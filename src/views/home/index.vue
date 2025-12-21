@@ -12,8 +12,12 @@
             :key="'list-item-' + index"
           >
             <div class="index-warp ins">
-              <div class="index-num" :style="valueStyle(item.f2)">{{parseInt(item.f2)}}</div>
-              <div class="index-info" :style="valueStyle(item.f2)">{{item.f3}}%</div>
+              <div class="index-num" :style="valueStyle(item.f2)">
+                {{ item.f2 }}
+              </div>
+              <div class="index-info" :style="valueStyle(item.f2)">
+                {{ item.f3 }}%
+              </div>
               <div class="index-title">{{ item.f14 }}</div>
             </div>
           </van-grid-item>
@@ -21,13 +25,13 @@
         <van-grid :gutter="0" square style="margin-top: 10px">
           <van-grid-item>
             <div class="index-warp ins">
-              <div class="index-info">{{homeInfo.goldenCrossCount}}</div>
+              <div class="index-info">{{ homeInfo.goldenCrossCount }}</div>
               <div class="index-title">金叉数</div>
             </div>
           </van-grid-item>
           <van-grid-item>
             <div class="index-warp des">
-              <div class="index-info">{{homeInfo.deathCrossCount}}</div>
+              <div class="index-info">{{ homeInfo.deathCrossCount }}</div>
               <div class="index-title">死叉数</div>
             </div>
           </van-grid-item>
@@ -65,7 +69,7 @@ export default {
         { title: "概念", icon: "shop-collect-o", name: "concept" },
         { title: "地区", icon: "hot-o", name: "region" },
       ],
-      valueStyle, 
+      valueStyle,
       formatPrec,
       homeInfo: {},
     };
@@ -81,11 +85,13 @@ export default {
       this.$router.push({ name: item.name });
     },
     getHomeInfo() {
-      getHomeInfo().then((res) => {
-        this.homeInfo = res || {};
-      }).finally(()=>{
-        this.refreshing = false;
-      });
+      getHomeInfo()
+        .then((res) => {
+          this.homeInfo = res || {};
+        })
+        .finally(() => {
+          this.refreshing = false;
+        });
     },
   },
 };
@@ -109,6 +115,9 @@ export default {
     text-align: center;
     font-size: 14px;
     line-height: 1.2;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
   }
   .index-info {
     text-align: center;

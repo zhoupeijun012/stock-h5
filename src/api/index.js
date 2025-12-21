@@ -120,6 +120,12 @@ export const taskInitK = (params) => {
   return httpRequest.post('/task/init-k', params);
 };
 
+
+export const taskInitHolding = () => {
+  return httpRequest.post('/task/init-holding');
+};
+
+
 export const taskClear = ()=>{
   return httpRequest.post('/task/clear');
 }

@@ -5,7 +5,12 @@
       <span :style="valueStyle(info.f3)" style="font-size: 18px; line-height: 24px" class="card-prec">{{ formatPrec(info.f3, '%') }}</span>
       <focus-icon :info="info" :cardType="cardType" style="position: absolute; right: 10px; top: 6px;"></focus-icon>
     </div>
-    <div class=""></div>
+        <div class="card-col" v-if="info.ccRate">
+      <div class="card-title">持仓占比：</div>
+      <div class="card-text" style="color: red;font-weight:700;">
+        {{ info.ccRate }}%
+      </div>
+    </div>
     <div class="card-col">
       <div class="card-title">成交额：</div>
       <div class="card-text" style="color: red">

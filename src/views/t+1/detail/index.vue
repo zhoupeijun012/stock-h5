@@ -1,16 +1,26 @@
 <template>
   <nav-warp :title="title">
     <template #nav-right>
-      <focus-icon :info="info" ></focus-icon>
+      <focus-icon :info="info"></focus-icon>
     </template>
     <div class="stock-detail">
       <list-grid
-      :colNum="3"
-      :labelWidth="8"
-      v-if="infoOptions.length > 0"
-      :list="infoOptions"
-    />
-    <k-line-chart ref="k-line-chart" />
+        :colNum="3"
+        :labelWidth="8"
+        v-if="infoOptions.length > 0"
+        :list="infoOptions"
+      />
+      <k-line-chart ref="k-line-chart" />
+      <div class="holding-wrap" v-if="info && Array.isArray(info.f1888) && info.f1888.length > 0">
+        <div class="holding-title">持仓明细</div>
+        <stock-card
+          v-for="item in info.f1888"
+          :key="item.id"
+          :info="item"
+          cardType="STOCK"
+          @click.native="toDetail(item)"
+        ></stock-card>
+      </div>
     </div>
   </nav-warp>
 </template>
@@ -23,13 +33,15 @@ import ListGrid from "@/components/list-grid";
 import { Toast } from "vant";
 import { formatMoney, valueStyle, formatPrec } from "@/utils/tool";
 import FocusIcon from "@/components/focus-icon";
+import StockCard from "@/components/stock-card";
 export default {
   name: "t1-detail",
   components: {
     NavWarp,
     KLineChart,
     ListGrid,
-    FocusIcon
+    FocusIcon,
+    StockCard,
   },
   computed: {
     title() {
@@ -170,14 +182,30 @@ export default {
         this.$refs["k-line-chart"].refresh(chartData);
       });
     },
+    toDetail(item) {
+      this.$router.push({
+        name: "stock-detail",
+        query: {
+          f12: item.f12,
+          f14: item.f14,
+        },
+      });
+    },
   },
 };
 </script>
 <style lang="less" scoped>
-.stock-detail{
+.stock-detail {
   height: 100%;
   width: 100%;
   overflow: hidden;
   overflow-y: scroll;
+}
+.holding-wrap {
+  padding-top: 20px;
+}
+.holding-title {
+  padding: 0 10px;
+  font-size: 16px;
 }
 </style>

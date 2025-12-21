@@ -31,6 +31,10 @@
         >更新{{ item.label }}K线</van-button
       >
 
+      <van-button class="logout-btn" type="primary" block @click="taskInitHolding"
+        >初始化持仓</van-button
+      >
+
       <van-button class="logout-btn" type="danger" block @click="clearQueue"
         >清空任务</van-button
       >
@@ -130,6 +134,25 @@ export default {
         .then(() => {
           this.$api
             .taskInitK({ mode })
+            .then(() => {
+              Toast.success("提交任务成功");
+            })
+            .catch(() => {
+              Toast.fail("提交任务失败");
+            });
+        })
+        .catch(() => {});
+    },
+
+    taskInitHolding() {
+      Dialog.confirm({
+        title: "提示",
+        message: "确定获取所有ETF持仓吗？",
+        showCancelButton: true,
+      })
+        .then(() => {
+          this.$api
+            .taskInitHolding()
             .then(() => {
               Toast.success("提交任务成功");
             })

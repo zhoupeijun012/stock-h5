@@ -1,7 +1,7 @@
 <template>
   <nav-warp :title="title">
     <template #nav-right>
-      <focus-icon :info="info" ></focus-icon>
+      <focus-icon :info="info" cardType="LOF"></focus-icon>
     </template>
     <div class="stock-detail">
       <list-grid

@@ -34,7 +34,10 @@ export default {
       });
     },
     handDelete() {
-      this.$store.dispatch(StoreTypes.ACTION_FOCUS_DELETE, this.info);
+      this.$store.dispatch(StoreTypes.ACTION_FOCUS_DELETE, {
+        ...this.info,
+        cardType: this.cardType,
+      });
     },
   },
 };

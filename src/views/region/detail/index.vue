@@ -1,7 +1,7 @@
 <template>
   <nav-warp :title="title">
     <template #nav-right>
-      <focus-icon :info="info" ></focus-icon>
+      <focus-icon :info="info" cardType="REGION"></focus-icon>
     </template>
     <div class="region-detail">
       <list-grid

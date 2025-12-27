@@ -256,12 +256,9 @@ export default {
       this.getDetail();
     },
     toDetail(item) {
-      this.$router.push({
-        name: "lof-detail",
-        query: {
-          f12: item.f12,
-          f14: item.f14,
-        },
+      this.$lofDetail({
+        f12: item.f12,
+        f14: item.f14,
       });
     },
   },

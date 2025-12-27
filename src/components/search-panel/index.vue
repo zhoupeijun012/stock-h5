@@ -3,8 +3,9 @@
     :value="value"
     @input="(val) => $emit('input', val)"
     :closeable="false"
-    position="right"
-    :style="{ width: '90%', height: '100%' }"
+    position="bottom"
+    round
+    :style="{ width: '100%', height: '90%' }"
   >
     <div class="panel-container" >
       <div class="panel-content" ref="panelContainer">

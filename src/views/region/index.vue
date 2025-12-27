@@ -269,12 +269,9 @@ export default {
       this.getDetail();
     },
     toDetail(item) {
-      this.$router.push({
-        name: "region-detail",
-        query: {
-          f12: item.f12,
-          f14: item.f14,
-        },
+      this.$regionDetail({
+        f12: item.f12,
+        f14: item.f14,
       });
     },
   },

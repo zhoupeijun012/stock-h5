@@ -12,10 +12,10 @@
             :key="'list-item-' + index"
           >
             <div class="index-warp ins">
-              <div class="index-num" :style="valueStyle(item.f2)">
+              <div class="index-num" :style="valueStyle(item.f3)">
                 {{ item.f2 }}
               </div>
-              <div class="index-info" :style="valueStyle(item.f2)">
+              <div class="index-info" :style="valueStyle(item.f3)">
                 {{ item.f3 }}%
               </div>
               <div class="index-title">{{ item.f14 }}</div>

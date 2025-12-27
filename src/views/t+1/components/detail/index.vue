@@ -1,28 +1,42 @@
 <template>
-  <nav-warp :title="title">
-    <template #nav-right>
-      <focus-icon :info="info" cardType="ETF"></focus-icon>
-    </template>
-    <div class="stock-detail">
-      <list-grid
-        :colNum="3"
-        :labelWidth="8"
-        v-if="infoOptions.length > 0"
-        :list="infoOptions"
-      />
-      <k-line-chart ref="k-line-chart" />
-      <div class="holding-wrap" v-if="info && Array.isArray(info.f1888) && info.f1888.length > 0">
-        <div class="holding-title">持仓明细</div>
-        <stock-card
-          v-for="item in info.f1888"
-          :key="item.id"
-          :info="item"
-          cardType="STOCK"
-          @click.native="toDetail(item)"
-        ></stock-card>
+  <van-popup
+    v-model="visible"
+    position="bottom"
+    :closeable="false"
+    round
+    :style="{ width: '100%', height: '90%' }"
+  >
+    <div class="t1-detail">
+      <div class="sticky-header">
+        <div class="sticky-left" @click="visible = false">
+          <van-icon name="cross" />
+        </div>
+        <div class="sticky-title">{{ title }}</div>
+        <div class="sticky-right">
+          <focus-icon :info="info" cardType="ETF"></focus-icon>
+        </div>
+      </div>
+      <div class="t1-content">
+        <list-grid
+          :colNum="3"
+          :labelWidth="8"
+          v-if="infoOptions.length > 0"
+          :list="infoOptions"
+        />
+        <k-line-chart ref="k-line-chart" />
+        <div class="holding-wrap" v-if="f1888List.length > 0">
+          <div class="holding-title">持仓明细</div>
+          <stock-card
+            v-for="item in f1888List"
+            :key="item.id"
+            :info="item"
+            cardType="STOCK"
+            @click.native="toDetail(item)"
+          ></stock-card>
+        </div>
       </div>
     </div>
-  </nav-warp>
+  </van-popup>
 </template>
 <script>
 import NavWarp from "@/components/nav-warp";
@@ -45,7 +59,7 @@ export default {
   },
   computed: {
     title() {
-      return `${this.$route.query.f14} (${this.$route.query.f12})`;
+      return `${this.routerInfo.f14} (${this.routerInfo.f12})`;
     },
     infoOptions() {
       if (!this.info) return [];
@@ -128,53 +142,51 @@ export default {
         },
       ];
     },
+    f1888List() {
+      if (!this.info || !this.info.f1888) {
+        return [];
+      }
+      return this.info.f1888.sort((cur, next) => next.ccRate - cur.ccRate);
+    },
   },
   data() {
     return {
       info: null,
+      visible: false,
+      routerInfo: {},
     };
-  },
-  mounted() {
-    Toast.loading({
-      forbidClick: true, // 是否禁止背景点击
-      loadingType: "spinner", // 加载图标类型，可选 spinner/circular
-      duration: 0, // 持续时间，0 表示不会自动关闭
-    });
-    Promise.all([this.getInfo(), this.getKline()]).finally(() => {
-      Toast.clear();
-    });
   },
   methods: {
     getInfo() {
-      const stockDetailParams = {
+      const t1DetailParams = {
         where: [
           {
             field: "f12",
             operator: "eq",
-            value: this.$route.query.f12,
+            value: this.routerInfo.f12,
           },
           {
             field: "f14",
             operator: "eq",
-            value: this.$route.query.f14,
+            value: this.routerInfo.f14,
           },
         ],
       };
-      return getEftOne(stockDetailParams).then((res) => {
+      return getEftOne(t1DetailParams).then((res) => {
         this.info = res || null;
       });
     },
     getKline() {
-      const stockKlineParams = {
+      const t1KlineParams = {
         where: [
           {
             field: "f12",
             operator: "eq",
-            value: this.$route.query.f12,
+            value: this.routerInfo.f12,
           },
         ],
       };
-      return getKLineOne(stockKlineParams).then((res) => {
+      return getKLineOne(t1KlineParams).then((res) => {
         let { f40001, f40002 = "[]" } = res || {};
         let chartData = JSON.parse(f40002);
         //  时间/开/收/最高/最低/成交量/成交额/震幅/涨跌幅/涨跌额/换手率/流通股本
@@ -182,22 +194,60 @@ export default {
         this.$refs["k-line-chart"].refresh(chartData);
       });
     },
+    show(info) {
+      this.visible = true;
+      this.routerInfo = info;
+      this.$nextTick(() => {
+        Toast.loading({
+          forbidClick: true, // 是否禁止背景点击
+          loadingType: "spinner", // 加载图标类型，可选 spinner/circular
+          duration: 0, // 持续时间，0 表示不会自动关闭
+        });
+        Promise.all([this.getInfo(), this.getKline()]).finally(() => {
+          Toast.clear();
+        });
+      });
+    },
     toDetail(item) {
-      this.$router.push({
-        name: "stock-detail",
-        query: {
-          f12: item.f12,
-          f14: item.f14,
-        },
+      // 这里可以调用stock-detail组件的show方法来显示详情
+      // 如果需要跳转到其他页面，保持原来的逻辑
+      this.$stockDetail({
+        f12: item.f12,
+        f14: item.f14,
       });
     },
   },
 };
 </script>
 <style lang="less" scoped>
-.stock-detail {
+.t1-detail {
   height: 100%;
   width: 100%;
+  overflow: hidden;
+}
+.sticky-header {
+  height: 48px;
+  display: flex;
+  box-shadow: rgba(100, 101, 102, 0.12) 0px 2px 4px 0px;
+  border-bottom: 1px solid #ebedf0;
+  z-index: 100;
+  .sticky-left,
+  .sticky-right {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+    text-align: center;
+    line-height: 48px;
+  }
+  .sticky-title {
+    flex: 1;
+    line-height: 48px;
+    text-align: center;
+    font-size: 16px;
+  }
+}
+.t1-content {
+  height: calc(100% - 48px);
   overflow: hidden;
   overflow-y: scroll;
 }

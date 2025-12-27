@@ -1,18 +1,32 @@
 <template>
-  <nav-warp :title="title">
-    <template #nav-right>
-      <focus-icon :info="info" cardType="LOF"></focus-icon>
-    </template>
-    <div class="stock-detail">
-      <list-grid
-      :colNum="3"
-      :labelWidth="8"
-      v-if="infoOptions.length > 0"
-      :list="infoOptions"
-    />
-    <k-line-chart ref="k-line-chart" />
+  <van-popup
+    v-model="visible"
+    position="bottom"
+    :closeable="false"
+    round
+    :style="{ width: '100%', height: '90%' }"
+  >
+    <div class="lof-detail">
+      <div class="sticky-header">
+        <div class="sticky-left" @click="visible = false">
+          <van-icon name="cross" />
+        </div>
+        <div class="sticky-title">{{ title }}</div>
+        <div class="sticky-right">
+          <focus-icon :info="info" cardType="LOF"></focus-icon>
+        </div>
+      </div>
+      <div class="lof-content">
+        <list-grid
+          :colNum="3"
+          :labelWidth="8"
+          v-if="infoOptions.length > 0"
+          :list="infoOptions"
+        />
+        <k-line-chart ref="k-line-chart" />
+      </div>
     </div>
-  </nav-warp>
+  </van-popup>
 </template>
 <script>
 import NavWarp from "@/components/nav-warp";
@@ -24,7 +38,7 @@ import { Toast } from "vant";
 import { formatMoney, valueStyle, formatPrec } from "@/utils/tool";
 import FocusIcon from "@/components/focus-icon";
 export default {
-  name: "t0-detail",
+  name: "lof-detail",
   components: {
     NavWarp,
     KLineChart,
@@ -33,7 +47,7 @@ export default {
   },
   computed: {
     title() {
-      return `${this.$route.query.f14} (${this.$route.query.f12})`;
+      return `${this.routerInfo.f14} (${this.routerInfo.f12})`;
     },
     infoOptions() {
       if (!this.info) return [];
@@ -120,49 +134,41 @@ export default {
   data() {
     return {
       info: null,
+      visible: false,
+      routerInfo: {},
     };
-  },
-  mounted() {
-    Toast.loading({
-      forbidClick: true, // 是否禁止背景点击
-      loadingType: "spinner", // 加载图标类型，可选 spinner/circular
-      duration: 0, // 持续时间，0 表示不会自动关闭
-    });
-    Promise.all([this.getInfo(), this.getKline()]).finally(() => {
-      Toast.clear();
-    });
   },
   methods: {
     getInfo() {
-      const stockDetailParams = {
+      const lofDetailParams = {
         where: [
           {
             field: "f12",
             operator: "eq",
-            value: this.$route.query.f12,
+            value: this.routerInfo.f12,
           },
           {
             field: "f14",
             operator: "eq",
-            value: this.$route.query.f14,
+            value: this.routerInfo.f14,
           },
         ],
       };
-      return getLofOne(stockDetailParams).then((res) => {
+      return getLofOne(lofDetailParams).then((res) => {
         this.info = res || null;
       });
     },
     getKline() {
-      const stockKlineParams = {
+      const lofKlineParams = {
         where: [
           {
             field: "f12",
             operator: "eq",
-            value: this.$route.query.f12,
+            value: this.routerInfo.f12,
           },
         ],
       };
-      return getKLineOne(stockKlineParams).then((res) => {
+      return getKLineOne(lofKlineParams).then((res) => {
         let { f40001, f40002 = "[]" } = res || {};
         let chartData = JSON.parse(f40002);
         //  时间/开/收/最高/最低/成交量/成交额/震幅/涨跌幅/涨跌额/换手率/流通股本
@@ -170,13 +176,52 @@ export default {
         this.$refs["k-line-chart"].refresh(chartData);
       });
     },
+    show(info) {
+      this.visible = true;
+      this.routerInfo = info;
+      this.$nextTick(() => {
+        Toast.loading({
+          forbidClick: true, // 是否禁止背景点击
+          loadingType: "spinner", // 加载图标类型，可选 spinner/circular
+          duration: 0, // 持续时间，0 表示不会自动关闭
+        });
+        Promise.all([this.getInfo(), this.getKline()]).finally(() => {
+          Toast.clear();
+        });
+      });
+    },
   },
 };
 </script>
 <style lang="less" scoped>
-.stock-detail{
+.lof-detail {
   height: 100%;
   width: 100%;
+  overflow: hidden;
+}
+.sticky-header {
+  height: 48px;
+  display: flex;
+  box-shadow: rgba(100, 101, 102, 0.12) 0px 2px 4px 0px;
+  border-bottom: 1px solid #ebedf0;
+  z-index: 100;
+  .sticky-left,
+  .sticky-right {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+    text-align: center;
+    line-height: 48px;
+  }
+  .sticky-title {
+    flex: 1;
+    line-height: 48px;
+    text-align: center;
+    font-size: 16px;
+  }
+}
+.lof-content {
+  height: calc(100% - 48px);
   overflow: hidden;
   overflow-y: scroll;
 }

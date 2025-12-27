@@ -44,12 +44,12 @@ export default {
     return {
       focusType: "STOCK",
       options: [
-        { title: "股票", name: "STOCK" },
-        { title: "ETF", name: "ETF" },
-        { title: "LOF", name: "LOF" },
-        { title: "板块", name: "INDUSTRY" },
-        { title: "概念", name: "CONCEPT" },
-        { title: "地区", name: "REGION" },
+        { title: "股票", name: "STOCK",dialog: '$stockDetail' },
+        { title: "ETF", name: "ETF",dialog: '$t1Detail' },
+        { title: "LOF", name: "LOF",dialog: '$lofDetail' },
+        { title: "板块", name: "INDUSTRY",dialog: '$industryDetail' },
+        { title: "概念", name: "CONCEPT",dialog: '$conceptDetail' },
+        { title: "地区", name: "REGION",dialog: '$regionDetail' },
       ],
     };
   },
@@ -121,23 +121,14 @@ export default {
       });
     },
     toDetail(item) {
-      const routerNameMap = {
-        'STOCK': 'stock-detail',
-        'INDUSTRY': 'industry-detail',
-        'CONCEPT': 'concept-detail',
-        'REGION': 'region-detail',
-        'ETF': 't1-detail',
-        'LOF': 'lof-detail'
-      }
-      this.$router.push({
-        name: routerNameMap[this.focusType],
-        query: {
+      const focusObj = this.options.find((item)=>item.name == this.focusType)
+      const dialogFunc = this[focusObj.dialog];
+      dialogFunc({
           f12: item.f12,
           f14: item.f14,
-        },
-      });
-    },
-  },
+      })
+    }
+  }
 };
 </script>
 

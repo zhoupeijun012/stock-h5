@@ -6,7 +6,6 @@
       :colNum="2"
       :labelWidth="10"
     ></list-grid>
-
     <ft-list :requestFunction="$api.getConceptList" ref="ft-list">
       <template v-slot:list="{ list }">
         <stock-card
@@ -268,12 +267,9 @@ export default {
       this.getDetail();
     },
     toDetail(item) {
-      this.$router.push({
-        name: "concept-detail",
-        query: {
-          f12: item.f12,
-          f14: item.f14,
-        },
+      this.$conceptDetail({
+        f12: item.f12,
+        f14: item.f14,
       });
     },
   },

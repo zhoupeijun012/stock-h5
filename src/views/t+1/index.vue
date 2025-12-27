@@ -256,12 +256,9 @@ export default {
       this.getDetail();
     },
     toDetail(item) {
-      this.$router.push({
-        name: "t1-detail",
-        query: {
-          f12: item.f12,
-          f14: item.f14,
-        },
+      this.$t1Detail({
+        f12: item.f12,
+        f14: item.f14,
       });
     },
   },

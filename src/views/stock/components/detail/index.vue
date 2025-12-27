@@ -1,18 +1,32 @@
 <template>
-  <nav-warp :title="title">
-    <template #nav-right>
-      <focus-icon :info="info" cardType="STOCK"></focus-icon>
-    </template>
+  <van-popup
+    v-model="visible"
+    position="bottom"
+    :closeable="false"
+    round
+    :style="{ width: '100%', height: '90%' }"
+  >
     <div class="stock-detail">
-      <list-grid
-      :colNum="3"
-      :labelWidth="8"
-      v-if="infoOptions.length > 0"
-      :list="infoOptions"
-    />
-    <k-line-chart ref="k-line-chart" />
+      <div class="sticky-header">
+        <div class="sticky-left" @click="visible = false">
+          <van-icon name="cross" />
+        </div>
+        <div class="sticky-title">{{ title }}</div>
+        <div class="sticky-right">
+          <focus-icon :info="info" cardType="STOCK"></focus-icon>
+        </div>
+      </div>
+      <div class="stock-content">
+        <list-grid
+          :colNum="3"
+          :labelWidth="8"
+          v-if="infoOptions.length > 0"
+          :list="infoOptions"
+        />
+        <k-line-chart ref="k-line-chart" />
+      </div>
     </div>
-  </nav-warp>
+  </van-popup>
 </template>
 <script>
 import NavWarp from "@/components/nav-warp";
@@ -29,11 +43,11 @@ export default {
     NavWarp,
     KLineChart,
     ListGrid,
-    FocusIcon
+    FocusIcon,
   },
   computed: {
     title() {
-      return `${this.$route.query.f14} (${this.$route.query.f12})`;
+      return `${this.routerInfo.f14} (${this.routerInfo.f12})`;
     },
     infoOptions() {
       if (!this.info) return [];
@@ -153,17 +167,9 @@ export default {
   data() {
     return {
       info: null,
+      visible: false,
+      routerInfo: {},
     };
-  },
-  mounted() {
-    Toast.loading({
-      forbidClick: true, // 是否禁止背景点击
-      loadingType: "spinner", // 加载图标类型，可选 spinner/circular
-      duration: 0, // 持续时间，0 表示不会自动关闭
-    });
-    Promise.all([this.getInfo(), this.getKline()]).finally(() => {
-      Toast.clear();
-    });
   },
   methods: {
     getInfo() {
@@ -172,12 +178,12 @@ export default {
           {
             field: "f12",
             operator: "eq",
-            value: this.$route.query.f12,
+            value: this.routerInfo.f12,
           },
           {
             field: "f14",
             operator: "eq",
-            value: this.$route.query.f14,
+            value: this.routerInfo.f14,
           },
         ],
       };
@@ -191,7 +197,7 @@ export default {
           {
             field: "f12",
             operator: "eq",
-            value: this.$route.query.f12,
+            value: this.routerInfo.f12,
           },
         ],
       };
@@ -203,13 +209,52 @@ export default {
         this.$refs["k-line-chart"].refresh(chartData);
       });
     },
+    show(info) {
+      this.visible = true;
+      this.routerInfo = info;
+      this.$nextTick(() => {
+        Toast.loading({
+          forbidClick: true, // 是否禁止背景点击
+          loadingType: "spinner", // 加载图标类型，可选 spinner/circular
+          duration: 0, // 持续时间，0 表示不会自动关闭
+        });
+        Promise.all([this.getInfo(), this.getKline()]).finally(() => {
+          Toast.clear();
+        });
+      });
+    },
   },
 };
 </script>
 <style lang="less" scoped>
-.stock-detail{
+.stock-detail {
   height: 100%;
   width: 100%;
+  overflow: hidden;
+}
+.sticky-header {
+  height: 48px;
+  display: flex;
+  box-shadow: rgba(100, 101, 102, 0.12) 0px 2px 4px 0px;
+  border-bottom: 1px solid #ebedf0;
+  z-index: 100;
+  .sticky-left,
+  .sticky-right {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+    text-align: center;
+    line-height: 48px;
+  }
+  .sticky-title {
+    flex: 1;
+    line-height: 48px;
+    text-align: center;
+    font-size: 16px;
+  }
+}
+.stock-content {
+  height: calc(100% - 48px);
   overflow: hidden;
   overflow-y: scroll;
 }

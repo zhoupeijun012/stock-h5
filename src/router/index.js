@@ -97,63 +97,6 @@ export const routes = [
     meta: { title: "注册", noAuth: true, keepAlive: false, level: 1 },
   },
   {
-    path: "/stock-detail",
-    name: "stock-detail",
-    component: () =>
-      import(/* webpackChunkName:"stock" */ "@/views/stock/detail/index.vue"),
-    meta: { title: "股票详情", keepAlive: false, level: 3 },
-  },
-  {
-    path: "/region-detail",
-    name: "region-detail",
-    component: () =>
-      import(/* webpackChunkName:"stock" */ "@/views/region/detail/index.vue"),
-    meta: { title: "区域详情", keepAlive: false, level: 3 },
-  },
-  {
-    path: "/concept-detail",
-    name: "concept-detail",
-    component: () =>
-      import(/* webpackChunkName:"stock" */ "@/views/concept/detail/index.vue"),
-    meta: { title: "概念详情", keepAlive: false, level: 3 },
-  },
-  {
-    path: "/industry-detail",
-    name: "industry-detail",
-    component: () =>
-      import(
-        /* webpackChunkName:"stock" */ "@/views/industry/detail/index.vue"
-      ),
-    meta: { title: "行业详情", keepAlive: false, level: 3 },
-  },
-  {
-    path: "/t0-detail",
-    name: "t0-detail",
-    component: () =>
-      import(
-        /* webpackChunkName:"stock" */ "@/views/t+0/detail/index.vue"
-      ),
-    meta: { title: "T+0详情", keepAlive: false, level: 3 },
-  },
-  {
-    path: "/t1-detail",
-    name: "t1-detail",
-    component: () =>
-      import(
-        /* webpackChunkName:"stock" */ "@/views/t+1/detail/index.vue"
-      ),
-    meta: { title: "T+1详情", keepAlive: false, level: 3 },
-  },
-  {
-    path: "/lof-detail",
-    name: "lof-detail",
-    component: () =>
-      import(
-        /* webpackChunkName:"stock" */ "@/views/lof/detail/index.vue"
-      ),
-    meta: { title: "LOF详情", keepAlive: false, level: 3 },
-  },
-  {
     path: "/user",
     name: "user",
     component: () =>

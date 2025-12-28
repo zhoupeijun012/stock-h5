@@ -1,13 +1,14 @@
 <template>
   <van-popup
     :value="value"
-    @input="(val) => $emit('input', val)"
     :closeable="false"
     position="bottom"
     round
+    :close-on-click-overlay="false"
     :style="{ width: '100%', height: '90%' }"
+    @click-overlay="onHandClose"
   >
-    <div class="panel-container" >
+    <div class="panel-container">
       <div class="panel-content" ref="panelContainer">
         <template v-for="item in filterOptions">
           <template v-if="item.component === 'input'">
@@ -112,22 +113,34 @@ export default {
       });
     },
   },
+  mounted() {
+    window.addEventListener("popstate", this.onBrowserBack, false);
+  },
+  beforeDestory() {
+    window.removeEventListener("popstate", this.onBrowserBack, false);
+  },
   methods: {
-    onClear() {
-        this.filterOptions.forEach((item) => {
-          if(item.component === 'radio') {
-            item.value = [];
-          }
-          if(item.component === 'input') {
-            item.value = '';
-          }
-        });
-        this.onApply();
-    },
-    onApply() {
-      // 同时使用input事件和update:value事件确保弹窗能正确关闭
+    onBrowserBack() {
       this.$emit('input', false);
       this.$emit('update:value', false);
+    },
+    onHandClose() {
+      window.history.back();
+      this.onBrowserBack();
+    },
+    onClear() {
+      this.filterOptions.forEach((item) => {
+        if(item.component === 'radio') {
+          item.value = [];
+        }
+        if(item.component === 'input') {
+          item.value = '';
+        }
+      });
+      this.onApply();
+    },
+    onApply() {
+      this.onHandClose();
       // 赋值回去
       this.options.forEach((item) => {
         const findObj = this.filterOptions.find((filterItem) => filterItem.prop === item.prop);
@@ -146,6 +159,7 @@ export default {
         this.$nextTick(() => {
           this.$refs.panelContainer.scrollTop = 0;
         });
+        window.history.pushState(null, null, document.URL);
       }
     }
   }

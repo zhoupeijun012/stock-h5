@@ -126,13 +126,10 @@ export default {
       this.getDetail();
     },
     toDetail(item) {
-      //   this.$router.push({
-      //     name: "etf-detail",
-      //     query: {
-      //       f12: item.f12,
-      //       f14: item.f14,
-      //     },
-      //   });
+      this.$t0Detail({
+        f12: item.f12,
+        f14: item.f14,
+      });
     },
   },
 };

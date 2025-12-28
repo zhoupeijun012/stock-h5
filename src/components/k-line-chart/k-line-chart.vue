@@ -109,7 +109,7 @@ export default {
         locale: 'zh-CN',
         zoom: {
           // 初始缩放比例设置为 0.8
-          defaultScale: 1,
+          defaultScale: 0.6,
           step: 0.1, // 每次缩放的步长，可根据需要调整
           enabled: false, // 是否启用缩放功能
           minScale: 0.2, // 最小缩放比例

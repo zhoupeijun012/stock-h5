@@ -56,10 +56,6 @@ export const getNpList = (params) => {
   return httpRequest.post('/np/list', params);
 };
 
-export const taskRetry = (params) => {
-  return httpRequest.post('/taskRetry', params);
-};
-
 export const getKLineList = (params) => {
   return httpRequest.post('/kline/list', params);
 };
@@ -130,6 +126,13 @@ export const taskClear = ()=>{
   return httpRequest.post('/task/clear');
 }
 
+export const taskRetry = (params)=>{
+  return httpRequest.post('/task/taskRetry',params);
+}
+
+export const taskList = ()=>{
+  return httpRequest.post('/task/list');
+}
 export const getFocusListDetail = (params) => {
   return httpRequest.post('/focus/list-detail', params);
 };

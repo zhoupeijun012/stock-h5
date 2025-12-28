@@ -152,7 +152,10 @@ export default {
               });
             })
             .catch((error) => {
-              Toast.fail(error.message || "注册失败");
+              Toast.fail({
+                message:error.message || "注册失败",
+                icon: '123'
+              });
             })
             .finally(() => {
               this.loading = false;

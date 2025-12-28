@@ -118,7 +118,10 @@ export default {
           this.$store
             .dispatch(storeTypes.ACTION_LOGIN, this.loginForm)
             .then(() => {
-              Toast.success("登录成功");
+              Toast.success({
+                message: "登录成功",
+                icon: '123'
+              });
               // 跳转到指定页面或首页
               setTimeout(() => {
                 this.$router.replace({
@@ -127,7 +130,10 @@ export default {
               }, 300);
             })
             .catch((error) => {
-              Toast.fail(error.message || "登录失败");
+              Toast.fail({
+                message: error.message || "登录失败",
+                icon: '123'
+              });
             })
             .finally(() => {
               this.loading = false;

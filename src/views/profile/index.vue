@@ -80,7 +80,10 @@ export default {
           // 退出登录逻辑
           this.$store.commit(StoreTypes.CLEAR_ALL);
 
-          Toast.success("退出登录成功");
+          Toast.success({
+            message: "退出登录成功",
+            icon: '123'
+          });
           setTimeout(() => {
             this.$router.replace("/login");
           }, 2000);

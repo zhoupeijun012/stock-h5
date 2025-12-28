@@ -99,10 +99,16 @@ export default {
           this.$api
             .taskInitPage({ mode })
             .then(() => {
-              Toast.success("提交任务成功");
+              Toast.success({
+                message: "提交任务成功",
+                icon: '123'
+              });
             })
             .catch(() => {
-              Toast.fail("提交任务失败");
+              Toast.fail({
+                message:"提交任务失败",
+                icon: '123'
+              });
             });
         })
         .catch(() => {});
@@ -117,10 +123,10 @@ export default {
           this.$api
             .taskUpdatePage({ mode })
             .then(() => {
-              Toast.success("提交任务成功");
+              Toast.success({message:"提交任务成功",icon:'123'});
             })
             .catch(() => {
-              Toast.fail("提交任务失败");
+              Toast.fail({message:"提交任务失败",icon:'123'});
             });
         })
         .catch(() => {});
@@ -135,10 +141,10 @@ export default {
           this.$api
             .taskInitK({ mode })
             .then(() => {
-              Toast.success("提交任务成功");
+              Toast.success({message:"提交任务成功",icon:'123'});
             })
             .catch(() => {
-              Toast.fail("提交任务失败");
+              Toast.fail({message: '提交任务失败',icon: '123'});
             });
         })
         .catch(() => {});
@@ -154,10 +160,10 @@ export default {
           this.$api
             .taskInitHolding()
             .then(() => {
-              Toast.success("提交任务成功");
+              Toast.success({message:"提交任务成功",icon:'123'});
             })
             .catch(() => {
-              Toast.fail("提交任务失败");
+              Toast.fail({message:"提交任务失败",icon:'123'});
             });
         })
         .catch(() => {});
@@ -172,10 +178,10 @@ export default {
           this.$api
             .taskClear()
             .then(() => {
-              Toast.success("提交任务成功");
+              Toast.success({message:"提交任务成功",icon:'123'});
             })
             .catch(() => {
-              Toast.fail("提交任务失败");
+              Toast.fail({message:"提交任务失败",icon:'123'});
             });
         })
         .catch(() => {});

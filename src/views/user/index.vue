@@ -72,9 +72,15 @@ export default {
           isApproved: status,
         }).then((res) => {
             item.isApproved = status;
-            Toast.success("操作成功");
+            Toast.success({
+              message: "操作成功",
+              icon: '123'
+            });
         }).catch((err) => {
-          Toast.error(err.message);
+          Toast.error({
+            message: err.message,
+            icon: '123'
+          });
         });
       });
     },

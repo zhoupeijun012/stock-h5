@@ -14,8 +14,20 @@ let globalBackHandler = null;
  */
 export default function createDetailPlugin(Component, name) {
   return {
+
     install(Vue) {
-      const ComponentStructor = Vue.extend(Component);
+      let ComponentStructor = Vue.extend(Component);
+      ComponentStructor = ComponentStructor.extend({
+        methods: {
+          onHandClose() {
+            window.history.back();
+            this.visible = false;
+          },
+          backClose() {
+            this.visible = false;
+          }
+        }
+      })
       
       // 初始化全局返回事件监听
       if (!globalBackHandler) {
@@ -24,7 +36,7 @@ export default function createDetailPlugin(Component, name) {
             // 如果有弹窗打开，先关闭最顶层的弹窗
             const topDialog = dialogStack[dialogStack.length - 1];
             if (topDialog && topDialog.instance && topDialog.instance.visible) {
-              topDialog.instance.visible = false;
+              topDialog.instance.backClose()
               // 阻止默认的返回行为
               if (event) {
                 event.preventDefault();

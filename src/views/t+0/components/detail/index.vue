@@ -1,14 +1,16 @@
 <template>
   <van-popup
-    v-model="visible"
+    :value="visible"
     position="bottom"
     :closeable="false"
+    :close-on-click-overlay="false"
     round
     :style="{ width: '100%', height: '90%' }"
+    @click-overlay="onHandClose"
   >
     <div class="t0-detail">
       <div class="sticky-header">
-        <div class="sticky-left" @click="visible = false">
+        <div class="sticky-left" @click="onHandClose">
           <van-icon name="cross" />
         </div>
         <div class="sticky-title">{{ title }}</div>

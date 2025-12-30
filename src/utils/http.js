@@ -5,7 +5,7 @@ import { Toast } from "vant";
 // 创建一个具有默认配置的axios实例
 const instance = axios.create({
   // baseURL: 'https://120.48.100.49/api',
-  // baseURL: '/api',
+//   baseURL: '/api',
   baseURL: 'https://www.chives.asia/api',
   timeout: 60 * 1000,
 });
@@ -19,7 +19,10 @@ instance.interceptors.request.use(
     return config;
   },
   (error) => {
-    Toast.fail(error.message || '请求错误');
+    Toast.fail({
+      message: error.message || '请求错误',
+      icon: '123'
+    });
     return Promise.reject(error);
   }
 );
@@ -30,7 +33,10 @@ instance.interceptors.response.use(
       return response?.data?.data;
     }
     if (response?.data?.errorCode == 401) {
-      Toast.fail(response?.data?.message || '网络错误');
+      Toast.fail({
+        message: response?.data?.message || '网络错误',
+        icon: '123'
+      });
       store.commit(StoreTypes.CLEAR_ALL);
       setTimeout(() => {
         window.location.replace('/login');
@@ -39,7 +45,10 @@ instance.interceptors.response.use(
     }
 
     const message = response?.data?.message || '网络错误';
-    Toast.fail(message);
+    Toast.fail({
+      message,
+      icon: '123'
+    });
     return Promise.reject({
       success: false,
       message: message,
@@ -48,7 +57,10 @@ instance.interceptors.response.use(
   },
   (error) => {
     if (error?.status != 200) {
-      Toast.fail('网络错误');
+      Toast.fail({
+        message:'网络错误',
+        icon:'123'
+      });
       return Promise.reject({
         success: false,
         message: error.message || '网络错误',
@@ -57,7 +69,10 @@ instance.interceptors.response.use(
     }
     const message = error?.response?.data?.message;
     if (message) {
-      Toast.fail(message);
+      Toast.fail({
+        message,
+        icon: '123'
+      });
     }
     return Promise.reject({
       success: false,

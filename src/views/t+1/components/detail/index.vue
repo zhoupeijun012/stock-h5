@@ -145,10 +145,10 @@ export default {
       ];
     },
     f1888List() {
-      if (!this.info || !this.info.f1888) {
+      if (!this.info || !this.info.holding) {
         return [];
       }
-      return this.info.f1888.sort((cur, next) => next.ccRate - cur.ccRate);
+      return this.info.holding.sort((cur, next) => next.ccRate - cur.ccRate);
     },
   },
   data() {
@@ -161,6 +161,7 @@ export default {
   methods: {
     getInfo() {
       const t1DetailParams = {
+        matchKeys:['f14','f12','f3','f2','f21','f20','f10','f8','f9','f11','f6','f40008','f40017','f40014','f41006','holding'],
         where: [
           {
             field: "f12",

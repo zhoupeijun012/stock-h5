@@ -249,3 +249,7 @@ export function formatDD(dataStr = '') {
   let fixedStr = dataStr.split('.')[0];
   return dayjs(fixedStr).format('YYYY-MM-DD HH:mm:ss');
 }
+
+export function getValColor(val) {
+  return val > 0 ? '#ff2800' : val == 0 ? '#fff' : '#00ce45';
+}

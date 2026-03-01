@@ -26,7 +26,7 @@
                   {{ getStatus(item.status) }}
                 </van-col>
               </van-row>
-              <div>错误原因：{{ item.message }}</div>
+              <div>错误原因：{{ (item.message || '').slice(0,150) }}</div>
               <div>执行时间：{{ getDuration(item) + "ms" }}</div>
             </div>
           </div>

@@ -161,7 +161,7 @@ export default {
   methods: {
     getInfo() {
       const t1DetailParams = {
-        matchKeys:['f14','f12','f3','f2','f21','f20','f10','f8','f9','f11','f6','f40008','f40017','f40014','f41006','holding'],
+        matchKeys:['f14','f12','f3','f2','f21','f20','f10','f8','f9','f11','f6','f40008','f40017','f40014','f41006','holding',"f1888",],
         where: [
           {
             field: "f12",

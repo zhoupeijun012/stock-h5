@@ -6,7 +6,7 @@ import { Toast } from "vant";
 const instance = axios.create({
   // baseURL: 'https://120.48.100.49/api',
 //   baseURL: '/api',
-  baseURL: 'https://stock-api.amdyes.asia/api',
+  baseURL: 'https://stock-api.amdyes.asia:12345/api',
   timeout: 60 * 1000,
 });
 

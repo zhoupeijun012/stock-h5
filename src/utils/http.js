@@ -4,9 +4,9 @@ import * as StoreTypes from '@/store/store_types';
 import { Toast } from "vant";
 // 创建一个具有默认配置的axios实例
 const instance = axios.create({
-  // baseURL: 'https://120.48.100.49/api',
+  baseURL: 'https://120.48.100.49:12345/api',
 //   baseURL: '/api',
-  baseURL: `${location.protocol}//stock-api.amdyes.asia:12345/api`,
+  // baseURL: `${location.protocol}//stock-api.amdyes.asia:12345/api`,
   timeout: 60 * 1000,
 });
 

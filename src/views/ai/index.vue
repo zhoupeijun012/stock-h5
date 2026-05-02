@@ -1,5 +1,5 @@
 <template>
-    <NavWarp title="问AI" >
+    <NavWarp title="问AI" :showBack="false" >
       <iframe :src="showUrl" class="ai-iframe"></iframe>
     </NavWarp>
 </template>

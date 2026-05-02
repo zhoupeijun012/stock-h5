@@ -20,6 +20,13 @@ export const routes = [
     meta: { title: "策略", showTab: true, keepAlive: true, level: 1 },
   },
   {
+    path: "/ai",
+    name: "ai",
+    component: () =>
+      import(/* webpackChunkName:"stock" */ "@/views/ai/index.vue"),
+    meta: { title: "ai", showTab: true, keepAlive: true, level: 1 },
+  },
+  {
     path: "/favorite",
     name: "favorite",
     component: () =>

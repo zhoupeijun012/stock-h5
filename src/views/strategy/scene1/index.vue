@@ -78,7 +78,7 @@ export default {
           title: "流通市值",
           component: "radio",
           defaultValue: [],
-          value: ['7'],
+          value: ["7"],
           operator: "between",
           options: [
             { label: "小于20亿", value: "1", realValue: [0, 20e8] },
@@ -94,13 +94,71 @@ export default {
           title: "金叉天数",
           component: "radio",
           defaultValue: [],
-          value: ['2'],
+          value: ["-1"],
           operator: "between",
           options: [
+            { label: "大于1天", value: "-1", realValue: [1] },
             { label: "1天", value: "1", realValue: [1, 1] },
             { label: "1-3天", value: "2", realValue: [1, 3] },
             { label: "小于5天", value: "4", realValue: [0, 5] },
             { label: "5-10天", value: "5", realValue: [5, 10] },
+          ],
+        },
+        {
+          prop: "f41014",
+          title: "周金叉数",
+          component: "radio",
+          defaultValue: [],
+          value: ["-1"],
+          operator: "between",
+          options: [
+            { label: "大于1周", value: "-1", realValue: [1] },
+            { label: "1周", value: "1", realValue: [1, 1] },
+            { label: "1-3周", value: "2", realValue: [1, 3] },
+            { label: "小于5周", value: "4", realValue: [0, 5] },
+            { label: "5-10周", value: "5", realValue: [5, 10] },
+          ],
+        },
+        {
+          prop: "f42014",
+          title: "月金叉数",
+          component: "radio",
+          defaultValue: [],
+          value: [],
+          operator: "between",
+          options: [
+            { label: "大于1月", value: "-1", realValue: [1] },
+            { label: "1月", value: "1", realValue: [1, 1] },
+            { label: "1-3月", value: "2", realValue: [1, 3] },
+            { label: "小于5月", value: "4", realValue: [0, 5] },
+            { label: "5-10月", value: "5", realValue: [5, 10] },
+          ],
+        },
+        {
+          prop: "f40016",
+          title: "控盘程度",
+          component: "radio",
+          defaultValue: [],
+          value: ["5"],
+          operator: "between",
+          options: [
+            { label: "大于50", value: "3", realValue: [50] },
+            { label: "大于100", value: "5", realValue: [100] },
+            { label: "大于150", value: "6", realValue: [150] },
+            { label: "大于200", value: "7", realValue: [200] },
+          ],
+        },        {
+          prop: "f41016",
+          title: "周控盘",
+          component: "radio",
+          defaultValue: [],
+          value: ["5"],
+          operator: "between",
+          options: [
+            { label: "大于50", value: "3", realValue: [50] },
+            { label: "大于100", value: "5", realValue: [100] },
+            { label: "大于150", value: "6", realValue: [150] },
+            { label: "大于200", value: "7", realValue: [200] },
           ],
         },
         {
@@ -152,7 +210,7 @@ export default {
           "f14",
           "f3",
           "f40014",
-          "f41006",
+          "f41014",
           "f40006",
           "f40008",
           "f40009",
@@ -188,7 +246,7 @@ export default {
           "f16",
           "f5",
           "f4",
-          "f41006",
+          "f41014",
           "f40016",
           "f40014_XYS1",
         ],
@@ -198,7 +256,7 @@ export default {
       this.getDetail();
     },
     toDetail(item) {
-       this.$stockDetail({
+      this.$stockDetail({
         f12: item.f12,
         f14: item.f14,
       });

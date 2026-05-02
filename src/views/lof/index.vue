@@ -71,9 +71,22 @@ export default {
             { label: "5-10天", value: "5", realValue: [5, 10] },
           ],
         },
-        {
-          prop: "f41006",
+                {
+          prop: "f41014",
           title: "周金叉数",
+          component: "radio",
+          defaultValue: [],
+          value: [],
+          operator: "between",
+          options: [
+            { label: "大于1周", value: "-1", realValue: [1] },
+            { label: "1-2周", value: "1", realValue: [1, 2] },
+            { label: "小于5周", value: "4", realValue: [0, 5] },
+            { label: "5-10周", value: "5", realValue: [5, 10] },
+          ],
+        },{
+          prop: "f42014",
+          title: "月金叉数",
           component: "radio",
           defaultValue: [],
           value: [],
@@ -211,7 +224,7 @@ export default {
           "f14",
           "f3",
           "f40014",
-          "f41006",
+          "f41014",
           "f40006",
           "f40008",
           "f40009",
@@ -247,7 +260,7 @@ export default {
           "f16",
           "f5",
           "f4",
-          "f41006",
+          "f41014",
           "f40016",
         ],
       });

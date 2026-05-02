@@ -8,7 +8,7 @@
     :style="{ width: '100%', height: '90%' }"
     @click-overlay="onHandClose"
   >
-    <div class="t1-detail">
+    <div class="index-detail">
       <div class="sticky-header">
         <div class="sticky-left" @click="onHandClose">
           <van-icon name="cross" />
@@ -16,10 +16,9 @@
         <div class="sticky-title">{{ title }}</div>
         <div class="sticky-right">
           <van-icon name="chat-o" class="chat-icon" @click="openAiDetail" />
-          <focus-icon :info="info" cardType="ETF"></focus-icon>
         </div>
       </div>
-      <div class="t1-content">
+      <div class="index-content">
         <list-grid
           :colNum="3"
           :labelWidth="8"
@@ -35,16 +34,6 @@
           />
         </van-tabs>
         <k-line-chart ref="k-line-chart" />
-        <div class="holding-wrap" v-if="f1888List.length > 0">
-          <div class="holding-title">持仓明细</div>
-          <stock-card
-            v-for="item in f1888List"
-            :key="item.id"
-            :info="item"
-            cardType="STOCK"
-            @click.native="toDetail(item)"
-          ></stock-card>
-        </div>
       </div>
     </div>
   </van-popup>
@@ -52,25 +41,21 @@
 <script>
 import NavWarp from "@/components/nav-warp";
 import KLineChart from "@/components/k-line-chart";
-import { getKLineOne, getEftOne } from "@/api/index";
+import { getKLineOne } from "@/api/index";
 import { stockKMap } from "@/utils/tool";
 import ListGrid from "@/components/list-grid";
 import { Toast } from "vant";
 import { formatMoney, valueStyle, formatPrec } from "@/utils/tool";
-import FocusIcon from "@/components/focus-icon";
-import StockCard from "@/components/stock-card";
 export default {
-  name: "t1-detail",
+  name: "index-detail",
   components: {
     NavWarp,
     KLineChart,
     ListGrid,
-    FocusIcon,
-    StockCard,
   },
   computed: {
     title() {
-      return `${this.routerInfo.f14} (${this.routerInfo.f12})`;
+      return `${this.routerInfo.f14}`;
     },
     infoOptions() {
       if (!this.info) return [];
@@ -91,7 +76,6 @@ export default {
           value: formatPrec(this.info?.f3) + "%" || "-",
           style: valueStyle(this.info?.f3),
         },
-
         {
           title: "价格",
           value: formatPrec(this.info?.f2) || "-",
@@ -136,31 +120,13 @@ export default {
           style: { color: "red" },
         },
         {
-          title: "多头",
-          value: this.info?.f40008 + "天" || "-",
-        },
-        {
-          title: "流入",
-          value: formatMoney(this.info?.f40017) + "天" || "-",
-        },
-        {
-          title: "金叉",
-          value: this.info?.f40014 + "天" || "-",
-        },
-        {
-          title: "周叉",
-          value: this.info?.f41014 + "天" || "-",
-        },      {
-          title: "月叉",
-          value: this.info?.f42014 + "天" || "-",
+          title: "主力",
+          value: formatMoney(this.info?.f62) || "-",
+          style: {
+            color: this.info?.f62 > 0 ? "red" : "blue",
+          },
         },
       ];
-    },
-    f1888List() {
-      if (!this.info || !this.info.holding) {
-        return [];
-      }
-      return this.info.holding.sort((cur, next) => next.ccRate - cur.ccRate);
     },
   },
   data() {
@@ -187,27 +153,11 @@ export default {
   },
   methods: {
     getInfo() {
-      const t1DetailParams = {
-        matchKeys:['f14','f12','f3','f2','f21','f20','f10','f8','f9','f11','f6','f40008','f40017','f40014','f41014','holding',"f1888",],
-        where: [
-          {
-            field: "f12",
-            operator: "eq",
-            value: this.routerInfo.f12,
-          },
-          {
-            field: "f14",
-            operator: "eq",
-            value: this.routerInfo.f14,
-          },
-        ],
-      };
-      return getEftOne(t1DetailParams).then((res) => {
-        this.info = res || null;
-      });
+      this.info = this.routerInfo;
+      return Promise.resolve();
     },
     getKline() {
-      const t1KlineParams = {
+      const indexKlineParams = {
         where: [
           {
             field: "f12",
@@ -221,10 +171,9 @@ export default {
           },
         ],
       };
-      return getKLineOne(t1KlineParams).then((res) => {
+      return getKLineOne(indexKlineParams).then((res) => {
         let { f40001, f40002 = "[]" } = res || {};
         let chartData = JSON.parse(f40002);
-        //  时间/开/收/最高/最低/成交量/成交额/震幅/涨跌幅/涨跌额/换手率/流通股本
         chartData = stockKMap(chartData);
         this.$refs["k-line-chart"].refresh(chartData);
       });
@@ -245,9 +194,9 @@ export default {
       this.routerInfo = info;
       this.$nextTick(() => {
         Toast.loading({
-          forbidClick: true, // 是否禁止背景点击
-          loadingType: "spinner", // 加载图标类型，可选 spinner/circular
-          duration: 0, // 持续时间，0 表示不会自动关闭
+          forbidClick: true,
+          loadingType: "spinner",
+          duration: 0,
         });
         Promise.all([this.getInfo(), this.getKline()]).finally(() => {
           Toast.clear();
@@ -258,22 +207,14 @@ export default {
       const { f14 } = this.routerInfo;
       this.$aiDetail({
         key: f14,
-        type: "ETF",
-      });
-    },
-    toDetail(item) {
-      // 这里可以调用stock-detail组件的show方法来显示详情
-      // 如果需要跳转到其他页面，保持原来的逻辑
-      this.$stockDetail({
-        f12: item.f12,
-        f14: item.f14,
+        type: "STOCK",
       });
     },
   },
 };
 </script>
 <style lang="less" scoped>
-.t1-detail {
+.index-detail {
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -291,30 +232,22 @@ export default {
     font-size: 24px;
     text-align: center;
     line-height: 48px;
-  }.sticky-right { width: 96px;}
+  }
   .sticky-title {
     flex: 1;
     line-height: 48px;
     text-align: center;
-    font-size: 16px;    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    font-size: 16px;
   }
   .chat-icon {
-    margin-right: 12px;
+    margin-right: 8px;
     font-size: 24px;
+    color: #00c9a7;
   }
 }
-.t1-content {
+.index-content {
   height: calc(100% - 48px);
   overflow: hidden;
   overflow-y: scroll;
-}
-.holding-wrap {
-  padding-top: 20px;
-}
-.holding-title {
-  padding: 0 10px;
-  font-size: 16px;
 }
 </style>

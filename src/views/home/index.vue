@@ -1,14 +1,12 @@
 <template>
   <div class="home-wrapper">
-    <van-pull-refresh
-      v-model="refreshing"
-      @refresh="onRefresh"
-    >
+    <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
       <div class="content">
         <van-grid :gutter="0" square v-if="Array.isArray(homeInfo.np)">
           <van-grid-item
             v-for="(item, index) in homeInfo.np"
             :key="'list-item-' + index"
+            @click="handleIndexClick(item)"
           >
             <div class="index-warp ins">
               <div class="index-num" :style="valueStyle(item.f3)">
@@ -17,7 +15,7 @@
               <div class="index-info" :style="valueStyle(item.f3)">
                 {{ formatPrec(item.f3, "%") }}
               </div>
-                         <div class="index-info" :style="valueStyle(item.f62)">
+              <div class="index-info" :style="valueStyle(item.f62)">
                 {{ formatMoney(item.f62) }}
               </div>
               <div
@@ -34,13 +32,31 @@
         <van-grid :gutter="0" square style="margin-top: 10px">
           <van-grid-item>
             <div class="index-warp ins">
-              <div class="index-info">{{ homeInfo.summary && homeInfo.summary.goldenCrossCount || '-' }}</div>
+              <div class="index-info">
+                {{
+                  (homeInfo.summary && homeInfo.summary.goldenCrossCount) || "-"
+                }}
+              </div>
               <div class="index-title">金叉数</div>
             </div>
           </van-grid-item>
           <van-grid-item>
             <div class="index-warp des">
-              <div class="index-info">{{ homeInfo.summary && homeInfo.summary.deathCrossCount || '-' }}</div>
+              <div class="index-info">
+                {{
+                  (homeInfo.summary && homeInfo.summary.weekCrossCount) || "-"
+                }}
+              </div>
+              <div class="index-title">周金叉数</div>
+            </div>
+          </van-grid-item>
+          <van-grid-item>
+            <div class="index-warp des">
+              <div class="index-info">
+                {{
+                  (homeInfo.summary && homeInfo.summary.deathCrossCount) || "-"
+                }}
+              </div>
               <div class="index-title">死叉数</div>
             </div>
           </van-grid-item>
@@ -48,19 +64,25 @@
         <van-grid :gutter="0" square style="margin-top: 10px">
           <van-grid-item>
             <div class="index-warp des">
-              <div class="index-info">{{ homeInfo.summary && homeInfo.summary.upCount || '-' }}</div>
+              <div class="index-info">
+                {{ (homeInfo.summary && homeInfo.summary.upCount) || "-" }}
+              </div>
               <div class="index-title">上涨</div>
             </div>
           </van-grid-item>
           <van-grid-item>
             <div class="index-warp des">
-              <div class="index-info">{{ homeInfo.summary && homeInfo.summary.eqCount || '-' }}</div>
+              <div class="index-info">
+                {{ (homeInfo.summary && homeInfo.summary.eqCount) || "-" }}
+              </div>
               <div class="index-title">平盘</div>
             </div>
           </van-grid-item>
           <van-grid-item>
             <div class="index-warp des">
-              <div class="index-info">{{ homeInfo.summary && homeInfo.summary.downCount || '-' }}</div>
+              <div class="index-info">
+                {{ (homeInfo.summary && homeInfo.summary.downCount) || "-" }}
+              </div>
               <div class="index-title">下跌</div>
             </div>
           </van-grid-item>
@@ -157,13 +179,13 @@ export default {
       const ratio =
         (numValue - prevPoint.val) / (nextPoint.val - prevPoint.val);
       const r = Math.round(
-        prevPoint.rgb[0] + (nextPoint.rgb[0] - prevPoint.rgb[0]) * ratio
+        prevPoint.rgb[0] + (nextPoint.rgb[0] - prevPoint.rgb[0]) * ratio,
       );
       const g = Math.round(
-        prevPoint.rgb[1] + (nextPoint.rgb[1] - prevPoint.rgb[1]) * ratio
+        prevPoint.rgb[1] + (nextPoint.rgb[1] - prevPoint.rgb[1]) * ratio,
       );
       const b = Math.round(
-        prevPoint.rgb[2] + (nextPoint.rgb[2] - prevPoint.rgb[2]) * ratio
+        prevPoint.rgb[2] + (nextPoint.rgb[2] - prevPoint.rgb[2]) * ratio,
       );
 
       // RGB转十六进制
@@ -176,6 +198,9 @@ export default {
     },
     handleClick(item) {
       this.$router.push({ name: item.name });
+    },
+    handleIndexClick(item) {
+      this.$indexDetail(item);
     },
     getHomeInfo() {
       getHomeInfo()

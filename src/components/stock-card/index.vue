@@ -44,7 +44,7 @@
     <div class="card-col">
       <div class="card-title">周金叉：</div>
       <div class="card-text">
-        <span style="color: #f00">{{ info.f41006 }}</span>
+        <span style="color: #f00">{{ info.f41014 }}</span>
       </div>
     </div>
     <div class="card-col">

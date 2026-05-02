@@ -16,6 +16,9 @@
         <van-tabbar-item replace name="strategy" to="/strategy" icon="bars"
           >策略</van-tabbar-item
         >
+        <van-tabbar-item name="ai" @click="openAiDetail" icon="chat-o"
+          >问AI</van-tabbar-item
+        >
         <van-tabbar-item replace name="favorite" to="/favorite" icon="star-o"
           >收藏</van-tabbar-item
         >
@@ -55,6 +58,11 @@ export default {
   },
   data() {
     return {};
+  },
+  methods: {
+    openAiDetail() {
+      this.$aiDetail({});
+    },
   },
   mounted() {
     if (!detectPwaMode()) {

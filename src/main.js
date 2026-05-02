@@ -33,6 +33,12 @@ Vue.use(T1Detail);
 import LofDetail from '@/views/lof/components/detail/lof-detail.js';
 Vue.use(LofDetail);
 
+import AiDetail from '@/views/ai/components/detail/ai-detail.js';
+Vue.use(AiDetail);
+
+import IndexDetail from '@/views/home/components/detail/index-detail.js';
+Vue.use(IndexDetail);
+
 new Vue({
   router,
   store,

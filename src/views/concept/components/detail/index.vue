@@ -1,6 +1,6 @@
 <template>
   <van-popup
-   :value="visible"
+    :value="visible"
     position="bottom"
     :closeable="false"
     :close-on-click-overlay="false"
@@ -15,6 +15,7 @@
         </div>
         <div class="sticky-title">{{ title }}</div>
         <div class="sticky-right">
+          <van-icon name="chat-o" class="chat-icon" @click="openAiDetail" />
           <focus-icon :info="info" cardType="CONCEPT"></focus-icon>
         </div>
       </div>
@@ -25,6 +26,14 @@
           v-if="infoOptions.length > 0"
           :list="infoOptions"
         />
+        <van-tabs :active="currentIndicators" @change="typeChange" sticky>
+          <van-tab
+            v-for="item in showIndicators"
+            :key="item.value"
+            :title="item.label"
+            :name="item.value"
+          />
+        </van-tabs>
         <k-line-chart ref="k-line-chart" />
       </div>
     </div>
@@ -58,10 +67,10 @@ export default {
           title: "名称",
           value: this.info?.f14 || "-",
           style: {
-            whiteSpace: 'noWrap',
+            whiteSpace: "noWrap",
             textOverflow: "ellipsis",
-            overflow: "hidden"
-          }
+            overflow: "hidden",
+          },
         },
         {
           title: "代码",
@@ -166,7 +175,10 @@ export default {
         },
         {
           title: "周叉",
-          value: this.info?.f41006 + "天" || "-",
+          value: this.info?.f41014 + "天" || "-",
+        },      {
+          title: "月叉",
+          value: this.info?.f42014 + "天" || "-",
         },
       ];
     },
@@ -176,6 +188,21 @@ export default {
       info: null,
       visible: false,
       routerInfo: {},
+      showIndicators: [
+        {
+          label: "日线",
+          value: 101,
+        },
+        {
+          label: "周线",
+          value: 102,
+        },
+        {
+          label: "月线",
+          value: 103,
+        },
+      ],
+      currentIndicators: 101,
     };
   },
   methods: {
@@ -206,6 +233,11 @@ export default {
             operator: "eq",
             value: this.routerInfo.f12,
           },
+          {
+            field: "f40001",
+            operator: "eq",
+            value: this.currentIndicators,
+          },
         ],
       };
       return getKLineOne(conceptKlineParams).then((res) => {
@@ -214,6 +246,17 @@ export default {
         //  时间/开/收/最高/最低/成交量/成交额/震幅/涨跌幅/涨跌额/换手率/流通股本
         chartData = stockKMap(chartData);
         this.$refs["k-line-chart"].refresh(chartData);
+      });
+    },
+    typeChange(name) {
+      this.currentIndicators = name;
+      Toast.loading({
+        forbidClick: true,
+        loadingType: "spinner",
+        duration: 0,
+      });
+      this.getKline().finally(() => {
+        Toast.clear();
       });
     },
     show(info) {
@@ -228,6 +271,13 @@ export default {
         Promise.all([this.getInfo(), this.getKline()]).finally(() => {
           Toast.clear();
         });
+      });
+    },
+    openAiDetail() {
+      const { f14 } = this.routerInfo;
+      this.$aiDetail({
+        key: f14,
+        type: "CONCEPT",
       });
     },
   },
@@ -252,12 +302,18 @@ export default {
     font-size: 24px;
     text-align: center;
     line-height: 48px;
-  }
+  }.sticky-right { width: 96px;}
   .sticky-title {
     flex: 1;
     line-height: 48px;
     text-align: center;
-    font-size: 16px;
+    font-size: 16px;    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  .chat-icon {
+    margin-right: 12px;
+    font-size: 24px;
   }
 }
 .concept-content {

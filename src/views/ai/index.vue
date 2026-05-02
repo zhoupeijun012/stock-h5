@@ -1,9 +1,7 @@
 <template>
-  <div class="ai-page">
     <NavWarp title="问AI" >
       <iframe :src="showUrl" class="ai-iframe"></iframe>
     </NavWarp>
-  </div>
 </template>
 <script>
 import NavWarp from "@/components/nav-warp";

@@ -16,7 +16,7 @@
         <van-tabbar-item replace name="strategy" to="/strategy" icon="bars"
           >策略</van-tabbar-item
         >
-        <van-tabbar-item replace name="ai" to="ai" icon="chat-o"
+        <van-tabbar-item replace name="ai" to="/ai" icon="chat-o"
           >问AI</van-tabbar-item
         >
         <van-tabbar-item replace name="favorite" to="/favorite" icon="star-o"

@@ -1,50 +1,64 @@
 <template>
-    <NavWarp title="问AI" :showBack="false" :showNav="false">
-      <iframe :src="showUrl" class="ai-iframe"></iframe>
-    </NavWarp>
+  <NavWarp title="问AI" :showBack="false" :showNav="false">
+    <div class="iframe-box">
+      <iframe
+        :src="showUrl"
+        class="ai-iframe"
+        ref="iframe"
+        frameborder="0"
+      ></iframe>
+    </div>
+  </NavWarp>
 </template>
+
 <script>
 import NavWarp from "@/components/nav-warp";
 export default {
   name: "ai",
-  components: {
-    NavWarp,
-  },
+  components: { NavWarp },
   computed: {
     showUrl() {
-      const queryArr = [];
-      if (this.routerConfig.key) {
-        queryArr.push(`key=${this.routerConfig.key}`);
-      }
-      if (this.routerConfig.type) {
-        queryArr.push(`type=${this.routerConfig.type}`);
-      }
       return `${location.protocol}//www.amdyes.asia`;
     },
   },
-  data() {
-    return {
-      routerConfig: {},
-    };
-  },
   mounted() {
-    this.routerConfig = this.$route.query || {};
+    this.fitIframe();
+    window.addEventListener("resize", this.fitIframe);
+  },
+  destroyed() {
+    window.removeEventListener("resize", this.fitIframe);
+  },
+  methods: {
+    fitIframe() {
+      const iframe = this.$refs.iframe;
+      if (!iframe) return;
+
+      // 屏幕宽度 / 1400 = 缩放比例
+      const scale = window.innerWidth / 1400;
+
+      // ✅ 核心：宽度1400，高度用 100% / 缩放比例，抵消高度缩小
+      iframe.style.width = "1400px";
+      iframe.style.height = `${100 / scale}%`; // 关键！抵消scale带来的高度变短
+
+      // 等比缩放宽度
+      iframe.style.transform = `scale(${scale})`;
+      iframe.style.transformOrigin = "top left";
+    },
   },
 };
 </script>
+
 <style lang="less" scoped>
-.ai-page {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.ai-content {
-  flex: 1;
+.iframe-box {
+  width: 100%;
+  height: 100vh;
   overflow: hidden;
+  position: relative;
 }
 .ai-iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: 0;
 }
 </style>

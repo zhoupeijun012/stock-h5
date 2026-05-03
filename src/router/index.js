@@ -13,19 +13,27 @@ export const routes = [
     meta: { title: "首页", showTab: true, keepAlive: true, level: 1 },
   },
   {
-    path: "/strategy",
-    name: "strategy",
-    component: () =>
-      import(/* webpackChunkName:"stock" */ "@/views/strategy/index.vue"),
-    meta: { title: "策略", showTab: true, keepAlive: true, level: 1 },
-  },
-  {
     path: "/ai",
     name: "ai",
     component: () =>
       import(/* webpackChunkName:"stock" */ "@/views/ai/index.vue"),
     meta: { title: "ai", showTab: true, keepAlive: true, level: 1 },
   },
+  {
+    path: "/cloud",
+    name: "cloud",
+    component: () =>
+      import(/* webpackChunkName:"stock" */ "@/views/cloud/index.vue"),
+    meta: { title: "cloud", showTab: true, keepAlive: true, level: 1 },
+  },
+  {
+    path: "/strategy",
+    name: "strategy",
+    component: () =>
+      import(/* webpackChunkName:"stock" */ "@/views/strategy/index.vue"),
+    meta: { title: "策略", showTab: true, keepAlive: true, level: 1 },
+  },
+
   {
     path: "/favorite",
     name: "favorite",

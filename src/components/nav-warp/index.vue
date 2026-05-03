@@ -6,15 +6,28 @@
         :left-text="showBack ? '返回' : ''"
         :left-arrow="showBack"
         @click-left="onClickLeft"
+        v-if="showNav"
         class="nav-bar"
       >
-        <template #right >
-          <van-icon v-if="searchOptions.length > 0" name="search" @click="showSearchPanel = true" size="24"/>
+        <template #right>
+          <van-icon
+            v-if="searchOptions.length > 0"
+            name="search"
+            @click="showSearchPanel = true"
+            size="24"
+          />
           <slot name="nav-right"></slot>
         </template>
       </van-nav-bar>
     </div>
-    <div class="page-content">
+
+    <div
+      class="page-content"
+      :style="{
+        height: showNav ? 'calc(100% - 46px)' : '100%',
+        marginTop: showNav ? '46px' : '0',
+      }"
+    >
       <slot></slot>
     </div>
     <search-panel
@@ -44,6 +57,10 @@ export default {
     searchOptions: {
       type: Array,
       default: () => [],
+    },
+    showNav: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {
@@ -86,8 +103,6 @@ export default {
 }
 .page-content {
   background-color: #f5f5f5;
-  margin-top: 46px;
-  height: calc(100% - 46px);
   display: flex;
   flex-direction: column;
 }

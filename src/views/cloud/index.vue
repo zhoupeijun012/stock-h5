@@ -19,7 +19,7 @@ export default {
       if (this.routerConfig.type) {
         queryArr.push(`type=${this.routerConfig.type}`);
       }
-      return `${location.protocol}//ai.amdyes.asia/#/?${queryArr.join("&")}`;
+      return `${location.protocol}//www.amdyes.asia`;
     },
   },
   data() {

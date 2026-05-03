@@ -242,7 +242,6 @@ export default {
   .chat-icon {
     margin-right: 8px;
     font-size: 24px;
-    color: #00c9a7;
   }
 }
 .index-content {

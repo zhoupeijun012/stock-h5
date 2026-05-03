@@ -13,6 +13,9 @@
         <van-tabbar-item replace name="home" to="/home" icon="wap-home-o"
           >首页</van-tabbar-item
         >
+        <van-tabbar-item replace name="cloud" to="/cloud" icon="cashier-o" >
+          云图</van-tabbar-item
+        >
         <van-tabbar-item replace name="strategy" to="/strategy" icon="bars"
           >策略</van-tabbar-item
         >

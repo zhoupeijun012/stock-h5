@@ -207,7 +207,7 @@ export default {
       const { f14 } = this.routerInfo;
       this.$aiDetail({
         key: f14,
-        type: "STOCK",
+        type: "INDUSTRY",
       });
     },
   },

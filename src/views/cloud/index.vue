@@ -18,7 +18,7 @@ export default {
   components: { NavWarp },
   computed: {
     showUrl() {
-      return `${location.protocol}//www.amdyes.asia?token=${encodeURIComponent(window.localStorage.getItem('v1'))}`;
+      return `${location.protocol}//www.amdyes.asia/third-login?token=${encodeURIComponent(window.localStorage.getItem('v1'))}`;
     },
   },
   mounted() {

@@ -24,7 +24,7 @@ export const routes = [
     name: "cloud",
     component: () =>
       import(/* webpackChunkName:"stock" */ "@/views/cloud/index.vue"),
-    meta: { title: "cloud", showTab: false, keepAlive: true, level: 1 },
+    meta: { title: "cloud", showTab: true, keepAlive: true, level: 1 },
   },
   {
     path: "/strategy",
